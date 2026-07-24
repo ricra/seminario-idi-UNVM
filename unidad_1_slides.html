@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 1: Fundamentos de Creatividad e Innovación (2026)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy-unvm: #0F2942;
+            --teal-tech: #0F766E;
+            --bg-slide: #F8FAFC;
+            --card-border: #CBD5E1;
+            --text-dark: #1E293B;
+        }
+
+        body {
+            background-color: #020617;
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .slide-deck {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-slide) 100%);
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 36px 46px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--navy-unvm);
+            line-height: 1.25;
+            border-bottom: 3px solid var(--teal-tech);
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .card-box {
+            background-color: #FFFFFF;
+            border: 1.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        .bottom-banner {
+            background-color: var(--navy-unvm);
+            color: #FFFFFF;
+            border-radius: 10px;
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13.5px;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+
+        .bottom-banner i {
+            font-size: 18px;
+            color: #38BDF8;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .slide-deck {
+                aspect-ratio: auto;
+                height: auto;
+                min-height: calc(100vh - 80px);
+                border-radius: 0;
+            }
+            .slide {
+                position: relative;
+                padding: 20px 16px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-0 sm:p-4">
+
+<div class="slide-deck" id="slideDeck">
+
+    <!-- Slide 1: Portada -->
+    <div class="slide active flex-col justify-between" style="background: linear-gradient(135deg, #0F2942 0%, #1E3A5F 100%); color: white;">
+        <div class="flex justify-between items-center border-b border-slate-600 pb-3">
+            <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
+            <span class="text-xs text-slate-300">INGENIERÍA EN ALIMENTOS — 2026</span>
+        </div>
+        <div class="my-auto text-center">
+            <span class="inline-block bg-teal-800/50 border border-teal-400 text-teal-300 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">Gestión de la I+D+i — Unidad 1</span>
+            <h1 class="font-['Poppins'] text-3xl sm:text-5xl font-bold text-white mb-3">FUNDAMENTOS DE CREATIVIDAD<br><span class="text-teal-400">E INNOVACIÓN</span></h1>
+            <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto">De la inventiva abstracta a la creación de valor sostenible en la industria agroalimentaria</p>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-between items-center border-t border-slate-600 pt-4 gap-2">
+            <div class="text-left text-sm text-slate-300">
+                <strong class="text-white">Dr. Ing. Ricardo Cravero</strong> | Ing. Alejandro Benito
+            </div>
+            <div class="italic text-teal-300 text-sm">
+                "Ideas × Valor = Resultados" — Alfons Cornella
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: La Tríada del Valor -->
+    <div class="slide">
+        <h2 class="slide-title">💡 La Tríada: Creatividad vs. Invención vs. Innovación</h2>
+        <p class="text-slate-600 text-xs mb-3">Evolución conceptual desde la idea abstracta hasta el objeto de mercado</p>
+        
+        <div class="bg-teal-50 border-2 border-teal-600 p-3 rounded-xl text-center mb-3">
+            <span class="font-['Poppins'] text-base sm:text-lg font-bold text-teal-900">
+                FÓRMULA CORNELLA: IDEAS × VALOR = RESULTADOS SOSTENIBLES
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto">
+            <div class="card-box border-t-4 border-t-sky-600">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <i class="fa-solid fa-brain text-sky-600 text-lg"></i>
+                    <h3 class="font-['Poppins'] font-bold text-slate-800 text-xs sm:text-sm">1. Creatividad</h3>
+                </div>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Capacidad cognitiva humana para generar conexiones originales e imaginativas. Ocurre en el mundo abstracto.</p>
+            </div>
+
+            <div class="card-box border-t-4 border-t-amber-600">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <i class="fa-solid fa-flask text-amber-600 text-lg"></i>
+                    <h3 class="font-['Poppins'] font-bold text-slate-800 text-xs sm:text-sm">2. Invención</h3>
+                </div>
+                <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Primera realización o manifestación técnica (patentable o no). Crea nuevo conocimiento sin garantizar mercado (Fagerberg).</p>
+            </div>
+
+            <div class="card-box border-t-4 border-t-emerald-600 bg-emerald-50/40">
+                <div class="flex items-center gap-2 mb-1.5">
+                    <i class="fa-solid fa-chart-line text-emerald-600 text-lg"></i>
+                    <h3 class="font-['Poppins'] font-bold text-emerald-900 text-xs sm:text-sm">3. Innovación ⭐</h3>
+                </div>
+                <p class="text-[11px] sm:text-xs text-slate-700 leading-relaxed">Introducción exitosa en el mercado o implementación organizacional de un producto o proceso que genera <strong>valor real</strong> (Manual de Oslo 2018).</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-lightbulb"></i>
+            <div>
+                <strong>Diferencia Clave:</strong> La invención transforma recursos en conocimiento; la innovación transforma conocimiento en valor económico y social.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Tipos de Innovación (Manual de Oslo 2018) -->
+    <div class="slide">
+        <h2 class="slide-title">📦 Tipos de Innovación Empresarial (Manual de Oslo 2018)</h2>
+        <p class="text-slate-600 text-xs mb-3">Sintetizando las 4 funciones de negocio tradicionales en 2 categorías principales</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="card-box border-l-4 border-l-teal-600">
+                <h3 class="font-['Poppins'] font-bold text-teal-800 text-sm mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-utensils text-teal-600"></i> Innovación de Producto
+                </h3>
+                <p class="text-xs text-slate-600 mb-2">Bien o servicio nuevo o significativamente mejorado en sus especificaciones técnicas, componentes o uso.</p>
+                <div class="p-2 bg-slate-50 rounded text-[11px] text-slate-700 font-mono">
+                    • Alimentos funcionales (probióticos, péptidos).<br>
+                    • Matriz vegetal alternativa (plant-based).<br>
+                    • Reducción de sellos (Clean Label).
+                </div>
+            </div>
+
+            <div class="card-box border-l-4 border-l-sky-600">
+                <h3 class="font-['Poppins'] font-bold text-sky-800 text-sm mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-gears text-sky-600"></i> Innovación de Proceso de Negocio
+                </h3>
+                <p class="text-xs text-slate-600 mb-2">Implementación de métodos nuevos para funciones operativas o administrativas en la empresa.</p>
+                <div class="p-2 bg-slate-50 rounded text-[11px] text-slate-700 font-mono">
+                    • Conservación no térmica (HPP, PEF).<br>
+                    • Logística digitalizada y trazabilidad IoT.<br>
+                    • Innovación abierta y Upcycling circular.
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-arrows-split-up-and-left"></i>
+            <div>
+                <strong>Combinaciones Comunes:</strong> Reformular un producto para quitar conservantes suele exigir innovar simultáneamente en el proceso (ej. envasado aséptico o HPP).
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Grados de Cambio y Matriz de Innovación -->
+    <div class="slide">
+        <h2 class="slide-title">📈 Grados y Alcance del Cambio Innovador</h2>
+        <p class="text-slate-600 text-xs mb-2">Matriz Nivel de Tecnología vs. Impacto en el Mercado</p>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 my-auto text-xs">
+            <div class="card-box border-t-4 border-t-slate-400 bg-slate-50">
+                <strong class="text-slate-800 text-xs block mb-1">1. Mejora Continua</strong>
+                <p class="text-[11px] text-slate-600">Ajustes rutinarios y pequeñas optimizaciones en línea de producción.</p>
+            </div>
+            <div class="card-box border-t-4 border-t-sky-500">
+                <strong class="text-sky-900 text-xs block mb-1">2. Incremental</strong>
+                <p class="text-[11px] text-slate-600">Suma de mejoras que agregan valor sobre un producto existente (ej. nuevo sabor de yogur).</p>
+            </div>
+            <div class="card-box border-t-4 border-t-amber-500">
+                <strong class="text-amber-900 text-xs block mb-1">3. Radical</strong>
+                <p class="text-[11px] text-slate-600">Propuesta técnica completamente nueva para la empresa o la industria (ej. HPP en jugos frescos).</p>
+            </div>
+            <div class="card-box border-t-4 border-t-emerald-600 bg-emerald-50/30">
+                <strong class="text-emerald-900 text-xs block mb-1">4. Disruptiva ⭐</strong>
+                <p class="text-[11px] text-slate-700">Transforma la dinámica del mercado y crea categorías nuevas (ej. carne cultivada / fermentación de precisión).</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-chart-pie"></i>
+            <div>
+                <strong>Estrategia PyME (Regla 70/20/10):</strong> Un portafolio saludable balancea un 70% de innovaciones incrementales, 20% radicales y 10% exploratorias.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: El Proceso Creativo -->
+    <div class="slide">
+        <h2 class="slide-title">🧠 Neurociencia del Proceso Creativo</h2>
+        <p class="text-slate-600 text-xs mb-3">Las 4 fases estructuradas desde la inmersión hasta la mesada de laboratorio</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 my-auto">
+            <div class="card-box text-center bg-slate-50">
+                <span class="bg-teal-700 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full mb-2 inline-block">1. Preparación</span>
+                <h3 class="font-bold text-slate-800 text-xs mb-1">Inmersión & Datos</h3>
+                <p class="text-[11px] text-slate-600">Análisis PESTEL, tendencias de mercado, normativas y definición clara del problema.</p>
+            </div>
+
+            <div class="card-box text-center bg-slate-50">
+                <span class="bg-teal-700 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full mb-2 inline-block">2. Incubación</span>
+                <h3 class="font-bold text-slate-800 text-xs mb-1">Proceso Inconsciente</h3>
+                <p class="text-[11px] text-slate-600">Distanciamiento del problema para permitir que el cerebro asocie ideas distantes.</p>
+            </div>
+
+            <div class="card-box text-center bg-teal-50 border-teal-500">
+                <span class="bg-amber-600 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full mb-2 inline-block">3. Iluminación</span>
+                <h3 class="font-bold text-teal-900 text-xs mb-1">El Momento "Eureka"</h3>
+                <p class="text-[11px] text-slate-700">Aparición espontánea de la conexión o hipótesis de solución innovadora.</p>
+            </div>
+
+            <div class="card-box text-center bg-slate-50">
+                <span class="bg-teal-700 text-white font-bold text-[11px] px-2.5 py-0.5 rounded-full mb-2 inline-block">4. Verificación</span>
+                <h3 class="font-bold text-slate-800 text-xs mb-1">Ensayo & Piloto</h3>
+                <p class="text-[11px] text-slate-600">Formulación en laboratorio, panel sensorial, inocuidad y evaluación de costos.</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-filter"></i>
+            <div>
+                <strong>Prerrequisitos Cognitivos:</strong> Requiere alternar entre <em>Divergencia</em> (generar caos y cantidad) y <em>Convergencia</em> (filtrado y selección).
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Caja de Herramientas Núcleo -->
+    <div class="slide">
+        <h2 class="slide-title">🛠️ Herramientas Núcleo de Ideación e Inversión</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto">
+            <div class="card-box border-l-4 border-l-sky-600">
+                <h3 class="font-bold text-sky-900 text-xs mb-1">1. Brainstorming (Inverso & Roles)</h3>
+                <p class="text-[11px] text-slate-600 mb-1.5">Generación masiva sin juicio previo. El <em>Inverso</em> indaga cómo arruinar el producto; el <em>Rolestorming</em> adopta el rol del competidor o auditor.</p>
+            </div>
+
+            <div class="card-box border-l-4 border-l-teal-600 bg-teal-50/20">
+                <h3 class="font-bold text-teal-900 text-xs mb-1">2. Método SCAMPER ⭐</h3>
+                <p class="text-[11px] text-slate-700 mb-1.5">7 disparadores: Sustituir, Combinar, Adaptar, Modificar, Proponer otros usos (Upcycling), Eliminar (Clean Label) y Reordenar.</p>
+            </div>
+
+            <div class="card-box border-l-4 border-l-amber-600">
+                <h3 class="font-bold text-amber-900 text-xs mb-1">3. Seis Sombreros (De Bono)</h3>
+                <p class="text-[11px] text-slate-600 mb-1.5">Mapeo de perspectivas: ⚪Blanco (datos), 🔴Rojo (emoción), 🖤Negro (riesgos/CAA), 🟡Amarillo (valor), 🟢Verde (locura), 🔵Azul (gestión).</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-cubes"></i>
+            <div>
+                <strong>Herramienta Directa para el TFI:</strong> SCAMPER es la técnica obligatoria para estructurar las variantes de la Idea-Proyecto en la Sección XII.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Métodos Sistémicos (TRIZ y Análisis Morfológico) -->
+    <div class="slide">
+        <h2 class="slide-title">📐 Métodos Sistémicos: Análisis Morfológico y TRIZ</h2>
+        <p class="text-slate-600 text-xs mb-2">Descomposición paramétrica y resolución de contradicciones técnicas</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto">
+            <div class="card-box">
+                <h3 class="font-bold text-slate-800 text-xs mb-1 flex items-center gap-1.5">
+                    <i class="fa-solid fa-table-cells text-sky-600"></i> Análisis Morfológico (Zwicky)
+                </h3>
+                <p class="text-[11px] text-slate-600 leading-relaxed mb-1.5">
+                    Descompone el alimento en parámetros clave (Base, Proteína, Sabor, Fortificación, Packaging) y combina opciones por filas para hallar propuestas inéditas.
+                </p>
+                <div class="p-1.5 bg-slate-100 rounded text-[10px] font-mono text-slate-700">
+                    Ej. Suero clarificado + Péptidos + Liposomas + Envase compostable.
+                </div>
+            </div>
+
+            <div class="card-box">
+                <h3 class="font-bold text-slate-800 text-xs mb-1 flex items-center gap-1.5">
+                    <i class="fa-solid fa-microchip text-teal-600"></i> TRIZ (Altshuller)
+                </h3>
+                <p class="text-[11px] text-slate-600 leading-relaxed mb-1.5">
+                    Teoría basada en 3 millones de patentes. Resuelve <strong>contradicciones técnicas</strong> (ej. aumentar vida útil sin usar conservantes sintéticos) mediante 40 principios universales.
+                </p>
+                <div class="p-1.5 bg-slate-100 rounded text-[10px] font-mono text-slate-700">
+                    ¡Sin soluciones de compromiso! Se eliminan los trade-offs.
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-leaf"></i>
+            <div>
+                <strong>Biomimetismo:</strong> Aprender de la naturaleza (ej. imitar la estructura micro-hidrofóbica de la hoja de loto para crear envases antiadherentes).
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: La Pyramide de Elementos de Valor -->
+    <div class="slide">
+        <h2 class="slide-title">🔺 La Pirámide de Elementos de Valor (Bain & Co / HBR)</h2>
+        <p class="text-slate-600 text-xs mb-2">Para que una innovación triunfe debe aportar valor multidimensional al consumidor</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-2.5 my-auto text-xs">
+            <div class="card-box border-t-4 border-t-slate-400 text-center">
+                <span class="bg-slate-200 text-slate-800 font-bold text-[10px] px-2 py-0.5 rounded mb-1 inline-block">1. FUNCIONAL</span>
+                <p class="text-[11px] text-slate-600">Ahorra tiempo, simplifica, reduce costos, aporta nutrición y salud.</p>
+            </div>
+            <div class="card-box border-t-4 border-t-sky-500 text-center">
+                <span class="bg-sky-100 text-sky-800 font-bold text-[10px] px-2 py-0.5 rounded mb-1 inline-block">2. EMOCIONAL</span>
+                <p class="text-[11px] text-slate-600">Reducción de ansiedad, nostalgia, estética, diseño y placer gastronómico.</p>
+            </div>
+            <div class="card-box border-t-4 border-t-teal-600 text-center">
+                <span class="bg-teal-100 text-teal-800 font-bold text-[10px] px-2 py-0.5 rounded mb-1 inline-block">3. CAMBIO DE VIDA</span>
+                <p class="text-[11px] text-slate-600">Autorealización, pertenencia a tribu urbana, hábitos saludables sostenibles.</p>
+            </div>
+            <div class="card-box border-t-4 border-t-emerald-600 text-center bg-emerald-50/30">
+                <span class="bg-emerald-700 text-white font-bold text-[10px] px-2 py-0.5 rounded mb-1 inline-block">4. TRASCENDENCIA</span>
+                <p class="text-[11px] text-slate-700">Impacto social positivo, descarbonización y regeneración del planeta.</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-heart"></i>
+            <div>
+                <strong>Regla de Mercado:</strong> Los productos que combinan atributos Funcionales + Emocionales + Ambientales logran la mayor fidelidad de marca.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Copiloto IA Generativa 2026 -->
+    <div class="slide">
+        <h2 class="slide-title">🤖 Copiloto de IA Generativa en Creatividad (2026)</h2>
+        <p class="text-slate-600 text-xs mb-3">Sinergia Humano-Máquina para acelerar la ideación alimentaria</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="card-box">
+                <h3 class="font-['Poppins'] font-bold text-teal-800 text-xs mb-1.5 flex items-center gap-2">
+                    <i class="fa-solid fa-robot text-teal-600"></i> Amplificador Divergente (IA)
+                </h3>
+                <ul class="text-[11px] text-slate-700 space-y-1 list-disc pl-4">
+                    <li>Generación masiva de variaciones SCAMPER en segundos.</li>
+                    <li>Sugerencias de sustitución de aditivos (*Clean Label*).</li>
+                    <li>Desafío a "Vacas Sagradas" y dogmas históricos de la empresa.</li>
+                </ul>
+            </div>
+
+            <div class="card-box border-teal-600 border-2 bg-teal-50/30">
+                <h3 class="font-['Poppins'] font-bold text-teal-900 text-xs mb-1.5 flex items-center gap-2">
+                    <i class="fa-solid fa-user-check text-teal-700"></i> Auditoría de Ingeniería (Humana)
+                </h3>
+                <ul class="text-[11px] text-slate-800 space-y-1 list-disc pl-4">
+                    <li>Evaluación de factibilidad físico-química de la matriz.</li>
+                    <li>Verificación de viabilidad de escalado en planta piloto.</li>
+                    <li>Cumplimiento estricto del Código Alimentario Argentino (CAA).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+                <strong>Caja de Auditoría Humana:</strong> La IA propone las alternativas; el ingeniero en alimentos audita y valida la viabilidad en planta.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Consigna Taller Práctico SCAMPER -->
+    <div class="slide">
+        <h2 class="slide-title">🛠️ Consigna Taller Práctico: Ideación SCAMPER + TFI Parte 2</h2>
+        <p class="text-slate-600 text-xs mb-2">Traduciendo la divergencia en la propuesta de valor de la Idea-Proyecto</p>
+
+        <div class="card-box my-auto bg-slate-50 border-slate-300">
+            <h3 class="font-bold text-slate-800 text-xs mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-teal-600"></i> Pasos de la Dinámica en Vivo (60 Minutos):
+            </h3>
+            <ol class="text-[11px] text-slate-700 space-y-1.5 list-decimal pl-4">
+                <li><strong>Tomar la Problemática Base:</strong> Seleccionar el alimento/proceso derivado del Diagnóstico (TFI Parte 1).</li>
+                <li><strong>Ejecutar el Prompt de SCAMPER:</strong> Correr el prompt maestro en la IA para obtener 2 variaciones por letra.</li>
+                <li><strong>Filtrado con Seis Sombreros:</strong> Evaluar riesgos de proceso (Negro) y valor para el consumidor (Amarillo).</li>
+                <li><strong>Redactar la Ficha de Selección (Sección X):</strong> Definir el QUÉ, CÓMO, POR QUÉ y CUÁL en Google Docs (`TFI_Parte2_Idea_Proyecto.gdoc`).</li>
+            </ol>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-file-arrow-up"></i>
+            <div>
+                <strong>Entregable en Drive:</strong> Matriz SCAMPER completa + Selección de Idea-Proyecto e Integración de la Caja de Auditoría de IA.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Control Bar -->
+<div class="flex justify-between items-center p-3 bg-slate-900 text-white w-full max-w-[1280px] rounded-b-2xl gap-3">
+    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="prevBtn" onclick="moveSlide(-1)">
+        <i class="fa-solid fa-arrow-left"></i> Anterior
+    </button>
+    
+    <div class="flex items-center gap-3">
+        <span class="text-xs text-slate-300 font-semibold" id="slideCounter">Diapositiva 1 de 10</span>
+        <select class="bg-slate-800 border border-slate-600 text-white text-xs rounded-lg px-3 py-1.5 max-w-[220px] sm:max-w-[320px]" id="slideSelect" onchange="jumpToSlide(this.value)">
+            <!-- Options added dynamically -->
+        </select>
+    </div>
+
+    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="nextBtn" onclick="moveSlide(1)">
+        Siguiente <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideCounter = document.getElementById('slideCounter');
+    const slideSelect = document.getElementById('slideSelect');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Populate dropdown
+    slides.forEach((slide, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        const headerText = slide.querySelector('h2') ? slide.querySelector('h2').textContent.replace(/^[^\w\sÁÉÍÓÚáéíóú🎯🌍📖🏢🌱📐🌐🏛️⚙️🔺🚀🧬♻️📦🤖💡🧩📈🧠🐄🗣️🛠️🎩🧰📌🏁👨‍🔬🚨🔗📊⚖️🏻]+/u, '').trim() : `Diapositiva ${index + 1}`;
+        option.textContent = `${index + 1}. ${headerText.substring(0, 34)}...`;
+        slideSelect.appendChild(option);
+    });
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+        slideCounter.textContent = `Diapositiva ${currentSlide + 1} de ${totalSlides}`;
+        slideSelect.value = currentSlide;
+
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function moveSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        updateSlide();
+    }
+
+    function jumpToSlide(index) {
+        currentSlide = parseInt(index);
+        updateSlide();
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') moveSlide(-1);
+        if (e.key === 'ArrowRight') moveSlide(1);
+    });
+
+    updateSlide();
+</script>
+
+</body>
+</html>
