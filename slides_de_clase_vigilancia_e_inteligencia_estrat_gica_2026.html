@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigilancia e Inteligencia Estratégica 2026 - Slides de Clase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --navy-unvm: #0F2942;
+            --teal-tech: #0F766E;
+            --bg-slide: #F8FAFC;
+            --card-border: #CBD5E1;
+            --text-dark: #1E293B;
+        }
+
+        body {
+            background-color: #020617;
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .slide-deck {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-slide) 100%);
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 40px 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--navy-unvm);
+            line-height: 1.25;
+            border-bottom: 3px solid var(--teal-tech);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .card-box {
+            background-color: #FFFFFF;
+            border: 1.5px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 22px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        .bottom-banner {
+            background-color: var(--navy-unvm);
+            color: #FFFFFF;
+            border-radius: 10px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 14px;
+            line-height: 1.45;
+            margin-top: 15px;
+        }
+
+        .bottom-banner i {
+            font-size: 20px;
+            color: #38BDF8;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .slide-deck {
+                aspect-ratio: auto;
+                height: auto;
+                min-height: calc(100vh - 80px);
+                border-radius: 0;
+            }
+            .slide {
+                position: relative;
+                padding: 20px 16px;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-0 sm:p-4">
+
+<div class="slide-deck" id="slideDeck">
+
+    <!-- Slide 1: Portada -->
+    <div class="slide active flex-col justify-between" style="background: linear-gradient(135deg, #0F2942 0%, #1E3A5F 100%); color: white;">
+        <div class="flex justify-between items-center border-b border-slate-600 pb-3">
+            <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
+            <span class="text-xs text-slate-300">INGENIERÍA EN ALIMENTOS — 2026</span>
+        </div>
+        <div class="my-auto text-center">
+            <span class="inline-block bg-teal-800/50 border border-teal-400 text-teal-300 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">Gestión de la I+D+i</span>
+            <h1 class="font-['Poppins'] text-3xl sm:text-5xl font-bold text-white mb-3">VIGILANCIA E INTELIGENCIA<br><span class="text-teal-400">ESTRATÉGICA (VeIE)</span></h1>
+            <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto">Captura de señales del entorno para la toma de decisiones tecnológicas en la industria alimentaria</p>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-between items-center border-t border-slate-600 pt-4 gap-2">
+            <div class="text-left text-sm text-slate-300">
+                <strong class="text-white">Dr. Ing. Ricardo Cravero</strong> | Ing. Alejandro Benito
+            </div>
+            <div class="italic text-teal-300 text-sm">
+                "Filtrar el ruido para tomar decisiones de inversión seguras"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Del Buscador al Radar -->
+    <div class="slide">
+        <h2 class="slide-title">📡 Del "Buscador" al "Radar"</h2>
+        <p class="text-slate-600 text-sm mb-4">Evolución del paradigma tradicional de Vigilancia hacia la Inteligencia Estratégica 2026</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+            <div class="card-box bg-slate-50 border-slate-300">
+                <div class="flex items-center gap-2 mb-3 border-b pb-2">
+                    <i class="fa-solid fa-building-columns text-slate-500 text-xl"></i>
+                    <h3 class="font-['Poppins'] font-bold text-slate-700 text-base">Antes: Vigilancia Tecnológica (VT)</h3>
+                </div>
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-2.5 list-disc pl-4">
+                    <li><strong>Enfoque acotado:</strong> Monitoreo aislado de patentes, tesis y laboratorio.</li>
+                    <li><strong>Operativa manual:</strong> Búsqueda de datos "a mano" con operadores complejos.</li>
+                    <li><strong>Rol profesional:</strong> Recopilador de información ("picar piedra").</li>
+                    <li><strong>Resultado:</strong> Listados extensos de links o alertas no procesadas.</li>
+                </ul>
+            </div>
+
+            <div class="card-box bg-teal-50/50 border-teal-600 border-2">
+                <div class="flex items-center gap-2 mb-3 border-b border-teal-200 pb-2">
+                    <i class="fa-solid fa-rocket text-teal-700 text-xl"></i>
+                    <h3 class="font-['Poppins'] font-bold text-teal-900 text-base">Hoy: Inteligencia Estratégica (VeIE)</h3>
+                </div>
+                <ul class="text-xs sm:text-sm text-slate-800 space-y-2.5 list-disc pl-4">
+                    <li><strong>Visión 360°:</strong> Integra Tecnología, Competencia, Mercado y PESTEL.</li>
+                    <li><strong>Co-Piloto IA + Auditoría Humana:</strong> Generación ágil y verificación de veracidad.</li>
+                    <li><strong>Rol profesional:</strong> Auditor Estratégico y curador de datos.</li>
+                    <li><strong>Resultado:</strong> Ficha FCV con Causa Raíz y Viabilidad de Planta (4.1).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-lightbulb"></i>
+            <div>
+                <strong>Mensaje Clave:</strong> En la era de la IA, el valor no está en conseguir el dato, sino en saber auditarlo, interpretar su causa raíz y convertirlo en decisiones viables para la empresa.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Los 4 Ejes del Radar -->
+    <div class="slide">
+        <h2 class="slide-title">🌐 Los 4 Ejes del Radar de Inteligencia</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto flex-grow">
+            <div class="card-box border-l-4 border-l-teal-600">
+                <h3 class="font-['Poppins'] font-bold text-teal-800 text-base mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-microscope text-teal-600"></i> 1. Vigilancia Tecnológica (VT)
+                </h3>
+                <p class="text-xs text-slate-600">Patentes, artículos científicos, tesis, nuevos ingredientes, tecnologías de conservación y soluciones de packaging.</p>
+            </div>
+
+            <div class="card-box border-l-4 border-l-sky-600">
+                <h3 class="font-['Poppins'] font-bold text-sky-800 text-base mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-user-ninja text-sky-600"></i> 2. Vigilancia Competitiva (IC)
+                </h3>
+                <p class="text-xs text-slate-600">Lanzamientos de competidores directos/indirectos, alianzas de rivales, compras, fusiones y movimientos de marcas.</p>
+            </div>
+
+            <div class="card-box border-l-4 border-l-amber-600">
+                <h3 class="font-['Poppins'] font-bold text-amber-800 text-base mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-shop text-amber-600"></i> 3. Vigilancia Comercial (VC)
+                </h3>
+                <p class="text-xs text-slate-600">Hábitos del consumidor, necesidades insatisfechas, proveedores de maquinaria/insumos y evolución de canales.</p>
+            </div>
+
+            <div class="card-box border-l-4 border-l-emerald-600">
+                <h3 class="font-['Poppins'] font-bold text-emerald-800 text-base mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-earth-americas text-emerald-600"></i> 4. Vigilancia del Entorno (VE)
+                </h3>
+                <p class="text-xs text-slate-600">Leyes de etiquetado (ANMAT/CAA/FDA), normativas ambientales, macroeconomía, aranceles y factores PESTEL.</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-circle-info"></i>
+            <div>
+                <strong>Equilibrio 360°:</strong> Desarrollar un gran ingrediente (VT) fracasa si no monitoreamos los cambios regulatorios de etiquetado (VE) o los movimientos del competidor líder (IC).
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Del Diagnóstico a los FCV -->
+    <div class="slide">
+        <h2 class="slide-title">🎯 De la Estrategia a los FCVs</h2>
+        <p class="text-slate-600 text-sm mb-3">Evitar la parálisis por infoxicación mediante focos de búsqueda precisos</p>
+
+        <div class="bg-slate-100 p-3 rounded-lg border border-slate-300 text-center mb-4 font-mono text-xs sm:text-sm text-slate-800 font-bold">
+            Estrategia de Empresa ➔ Diagnóstico PESTEL/FODA ➔ Identificación de FCVs ➔ Ecuación de Búsqueda
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="card-box">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded">Definición</span>
+                <h3 class="font-bold text-slate-800 text-sm mt-2 mb-1">¿Qué es un FCV?</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">Variable o evento externo clave que, de modificarse, **obliga a la PyME a tomar una decisión estratégica** de cambio, inversión o permanencia.</p>
+            </div>
+
+            <div class="card-box">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded">Origen</span>
+                <h3 class="font-bold text-slate-800 text-sm mt-2 mb-1">¿De dónde nacen?</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">Son la traducción directa de las **Amenazas que debemos mitigar** y las **Oportunidades que debemos capitalizar** detectadas en el FODA.</p>
+            </div>
+
+            <div class="card-box">
+                <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2 py-1 rounded">Tipos</span>
+                <h3 class="font-bold text-slate-800 text-sm mt-2 mb-1">Clasificación</h3>
+                <ul class="text-xs text-slate-600 space-y-1 list-disc pl-3">
+                    <li>Sobre decisiones estratégicas.</li>
+                    <li>Sobre señales tempranas.</li>
+                    <li>Sobre actores clave.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-bullseye"></i>
+            <div>
+                <strong>Regla de Oro:</strong> Un FCV bien definido le dice al analista qué buscar, en qué fuentes y con qué urgencia.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Puesta en Marcha en la PyME -->
+    <div class="slide">
+        <h2 class="slide-title">⚙️ Puesta en Marcha del Sistema en la PyME</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="card-box">
+                <h3 class="font-['Poppins'] font-bold text-teal-800 text-base mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-repeat text-teal-600"></i> Vigilancia Sistemática vs. Puntual
+                </h3>
+                <div class="space-y-2 text-xs sm:text-sm text-slate-700">
+                    <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                        <strong>Sistemática (Continua):</strong> Rutina permanente de monitoreo para mantener alimentado el radar de la empresa.
+                    </div>
+                    <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                        <strong>Puntual (Por Proyecto):</strong> Búsqueda específica para resolver una inquietud técnica o de inversión puntual.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-box">
+                <h3 class="font-['Poppins'] font-bold text-teal-800 text-base mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-users-gear text-teal-600"></i> Roles y Presupuesto
+                </h3>
+                <ul class="text-xs text-slate-700 space-y-2 list-disc pl-4">
+                    <li><strong>Gestor de Vigilancia:</strong> Coordina el sistema, valida pertinencia y elabora boletines/informes.</li>
+                    <li><strong>Sensores Humanos:</strong> Vendedores, compradores y técnicos de planta que captan datos en el campo.</li>
+                    <li><strong>Presupuesto D&I:</strong> Costos directos (suscripciones, patentes) + Costos indirectos (tiempo-hombre).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-network-wired"></i>
+            <div>
+                <strong>Simbiosis Humana:</strong> La vigilancia no la hace una sola persona aislada; se nutre de los contactos cotidianos de toda la organización.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Fuentes y Clasificación IPC -->
+    <div class="slide">
+        <h2 class="slide-title">🔍 Fuentes Clave & Clasificación IPC</h2>
+        <p class="text-slate-600 text-sm mb-3">Dónde buscar y cómo categorizar las invenciones en la Industria Alimentaria</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+            <div class="card-box">
+                <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2 border-b pb-1">
+                    <i class="fa-solid fa-database text-sky-600"></i> Fuentes Académicas y Patentes
+                </h3>
+                <div class="text-xs text-slate-700 space-y-1.5">
+                    <p><strong>Científicas:</strong> Google Scholar, ScienceDirect, PubMed, SciELO.</p>
+                    <p><strong>Patentes Gratis:</strong> Google Patents, Lens.org, Espacenet, Patentscope.</p>
+                    <p><strong>Buscadores Semánticos IA:</strong> Perplexity, SciSpace, Consensus.</p>
+                </div>
+            </div>
+
+            <div class="card-box">
+                <h3 class="font-bold text-slate-800 text-sm mb-2 flex items-center gap-2 border-b pb-1">
+                    <i class="fa-solid fa-barcode text-teal-600"></i> Códigos IPC Principales (OMPI)
+                </h3>
+                <div class="text-xs text-slate-700 space-y-1 font-mono">
+                    <p><strong>A23L:</strong> Alimentos y bebidas no alcohólicas.</p>
+                    <p><strong>A23L 33/00:</strong> Alimentos funcionales y dietéticos.</p>
+                    <p><strong>A23C:</strong> Productos lácteos y sus sustitutos.</p>
+                    <p><strong>A23J:</strong> Composiciones proteicas e aislamiento.</p>
+                    <p><strong>B65D:</strong> Envases, packaging activo e inteligente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-key"></i>
+            <div>
+                <strong>Dato de Valor:</strong> El 70% al 80% de la información técnica del mundo solo está en patentes y nunca se publica en papers académicos.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Protocolo Anti-Alucinaciones -->
+    <div class="slide">
+        <h2 class="slide-title">🤖 Protocolo de Auditoría Humana (Anti-Alucinación)</h2>
+        <p class="text-slate-600 text-sm mb-4">El flujo de trabajo obligatorio en la era de los Modelos de Lenguaje (LLMs)</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto">
+            <div class="card-box text-center border-t-4 border-t-sky-500">
+                <div class="text-3xl mb-2">🤖</div>
+                <h3 class="font-bold text-slate-800 text-sm mb-1">Fase 1: PROMPT (IA)</h3>
+                <p class="text-xs text-slate-600">Estructuración de FCVs, sinónimos técnico-comerciales en inglés (US/UK) y ecuaciones booleanas.</p>
+            </div>
+
+            <div class="card-box text-center border-t-4 border-t-amber-500">
+                <div class="text-3xl mb-2">🔎</div>
+                <h3 class="font-bold text-slate-800 text-sm mb-1">Fase 2: VERIFICACIÓN (Humana)</h3>
+                <p class="text-xs text-slate-600">Búsqueda directa del **DOI real** o **Número de Patente oficial** en Lens, Scholar o Espacenet.</p>
+            </div>
+
+            <div class="card-box text-center border-t-4 border-t-emerald-500">
+                <div class="text-3xl mb-2">🧠</div>
+                <h3 class="font-bold text-slate-800 text-sm mb-1">Fase 3: DECISIÓN (Estratégica)</h3>
+                <p class="text-xs text-slate-600">Evaluación de causa raíz, viabilidad en planta piloto e impacto en el Diagnóstico 4.1.</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+                <strong>Regla Inviolable:</strong> La IA propone la hipótesis o la cadena de búsqueda; el profesional humano audita y comprueba la fuente antes de comprometer capital.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: La Ficha FCV (Entregable 4.1) -->
+    <div class="slide">
+        <h2 class="slide-title">📋 La Ficha FCV (Entregable Diagnóstico 4.1)</h2>
+        <p class="text-slate-600 text-sm mb-3">Cómo traducir un hallazgo de vigilancia en conocimiento útil para la empresa</p>
+
+        <div class="card-box overflow-hidden my-auto p-0 border border-slate-300">
+            <table class="w-full text-xs text-left">
+                <thead class="bg-slate-800 text-white font-['Poppins']">
+                    <tr>
+                        <th class="p-2.5">Componente</th>
+                        <th class="p-2.5">Contenido Requerido</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                    <tr>
+                        <td class="p-2.5 font-bold bg-slate-50">Factor Crítico (FCV)</td>
+                        <td class="p-2.5">Área o variable monitoreada (ej. *Ingredientes funcionales para masa muscular*).</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold bg-slate-50">Ecuación & Búsqueda</td>
+                        <td class="p-2.5 font-mono text-[11px]"> Cadena booleana utilizada en bases oficiales.</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold bg-slate-50 text-teal-800">Evidencia Auditada</td>
+                        <td class="p-2.5 font-semibold text-teal-900">Cita verificada con DOI o Nº de Patente oficial.</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold bg-slate-50">Impacto & Causa Raíz</td>
+                        <td class="p-2.5">Análisis de brecha para la PyME (Viabilidad técnica/económica).</td>
+                    </tr>
+                    <tr>
+                        <td class="p-2.5 font-bold bg-slate-50 text-sky-800">Recomendación 4.1</td>
+                        <td class="p-2.5 font-semibold text-sky-900">Decisión concreta de proyecto sugerida para la gerencia.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-file-signature"></i>
+            <div>
+                <strong>Insumo Directo:</strong> Un hallazgo de vigilancia no termina en un enlace guardado; debe traducirse en una recomendación ejecutable.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Control Bar -->
+<div class="flex justify-between items-center p-3.5 bg-slate-900 text-white w-full max-w-[1280px] rounded-b-2xl gap-3">
+    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="prevBtn" onclick="moveSlide(-1)">
+        <i class="fa-solid fa-arrow-left"></i> Anterior
+    </button>
+    
+    <div class="flex items-center gap-3">
+        <span class="text-xs text-slate-300 font-semibold" id="slideCounter">Diapositiva 1 de 8</span>
+        <select class="bg-slate-800 border border-slate-600 text-white text-xs rounded-lg px-3 py-1.5 max-w-[220px] sm:max-w-[320px]" id="slideSelect" onchange="jumpToSlide(this.value)">
+            <!-- Options added dynamically -->
+        </select>
+    </div>
+
+    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="nextBtn" onclick="moveSlide(1)">
+        Siguiente <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideCounter = document.getElementById('slideCounter');
+    const slideSelect = document.getElementById('slideSelect');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Populate dropdown
+    slides.forEach((slide, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        const headerText = slide.querySelector('h2') ? slide.querySelector('h2').textContent.replace(/^[^\w\sÁÉÍÓÚáéíóú🎯🌍📖🏢🌱📐🌐🏛️⚙️🔺🚀🧬♻️📦🤖💡🧩📈🧠🐄🗣️🛠️🎩🧰📌🏁👨‍🔬🚨🔗📊⚖️🏻]+/u, '').trim() : `Diapositiva ${index + 1}`;
+        option.textContent = `${index + 1}. ${headerText.substring(0, 34)}...`;
+        slideSelect.appendChild(option);
+    });
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+        slideCounter.textContent = `Diapositiva ${currentSlide + 1} de ${totalSlides}`;
+        slideSelect.value = currentSlide;
+
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function moveSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        updateSlide();
+    }
+
+    function jumpToSlide(index) {
+        currentSlide = parseInt(index);
+        updateSlide();
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') moveSlide(-1);
+        if (e.key === 'ArrowRight') moveSlide(1);
+    });
+
+    updateSlide();
+</script>
+
+</body>
+</html>
