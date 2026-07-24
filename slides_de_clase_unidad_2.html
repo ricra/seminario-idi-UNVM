@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidad 2: Gestión de la Información, Conocimiento, Vigilancia y Prospectiva (2026)</title>
+    <title>Unidad 2: Gestión de la Información, Conocimiento y Vigilancia Tecnológica (2026)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@
             justify-content: space-between;
             width: 100%;
             height: 100%;
-            padding: 38px 48px;
+            padding: 36px 48px;
             position: absolute;
             top: 0;
             left: 0;
@@ -58,39 +58,44 @@
 
         .slide-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 26px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--navy-unvm);
-            line-height: 1.25;
-            border-bottom: 3px solid var(--teal-tech);
-            padding-bottom: 6px;
-            margin-bottom: 16px;
+            line-height: 1.2;
+            border-bottom: 3.5px solid var(--teal-tech);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
             width: 100%;
         }
 
         .card-box {
             background-color: #FFFFFF;
             border: 1.5px solid var(--card-border);
-            border-radius: 12px;
-            padding: 16px 18px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            border-radius: 14px;
+            padding: 24px 24px;
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
         }
 
         .bottom-banner {
             background-color: var(--navy-unvm);
             color: #FFFFFF;
-            border-radius: 10px;
-            padding: 10px 18px;
+            border-radius: 12px;
+            padding: 14px 22px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 13.5px;
-            line-height: 1.4;
-            margin-top: 10px;
+            gap: 14px;
+            font-size: 15px;
+            line-height: 1.45;
+            margin-top: 14px;
+            flex-shrink: 0;
         }
 
         .bottom-banner i {
-            font-size: 18px;
+            font-size: 22px;
             color: #38BDF8;
             flex-shrink: 0;
         }
@@ -117,19 +122,19 @@
     <!-- Slide 1: Portada -->
     <div class="slide active flex-col justify-between" style="background: linear-gradient(135deg, #0F2942 0%, #1E3A5F 100%); color: white;">
         <div class="flex justify-between items-center border-b border-slate-600 pb-3">
-            <span class="text-xs font-bold tracking-widest text-teal-400 uppercase">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
-            <span class="text-xs text-slate-300">INGENIERÍA EN ALIMENTOS — 2026</span>
+            <span class="text-xs sm:text-sm font-bold tracking-widest text-teal-400 uppercase">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
+            <span class="text-xs sm:text-sm text-slate-300">INGENIERÍA EN ALIMENTOS — 2026</span>
         </div>
-        <div class="my-auto text-center">
-            <span class="inline-block bg-teal-800/50 border border-teal-400 text-teal-300 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4">Gestión de la I+D+i — Unidad 2</span>
-            <h1 class="font-['Poppins'] text-3xl sm:text-5xl font-bold text-white mb-3">GESTIÓN DE LA INFORMACIÓN,<br><span class="text-teal-400">CONOCIMIENTO Y VIGILANCIA</span></h1>
-            <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto">Transformando datos del entorno en decisiones tecnológicas y de inversión seguras</p>
+        <div class="my-auto text-center py-6">
+            <span class="inline-block bg-teal-800/50 border border-teal-400 text-teal-300 text-sm font-bold px-5 py-2 rounded-full uppercase tracking-wider mb-6">Gestión de la I+D+i — Unidad 2</span>
+            <h1 class="font-['Poppins'] text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">GESTIÓN DE LA INFORMACIÓN,<br><span class="text-teal-400">CONOCIMIENTO Y VIGILANCIA</span></h1>
+            <p class="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">Transformando datos del entorno en decisiones tecnológicas y de inversión seguras</p>
         </div>
         <div class="flex flex-col sm:flex-row justify-between items-center border-t border-slate-600 pt-4 gap-2">
-            <div class="text-left text-sm text-slate-300">
+            <div class="text-left text-sm sm:text-base text-slate-300">
                 <strong class="text-white">Dr. Ing. Ricardo Cravero</strong> | Ing. Alejandro Benito
             </div>
-            <div class="italic text-teal-300 text-sm">
+            <div class="italic text-teal-300 text-sm sm:text-base">
                 "Filtrar la infoxicación para tomar decisiones con evidencia"
             </div>
         </div>
@@ -137,32 +142,42 @@
 
     <!-- Slide 2: Pirámide DIKW -->
     <div class="slide">
-        <h2 class="slide-title">📊 De los Datos a la Inteligencia Estratégica (Jerarquía DIKW)</h2>
-        <p class="text-slate-600 text-xs mb-3">Transformación progresiva del dato bruto en decisiones operativas y de inversión</p>
+        <div>
+            <h2 class="slide-title">📊 De los Datos a la Inteligencia Estratégica (Jerarquía DIKW)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Transformación progresiva del dato bruto en decisiones operativas y de inversión</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 my-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto flex-grow py-3">
             <div class="card-box border-t-4 border-t-slate-400 bg-slate-50 text-center">
-                <span class="bg-slate-200 text-slate-800 font-bold text-[11px] px-2 py-0.5 rounded mb-2 inline-block">1. DATO</span>
-                <h3 class="font-bold text-slate-800 text-xs mb-1">Medición Neutra</h3>
-                <p class="text-[11px] text-slate-600">Ej. <em>39°C</em> registrado por un sensor en tanque de proceso.</p>
+                <div>
+                    <span class="bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm px-3 py-1 rounded mb-3 inline-block">1. DATO</span>
+                    <h3 class="font-bold text-slate-800 text-sm sm:text-base mb-2">Medición Neutra</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Ej. <em class="font-bold text-slate-800">39°C</em> registrado por un sensor en tanque de proceso.</p>
             </div>
 
             <div class="card-box border-t-4 border-t-sky-500 text-center">
-                <span class="bg-sky-100 text-sky-800 font-bold text-[11px] px-2 py-0.5 rounded mb-2 inline-block">2. INFORMACIÓN</span>
-                <h3 class="font-bold text-slate-800 text-xs mb-1">Contextualizada</h3>
-                <p class="text-[11px] text-slate-600">Ej. <em>39°C de temperatura durante la inoculación del cultivo starter.</em></p>
+                <div>
+                    <span class="bg-sky-100 text-sky-800 font-bold text-xs sm:text-sm px-3 py-1 rounded mb-3 inline-block">2. INFORMACIÓN</span>
+                    <h3 class="font-bold text-slate-800 text-sm sm:text-base mb-2">Contextualizada</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Ej. <em class="font-bold text-slate-800">39°C durante la inoculación del cultivo starter.</em></p>
             </div>
 
             <div class="card-box border-t-4 border-t-teal-600 text-center">
-                <span class="bg-teal-100 text-teal-800 font-bold text-[11px] px-2 py-0.5 rounded mb-2 inline-block">3. CONOCIMIENTO</span>
-                <h3 class="font-bold text-slate-800 text-xs mb-1">Interpretado</h3>
-                <p class="text-[11px] text-slate-600">Ej. <em>Riesgo de muerte térmica o inactivación del fermento láctico.</em></p>
+                <div>
+                    <span class="bg-teal-100 text-teal-800 font-bold text-xs sm:text-sm px-3 py-1 rounded mb-3 inline-block">3. CONOCIMIENTO</span>
+                    <h3 class="font-bold text-slate-800 text-sm sm:text-base mb-2">Interpretado</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Ej. <em class="font-bold text-slate-800">Riesgo de inactivación térmica del fermento láctico.</em></p>
             </div>
 
             <div class="card-box border-t-4 border-t-emerald-600 bg-emerald-50/50 text-center">
-                <span class="bg-emerald-700 text-white font-bold text-[11px] px-2 py-0.5 rounded mb-2 inline-block">4. INTELIGENCIA ⭐</span>
-                <h3 class="font-bold text-emerald-900 text-xs mb-1">Decisión Accionable</h3>
-                <p class="text-[11px] text-slate-700">Ej. <em>Ajuste automático de la camisa de enfriamiento y alarma en planta.</em></p>
+                <div>
+                    <span class="bg-emerald-700 text-white font-bold text-xs sm:text-sm px-3 py-1 rounded mb-3 inline-block">4. INTELIGENCIA ⭐</span>
+                    <h3 class="font-bold text-emerald-900 text-sm sm:text-base mb-2">Decisión Accionable</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-800 leading-relaxed my-auto font-medium">Ej. <em class="font-bold text-emerald-950">Ajuste automático de la camisa de enfriamiento y alarma en planta.</em></p>
             </div>
         </div>
 
@@ -176,32 +191,42 @@
 
     <!-- Slide 3: Modelo SECI y Caso Delicias Gourmet -->
     <div class="slide">
-        <h2 class="slide-title">🧠 Gestión del Conocimiento: Modelo SECI (Nonaka & Takeuchi)</h2>
-        <p class="text-slate-600 text-xs mb-2">Transformando el saber tácito de planta en Capital Intelectual organizacional</p>
+        <div>
+            <h2 class="slide-title">🧠 Gestión del Conocimiento: Modelo SECI (Nonaka & Takeuchi)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Transformando el saber tácito de planta en Capital Intelectual organizacional</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto flex-grow py-3">
             <div class="card-box border-l-4 border-l-sky-600">
-                <h3 class="font-bold text-sky-900 text-xs mb-1">1. Socialización (Tácito ➔ Tácito)</h3>
-                <p class="text-[11px] text-slate-600 mb-1">Saber hacer no documentado. Ej. El maestro quesero compartiendo secretos de textura en mesada.</p>
-                <div class="p-1.5 bg-slate-50 rounded text-[10px] text-slate-700 italic">Caso Mario (Chef): Mentoring directo a cocineros junior.</div>
+                <div>
+                    <h3 class="font-bold text-sky-900 text-sm sm:text-base mb-2">1. Socialización (Tácito ➔ Tácito)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">Saber hacer no documentado. Ej. El maestro quesero compartiendo secretos de textura en mesada.</p>
+                </div>
+                <div class="p-2.5 bg-slate-100 rounded-lg text-xs sm:text-sm text-slate-800 italic"><strong>Caso Mario (Chef):</strong> Mentoring directo y talleres grupales a cocineros junior.</div>
             </div>
 
-            <div class="card-box border-l-4 border-l-teal-600 bg-teal-50/30">
-                <h3 class="font-bold text-teal-900 text-xs mb-1">2. Externalización (Tácito ➔ Explícito) ⭐</h3>
-                <p class="text-[11px] text-slate-700 mb-1">Codificación en manuales, recetas estandarizadas, fichas técnicas e instructivos HACCP.</p>
-                <div class="p-1.5 bg-slate-50 rounded text-[10px] text-slate-700 italic">Caso Ana (Calidad): Redacción de manuales de selección de insumos.</div>
+            <div class="card-box border-l-4 border-l-teal-600 bg-teal-50/20">
+                <div>
+                    <h3 class="font-bold text-teal-900 text-sm sm:text-base mb-2">2. Externalización (Tácito ➔ Explícito) ⭐</h3>
+                    <p class="text-xs sm:text-sm text-slate-700 mb-3 leading-relaxed">Codificación en manuales, recetas estandarizadas, fichas técnicas e instructivos HACCP.</p>
+                </div>
+                <div class="p-2.5 bg-white border border-teal-200 rounded-lg text-xs sm:text-sm text-teal-950 italic"><strong>Caso Ana (Calidad):</strong> Redacción de manuales de selección e inspección de insumos.</div>
             </div>
 
             <div class="card-box border-l-4 border-l-amber-600">
-                <h3 class="font-bold text-amber-900 text-xs mb-1">3. Combinación (Explícito ➔ Explícito)</h3>
-                <p class="text-[11px] text-slate-600 mb-1">Integración de fichas técnicas con normas del Código Alimentario (CAA) y reportes de ERP.</p>
-                <div class="p-1.5 bg-slate-50 rounded text-[10px] text-slate-700 italic">Sistemas ERP/QMS: Tableros integrados de trazabilidad.</div>
+                <div>
+                    <h3 class="font-bold text-amber-900 text-sm sm:text-base mb-2">3. Combinación (Explícito ➔ Explícito)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">Integración de fichas técnicas con normas del Código Alimentario (CAA) y reportes de ERP.</p>
+                </div>
+                <div class="p-2.5 bg-slate-100 rounded-lg text-xs sm:text-sm text-slate-800 italic"><strong>Sistemas ERP/QMS:</strong> Tableros integrados de trazabilidad e insumos.</div>
             </div>
 
             <div class="card-box border-l-4 border-l-emerald-600">
-                <h3 class="font-bold text-emerald-900 text-xs mb-1">4. Internalización (Explícito ➔ Tácito)</h3>
-                <p class="text-[11px] text-slate-600 mb-1">Aprender haciendo (<em>learning by doing</em>) leyendo manuales y practicando en planta piloto.</p>
-                <div class="p-1.5 bg-slate-50 rounded text-[10px] text-slate-700 italic">Adopción de nuevas rutinas operativas en la empresa.</div>
+                <div>
+                    <h3 class="font-bold text-emerald-900 text-sm sm:text-base mb-2">4. Internalización (Explícito ➔ Tácito)</h3>
+                    <p class="text-xs sm:text-sm text-slate-600 mb-3 leading-relaxed">Aprender haciendo (<em>learning by doing</em>) leyendo manuales y practicando en planta piloto.</p>
+                </div>
+                <div class="p-2.5 bg-slate-100 rounded-lg text-xs sm:text-sm text-slate-800 italic">Adopción natural de nuevas rutinas operativas en la empresa.</div>
             </div>
         </div>
 
@@ -215,71 +240,83 @@
 
     <!-- Slide 4: Los 4 Ejes de la VeIE -->
     <div class="slide">
-        <h2 class="slide-title">🌐 Los 4 Ejes de la Vigilancia e Inteligencia Estratégica (VeIE)</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto flex-grow">
+        <div>
+            <h2 class="slide-title">🌐 Los 4 Ejes de la Vigilancia e Inteligencia Estratégica (VeIE)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Captura de señales del entorno para la toma de decisiones 360°</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto flex-grow py-3">
             <div class="card-box border-l-4 border-l-teal-600">
-                <h3 class="font-['Poppins'] font-bold text-teal-800 text-xs sm:text-sm mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-microscope text-teal-600"></i> 1. Vigilancia Tecnológica (VT)
+                <h3 class="font-['Poppins'] font-bold text-teal-800 text-base sm:text-lg mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-microscope text-teal-600 text-xl"></i> 1. Vigilancia Tecnológica (VT)
                 </h3>
-                <p class="text-[11px] text-slate-600">Patentes, artículos científicos, tecnologías de conservación (HPP, PEF), ingredientes funcionales y envases activos.</p>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Patentes, artículos científicos, tecnologías de conservación (HPP, PEF), ingredientes funcionales y envases activos.</p>
             </div>
 
             <div class="card-box border-l-4 border-l-sky-600">
-                <h3 class="font-['Poppins'] font-bold text-sky-800 text-xs sm:text-sm mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-user-ninja text-sky-600"></i> 2. Vigilancia Competitiva (IC)
+                <h3 class="font-['Poppins'] font-bold text-sky-800 text-base sm:text-lg mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-user-ninja text-sky-600 text-xl"></i> 2. Vigilancia Competitiva (IC)
                 </h3>
-                <p class="text-[11px] text-slate-600">Lanzamientos de rivales, alianzas estratégicas, movimientos de patentes, fusiones y estrategias de precios.</p>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Lanzamientos de rivales, alianzas estratégicas, movimientos de patentes, fusiones y estrategias de precios.</p>
             </div>
 
             <div class="card-box border-l-4 border-l-amber-600">
-                <h3 class="font-['Poppins'] font-bold text-amber-800 text-xs sm:text-sm mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-shop text-amber-600"></i> 3. Vigilancia Comercial (VC)
+                <h3 class="font-['Poppins'] font-bold text-amber-800 text-base sm:text-lg mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-shop text-amber-600 text-xl"></i> 3. Vigilancia Comercial (VC)
                 </h3>
-                <p class="text-[11px] text-slate-600">Demandas de consumo (Clean Label, proteicas), proveedores de insumos/maquinaria y evolución de canales.</p>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Demandas de consumo (Clean Label, proteicas), proveedores de insumos/maquinaria y evolución de canales.</p>
             </div>
 
             <div class="card-box border-l-4 border-l-emerald-600">
-                <h3 class="font-['Poppins'] font-bold text-emerald-800 text-xs sm:text-sm mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-earth-americas text-emerald-600"></i> 4. Vigilancia del Entorno (VE)
+                <h3 class="font-['Poppins'] font-bold text-emerald-800 text-base sm:text-lg mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-earth-americas text-emerald-600 text-xl"></i> 4. Vigilancia del Entorno (VE)
                 </h3>
-                <p class="text-[11px] text-slate-600">Leyes de etiquetado (ANMAT/CAA/FDA), normativas ambientales, costos macroeconómicos y factores PESTEL.</p>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">Leyes de etiquetado (ANMAT/CAA/FDA), normativas ambientales, costos macroeconómicos y factores PESTEL.</p>
             </div>
         </div>
 
         <div class="bottom-banner">
             <i class="fa-solid fa-chart-pie"></i>
             <div>
-                <strong>Fórmula Integradora:</strong> $\text{Inteligencia Estratégica } (VeIE) = VT + IC + P + PE$.
+                <strong>Fórmula Integradora:</strong> Inteligencia Estratégica (VeIE) = VT + IC + P + PE.
             </div>
         </div>
     </div>
 
     <!-- Slide 5: Factores Críticos de Vigilancia (FCVs) -->
     <div class="slide">
-        <h2 class="slide-title">🎯 Factores Críticos de Vigilancia (FCVs) & KITs</h2>
-        <p class="text-slate-600 text-xs mb-2">Del diagnóstico estratégico PESTEL/FODA a las ecuaciones de búsqueda</p>
+        <div>
+            <h2 class="slide-title">🎯 Factores Críticos de Vigilancia (FCVs) & KITs</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Del diagnóstico estratégico PESTEL/FODA a las ecuaciones de búsqueda</p>
+        </div>
 
-        <div class="bg-slate-100 p-2.5 rounded-lg border border-slate-300 text-center mb-3 font-mono text-xs text-slate-800 font-bold">
+        <div class="bg-slate-100 p-3 rounded-xl border border-slate-300 text-center mb-3 font-mono text-xs sm:text-sm text-slate-800 font-bold">
             Estrategia PyME ➔ Diagnóstico PESTEL/FODA ➔ Identificación de FCVs ➔ Ecuación de Búsqueda
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto flex-grow py-2">
             <div class="card-box">
-                <span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">Definición</span>
-                <h3 class="font-bold text-slate-800 text-xs mt-1.5 mb-1">¿Qué es un FCV?</h3>
-                <p class="text-[11px] text-slate-600 leading-relaxed">Variable externa crítica que, si sufre una modificación, **obliga a la empresa a tomar una decisión estratégica** de inversión, cambio o permanencia.</p>
+                <div>
+                    <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2.5 py-1 rounded">Definición</span>
+                    <h3 class="font-bold text-slate-800 text-sm sm:text-base mt-3 mb-2">¿Qué es un FCV?</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Variable externa crítica que, si sufre una modificación, <strong>obliga a la empresa a tomar una decisión estratégica</strong> de inversión, cambio o permanencia.</p>
             </div>
 
             <div class="card-box">
-                <span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">Origen</span>
-                <h3 class="font-bold text-slate-800 text-xs mt-1.5 mb-1">¿De dónde nace?</h3>
-                <p class="text-[11px] text-slate-600 leading-relaxed">Surge de la traducción directa de las **Amenazas a mitigar** y **Oportunidades a capitalizar** detectadas en el FODA.</p>
+                <div>
+                    <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2.5 py-1 rounded">Origen</span>
+                    <h3 class="font-bold text-slate-800 text-sm sm:text-base mt-3 mb-2">¿De dónde nace?</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Surge de la traducción directa de las <strong>Amenazas a mitigar</strong> y <strong>Oportunidades a capitalizar</strong> detectadas en el FODA.</p>
             </div>
 
             <div class="card-box">
-                <span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2 py-0.5 rounded">Métrica</span>
-                <h3 class="font-bold text-slate-800 text-xs mt-1.5 mb-1">Indicadores Medibles</h3>
-                <ul class="text-[11px] text-slate-600 space-y-1 list-disc pl-3">
+                <div>
+                    <span class="bg-teal-100 text-teal-800 text-xs font-bold px-2.5 py-1 rounded">Métrica</span>
+                    <h3 class="font-bold text-slate-800 text-sm sm:text-base mt-3 mb-2">Indicadores Medibles</h3>
+                </div>
+                <ul class="text-xs sm:text-sm text-slate-600 space-y-1.5 list-disc pl-4 my-auto">
                     <li>N° de patentes en IPC A23L.</li>
                     <li>Porcentaje de digestibilidad (DIAAS).</li>
                     <li>Evolución de lanzamientos rivales.</li>
@@ -297,15 +334,17 @@
 
     <!-- Slide 6: Fuentes y Códigos IPC -->
     <div class="slide">
-        <h2 class="slide-title">🔍 Bases de Datos & Clasificación IPC (OMPI)</h2>
-        <p class="text-slate-600 text-xs mb-3">Dónde buscar y cómo categorizar las invenciones en la industria de alimentos</p>
+        <div>
+            <h2 class="slide-title">🔍 Bases de Datos & Clasificación IPC (OMPI)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-3">Dónde buscar y cómo categorizar las invenciones en la industria de alimentos</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto flex-grow py-3">
             <div class="card-box">
-                <h3 class="font-bold text-slate-800 text-xs mb-2 flex items-center gap-2 border-b pb-1">
-                    <i class="fa-solid fa-database text-sky-600"></i> Fuentes Académicas y Patentes
+                <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-3 flex items-center gap-2 border-b pb-2">
+                    <i class="fa-solid fa-database text-sky-600 text-xl"></i> Fuentes Académicas y Patentes
                 </h3>
-                <div class="text-[11px] text-slate-700 space-y-1.5">
+                <div class="text-xs sm:text-sm text-slate-700 space-y-3 leading-relaxed">
                     <p><strong>Científicas:</strong> Google Scholar, PubMed, ScienceDirect, SciELO.</p>
                     <p><strong>Patentes Gratis:</strong> Espacenet, Lens.org, Google Patents, Patentscope.</p>
                     <p><strong>Buscadores Semánticos IA:</strong> Perplexity, SciSpace, Consensus.</p>
@@ -313,10 +352,10 @@
             </div>
 
             <div class="card-box">
-                <h3 class="font-bold text-slate-800 text-xs mb-2 flex items-center gap-2 border-b pb-1">
-                    <i class="fa-solid fa-barcode text-teal-600"></i> Códigos IPC Principales (OMPI)
+                <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-3 flex items-center gap-2 border-b pb-2">
+                    <i class="fa-solid fa-barcode text-teal-600 text-xl"></i> Códigos IPC Principales (OMPI)
                 </h3>
-                <div class="text-[11px] text-slate-700 space-y-1 font-mono">
+                <div class="text-xs sm:text-sm text-slate-800 space-y-2 font-mono">
                     <p><strong>A23L:</strong> Alimentos y bebidas no alcohólicas.</p>
                     <p><strong>A23L 33/00:</strong> Alimentos funcionales y dietéticos.</p>
                     <p><strong>A23C:</strong> Productos lácteos y sus sustitutos.</p>
@@ -336,61 +375,71 @@
 
     <!-- Slide 7: Prospectiva vs Foresight y TRM -->
     <div class="slide">
-        <h2 class="slide-title">🔮 Prospectiva Tecnológica & Roadmapping (TRM)</h2>
-        <p class="text-slate-600 text-xs mb-2">Escuelas de pensamiento del futuro y mapas de ruta tecnológicos</p>
+        <div>
+            <h2 class="slide-title">🔮 Prospectiva Tecnológica & Roadmapping (TRM)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Escuelas de pensamiento del futuro y mapas de ruta tecnológicos</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto flex-grow py-2">
             <div class="card-box border-l-4 border-l-teal-600">
-                <h3 class="font-bold text-teal-900 text-xs mb-1">Escuela Francesa (Prospective - Berger/Godet)</h3>
-                <p class="text-[11px] text-slate-600 leading-relaxed mb-1">
-                    Enfoque normativo y voluntarista. El futuro no se predice; se construye activamente mediante escenarios deseados ($3\text{ a }20\text{ años}$).
+                <h3 class="font-bold text-teal-900 text-sm sm:text-base mb-2">Escuela Francesa (Prospective - Berger/Godet)</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2">
+                    Enfoque normativo y voluntarista. El futuro no se predice; se construye activamente mediante escenarios deseados (3 a 20 años).
                 </p>
             </div>
 
             <div class="card-box border-l-4 border-l-sky-600">
-                <h3 class="font-bold text-sky-900 text-xs mb-1">Escuela Anglosajona (Foresight - Voros/Popper)</h3>
-                <p class="text-[11px] text-slate-600 leading-relaxed mb-1">
-                    Pragmático y participativo. Utiliza *Horizon Scanning* y método Delphi para anticipar múltiples futuros posibles e informar decisiones.
+                <h3 class="font-bold text-sky-900 text-sm sm:text-base mb-2">Escuela Anglosajona (Foresight - Voros/Popper)</h3>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-2">
+                    Pragmático y participativo. Utiliza <em>Horizon Scanning</em> y método Delphi para anticipar múltiples futuros posibles e informar decisiones.
                 </p>
             </div>
         </div>
 
-        <div class="p-2.5 bg-slate-50 border border-slate-300 rounded-xl my-1">
-            <strong class="text-slate-800 text-xs block mb-1">🗺️ Technology Roadmapping (TRM) — 3 Capas Horizontales:</strong>
-            <div class="text-[10px] font-mono text-slate-700 grid grid-cols-3 gap-2 text-center">
-                <div class="p-1 bg-white border rounded">1. Mercado / Tendencias (Drivers)</div>
-                <div class="p-1 bg-white border rounded">2. Productos / Funciones (Lanzamientos)</div>
-                <div class="p-1 bg-white border rounded">3. Tecnologías Habilitadoras / R&D</div>
+        <div class="p-3 bg-slate-50 border border-slate-300 rounded-xl my-2">
+            <strong class="text-slate-800 text-xs sm:text-sm block mb-1.5">🗺️ Technology Roadmapping (TRM) — 3 Capas Horizontales:</strong>
+            <div class="text-xs font-mono text-slate-700 grid grid-cols-3 gap-3 text-center">
+                <div class="p-2 bg-white border rounded-lg shadow-sm">1. Mercado / Tendencias (Drivers)</div>
+                <div class="p-2 bg-white border rounded-lg shadow-sm">2. Productos / Funciones (Lanzamientos)</div>
+                <div class="p-2 bg-white border rounded-lg shadow-sm">3. Tecnologías Habilitadoras / R&D</div>
             </div>
         </div>
 
         <div class="bottom-banner">
             <i class="fa-solid fa-compass"></i>
             <div>
-                <strong>Visión-Acción:</strong> El Roadmap articula el corto ($0\text{--}3\text{ a}$), mediano ($3\text{--}7\text{ a}$) y largo plazo ($7\text{--}15\text{ a}$) reduciendo la incertidumbre.
+                <strong>Visión-Acción:</strong> El Roadmap articula el corto (0-3 a), mediano (3-7 a) y largo plazo (7-15 a) reduciendo la incertidumbre.
             </div>
         </div>
     </div>
 
     <!-- Slide 8: Costo de la NO Vigilancia -->
     <div class="slide">
-        <h2 class="slide-title">⚠️ Lecciones de la Industria: El Costo de la NO-Vigilancia</h2>
-        <p class="text-slate-600 text-xs mb-2">Casos reales donde ignorar las señales del entorno destruyó valor comercial</p>
+        <div>
+            <h2 class="slide-title">⚠️ Lecciones de la Industria: El Costo de la NO-Vigilancia</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Casos reales donde ignorar las señales del entorno destruyó valor comercial</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-auto flex-grow py-3">
             <div class="card-box border-t-4 border-t-red-600 bg-red-50/20">
-                <strong class="text-red-900 text-xs block mb-1">1. Envases para Detergente (Italia)</strong>
-                <p class="text-[11px] text-slate-600 leading-relaxed">Fabricantes de cartón no vigilaron la tendencia hacia fórmulas concentradas y envases compactos. Perderon el mercado a manos de nuevos competidores.</p>
+                <div>
+                    <strong class="text-red-900 text-sm sm:text-base block mb-2">1. Envases para Detergente (Italia)</strong>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">Fabricantes de cartón no vigilaron la tendencia hacia fórmulas concentradas y envases compactos. Perderon el mercado a manos de nuevos competidores.</p>
+                </div>
             </div>
 
             <div class="card-box border-t-4 border-t-amber-600 bg-amber-50/20">
-                <strong class="text-amber-900 text-xs block mb-1">2. Kokoku Rubber vs. EE. UU.</strong>
-                <p class="text-[11px] text-slate-600 leading-relaxed">El anuncio de una nueva planta rival estuvo en diarios locales durante 3 años. La falta de circulación interna de datos tomó por sorpresa a la gerencia.</p>
+                <div>
+                    <strong class="text-amber-900 text-sm sm:text-base block mb-2">2. Kokoku Rubber vs. EE. UU.</strong>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">El anuncio de una nueva planta rival estuvo en diarios locales durante 3 años. La falta de circulación interna de datos tomó por sorpresa a la gerencia.</p>
+                </div>
             </div>
 
             <div class="card-box border-t-4 border-t-emerald-600 bg-emerald-50/20">
-                <strong class="text-emerald-900 text-xs block mb-1">3. Saber Cancelar a Tiempo ⭐</strong>
-                <p class="text-[11px] text-slate-700 leading-relaxed">Searle (Monsanto) detectó que competidores lideraban el desarrollo de disolventes de coágulos (TPA) y canceló su proyecto, ahorrando millones en R&D.</p>
+                <div>
+                    <strong class="text-emerald-900 text-sm sm:text-base block mb-2">3. Saber Cancelar a Tiempo ⭐</strong>
+                    <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">Searle (Monsanto) detectó que competidores lideraban el desarrollo de disolventes de coágulos (TPA) y canceló su proyecto, ahorrando millones en R&D.</p>
+                </div>
             </div>
         </div>
 
@@ -404,26 +453,34 @@
 
     <!-- Slide 9: Protocolo Anti-Alucinación IA -->
     <div class="slide">
-        <h2 class="slide-title">🤖 Protocolo de Auditoría Humana (Anti-Alucinación)</h2>
-        <p class="text-slate-600 text-xs mb-3">Flujo de trabajo híbrido con Inteligencia Artificial en la era de los LLMs</p>
+        <div>
+            <h2 class="slide-title">🤖 Protocolo de Auditoría Humana (Anti-Alucinación)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-3">Flujo de trabajo híbrido con Inteligencia Artificial en la era de los LLMs</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-auto">
-            <div class="card-box text-center border-t-4 border-t-sky-500">
-                <div class="text-2xl mb-1">🤖</div>
-                <h3 class="font-bold text-slate-800 text-xs mb-1">Fase 1: PROMPT (IA)</h3>
-                <p class="text-[11px] text-slate-600">Estructurar FCVs, sinónimos técnico-comerciales en inglés (US/UK) y ecuaciones booleanas iniciales.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto flex-grow py-4">
+            <div class="card-box text-center border-t-4 border-t-sky-500 py-6">
+                <div>
+                    <div class="text-4xl sm:text-5xl mb-3">🤖</div>
+                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Fase 1: PROMPT (IA)</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Estructurar FCVs, sinónimos técnico-comerciales en inglés (US/UK) y ecuaciones booleanas iniciales.</p>
             </div>
 
-            <div class="card-box text-center border-t-4 border-t-amber-500 bg-amber-50/30">
-                <div class="text-2xl mb-1">🔎</div>
-                <h3 class="font-bold text-slate-800 text-xs mb-1">Fase 2: VERIFICACIÓN (Humana)</h3>
-                <p class="text-[11px] text-slate-700">Comprobar el **DOI real** o **N° de Patente oficial** en Google Scholar, Lens.org o Espacenet.</p>
+            <div class="card-box text-center border-t-4 border-t-amber-500 bg-amber-50/30 py-6">
+                <div>
+                    <div class="text-4xl sm:text-5xl mb-3">🔎</div>
+                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Fase 2: VERIFICACIÓN (Humana)</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-800 leading-relaxed my-auto">Comprobar el <strong>DOI real</strong> o <strong>N° de Patente oficial</strong> en Google Scholar, Lens.org o Espacenet.</p>
             </div>
 
-            <div class="card-box text-center border-t-4 border-t-emerald-500">
-                <div class="text-2xl mb-1">🧠</div>
-                <h3 class="font-bold text-slate-800 text-xs mb-1">Fase 3: DECISIÓN (Ingeniería)</h3>
-                <p class="text-[11px] text-slate-600">Analizar brecha de planta, factibilidad técnica y redactar recomendación para la gerencia.</p>
+            <div class="card-box text-center border-t-4 border-t-emerald-500 py-6">
+                <div>
+                    <div class="text-4xl sm:text-5xl mb-3">🧠</div>
+                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Fase 3: DECISIÓN (Ingeniería)</h3>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Analizar brecha de planta, factibilidad técnica y redactar recomendación para la gerencia.</p>
             </div>
         </div>
 
@@ -437,37 +494,39 @@
 
     <!-- Slide 10: Consigna Taller NutriSenior S.A. -->
     <div class="slide">
-        <h2 class="slide-title">📋 Taller Práctico: NutriSenior S.A. + Ficha FCV (Entregable 4.1)</h2>
-        <p class="text-slate-600 text-xs mb-2">Traduciendo hallazgos de vigilancia en decisiones de desarrollo e inversión en planta</p>
+        <div>
+            <h2 class="slide-title">📋 Taller Práctico: NutriSenior S.A. + Ficha FCV (Entregable 4.1)</h2>
+            <p class="text-slate-600 text-sm sm:text-base mb-2">Traduciendo hallazgos de vigilancia en decisiones de desarrollo e inversión en planta</p>
+        </div>
 
-        <div class="card-box overflow-hidden my-auto p-0 border border-slate-300">
-            <table class="w-full text-xs text-left">
+        <div class="card-box overflow-hidden my-auto p-0 border border-slate-300 flex-grow py-1">
+            <table class="w-full text-xs sm:text-sm text-left h-full">
                 <thead class="bg-slate-800 text-white font-['Poppins']">
                     <tr>
-                        <th class="p-2 text-[11px]">Sección de Ficha FCV</th>
-                        <th class="p-2 text-[11px]">Contenido Requerido para el TFI</th>
+                        <th class="p-3 text-xs sm:text-sm">Sección de Ficha FCV</th>
+                        <th class="p-3 text-xs sm:text-sm">Contenido Requerido para el TFI</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-200 text-[11px]">
+                <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
                     <tr>
-                        <td class="p-1.5 font-bold bg-slate-50">1. FCV Prioritario</td>
-                        <td class="p-1.5">Nombre, tipo (Tecnológico/Competitivo) y 2 indicadores medibles.</td>
+                        <td class="p-2.5 font-bold bg-slate-50">1. FCV Prioritario</td>
+                        <td class="p-2.5">Nombre, tipo (Tecnológico/Competitivo) y 2 indicadores medibles.</td>
                     </tr>
                     <tr>
-                        <td class="p-1.5 font-bold bg-slate-50 font-mono text-[10px]">2. Ecuación Booleana</td>
-                        <td class="p-1.5 font-mono text-[10px]"> Cadena booleana aplicada con comillas y operadores (AND/OR).</td>
+                        <td class="p-2.5 font-bold bg-slate-50 font-mono text-xs">2. Ecuación Booleana</td>
+                        <td class="p-2.5 font-mono text-xs">Cadena booleana applied con comillas y operadores (AND/OR).</td>
                     </tr>
                     <tr>
-                        <td class="p-1.5 font-bold bg-slate-50 text-teal-800">3. Evidencia Auditada</td>
-                        <td class="p-1.5 font-semibold text-teal-900">Cita verificada con DOI real o N° de Patente oficial.</td>
+                        <td class="p-2.5 font-bold bg-slate-50 text-teal-800">3. Evidencia Auditada</td>
+                        <td class="p-2.5 font-semibold text-teal-900">Cita verificada con DOI real o N° de Patente oficial.</td>
                     </tr>
                     <tr>
-                        <td class="p-1.5 font-bold bg-slate-50">4. Impacto & Causa Raíz</td>
-                        <td class="p-1.5">Brecha técnica que resuelve en la planta industrial de la PyME.</td>
+                        <td class="p-2.5 font-bold bg-slate-50">4. Impacto & Causa Raíz</td>
+                        <td class="p-2.5">Brecha técnica que resuelve en la planta industrial de la PyME.</td>
                     </tr>
                     <tr>
-                        <td class="p-1.5 font-bold bg-slate-50 text-sky-800">5. Recomendación 4.1</td>
-                        <td class="p-1.5 font-semibold text-sky-900">Decisión concreta para la fase de desarrollo/formulación.</td>
+                        <td class="p-2.5 font-bold bg-slate-50 text-sky-800">5. Recomendación 4.1</td>
+                        <td class="p-2.5 font-semibold text-sky-900">Decisión concreta para la fase de desarrollo/formulación.</td>
                     </tr>
                 </tbody>
             </table>
@@ -485,18 +544,18 @@
 
 <!-- Control Bar -->
 <div class="flex justify-between items-center p-3.5 bg-slate-900 text-white w-full max-w-[1280px] rounded-b-2xl gap-3">
-    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="prevBtn" onclick="moveSlide(-1)">
+    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="prevBtn" onclick="moveSlide(-1)">
         <i class="fa-solid fa-arrow-left"></i> Anterior
     </button>
     
     <div class="flex items-center gap-3">
-        <span class="text-xs text-slate-300 font-semibold" id="slideCounter">Diapositiva 1 de 10</span>
-        <select class="bg-slate-800 border border-slate-600 text-white text-xs rounded-lg px-3 py-1.5 max-w-[220px] sm:max-w-[320px]" id="slideSelect" onchange="jumpToSlide(this.value)">
+        <span class="text-xs sm:text-sm text-slate-300 font-semibold" id="slideCounter">Diapositiva 1 de 10</span>
+        <select class="bg-slate-800 border border-slate-600 text-white text-xs sm:text-sm rounded-lg px-3 py-1.5 max-w-[220px] sm:max-w-[340px]" id="slideSelect" onchange="jumpToSlide(this.value)">
             <!-- Options added dynamically -->
         </select>
     </div>
 
-    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="nextBtn" onclick="moveSlide(1)">
+    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="nextBtn" onclick="moveSlide(1)">
         Siguiente <i class="fa-solid fa-arrow-right"></i>
     </button>
 </div>
@@ -515,7 +574,7 @@
         const option = document.createElement('option');
         option.value = index;
         const headerText = slide.querySelector('h2') ? slide.querySelector('h2').textContent.replace(/^[^\w\sÁÉÍÓÚáéíóú🎯🌍📖🏢🌱📐🌐🏛️⚙️🔺🚀🧬♻️📦🤖💡🧩📈🧠🐄🗣️🛠️🎩🧰📌🏁👨‍🔬🚨🔗📊⚖️🏻]+/u, '').trim() : `Diapositiva ${index + 1}`;
-        option.textContent = `${index + 1}. ${headerText.substring(0, 34)}...`;
+        option.textContent = `${index + 1}. ${headerText.substring(0, 36)}...`;
         slideSelect.appendChild(option);
     });
 
