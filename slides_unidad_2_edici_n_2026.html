@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 2: Gestión de la Información, Conocimiento y Vigilancia Tecnológica (2026)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-unvm: #0F2942;
+            --teal-tech: #0F766E;
+            --teal-light: #0D9488;
+            --bg-slide: #F8FAFC;
+            --card-border: #CBD5E1;
+            --text-dark: #0F172A;
+            --text-muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #020617;
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .slide-deck {
+            position: relative;
+            width: 100%;
+            max-width: 1280px;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-slide) 100%);
+            border-radius: 16px 16px 0 0;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 32px 44px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .slide-header-box {
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        .slide-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--navy-unvm);
+            line-height: 1.2;
+            border-bottom: 4px solid var(--teal-tech);
+            padding-bottom: 6px;
+            margin-bottom: 4px;
+            width: 100%;
+        }
+
+        .slide-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Grid & Card Layout System */
+        .cards-grid {
+            display: grid;
+            gap: 18px;
+            width: 100%;
+            flex-grow: 1;
+            align-items: stretch;
+            margin: 6px 0;
+        }
+
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+        .card-box {
+            background-color: #FFFFFF;
+            border: 2px solid var(--card-border);
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card-image-box {
+            border-radius: 12px;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            min-height: 200px;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-box.accent-top-slate { border-top: 8px solid #64748B; background-color: #F8FAFC; }
+        .card-box.accent-top-sky { border-top: 8px solid #0284C7; background-color: #F0F9FF; }
+        .card-box.accent-top-teal { border-top: 8px solid #0F766E; background-color: #F0FDF4; }
+        .card-box.accent-top-emerald { border-top: 8px solid #059669; background-color: #ECFDF5; }
+        .card-box.accent-top-red { border-top: 8px solid #DC2626; background-color: #FEF2F2; }
+        .card-box.accent-top-amber { border-top: 8px solid #D97706; background-color: #FFFBEB; }
+
+        .card-box.accent-left-sky { border-left: 8px solid #0284C7; background-color: #F0F9FF; }
+        .card-box.accent-left-teal { border-left: 8px solid #0F766E; background-color: #F0FDF4; }
+        .card-box.accent-left-amber { border-left: 8px solid #D97706; background-color: #FFFBEB; }
+        .card-box.accent-left-emerald { border-left: 8px solid #059669; background-color: #ECFDF5; }
+
+        .badge-tag {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-slate { background-color: #E2E8F0; color: #0F172A; }
+        .badge-sky { background-color: #E0F2FE; color: #0369A1; }
+        .badge-teal { background-color: #CCFBF1; color: #115E59; }
+        .badge-emerald { background-color: #047857; color: #FFFFFF; }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .callout-box {
+            background-color: #FFFFFF;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: #1E293B;
+            margin-top: 8px;
+        }
+
+        /* Ad-hoc visual diagram styles */
+        .diagram-card-section {
+            background: #F8FAFC;
+            border: 1px solid #CBD5E1;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .diagram-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0F766E;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .diagram-box-step {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1E293B;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .diagram-arrow-down {
+            text-align: center;
+            color: #0F766E;
+            font-size: 11px;
+            margin: -2px 0;
+        }
+
+        .metric-bar-box {
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            border-radius: 8px;
+            padding: 8px 10px;
+            margin-top: 6px;
+        }
+
+        .metric-bar-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        .metric-bar-track {
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .metric-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0F766E, #2DD4BF);
+            border-radius: 4px;
+        }
+
+        .bottom-banner {
+            background-color: var(--navy-unvm);
+            color: #FFFFFF;
+            border-radius: 12px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
+
+        .bottom-banner i {
+            font-size: 22px;
+            color: #38BDF8;
+            flex-shrink: 0;
+        }
+
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: #0F172A;
+            color: #FFFFFF;
+            width: 100%;
+            max-width: 1280px;
+            border-radius: 0 0 16px 16px;
+            gap: 12px;
+        }
+
+        .btn-ctrl {
+            background-color: var(--teal-tech);
+            color: #FFFFFF;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-ctrl:hover { background-color: var(--teal-light); }
+        .btn-ctrl:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-secondary {
+            background-color: #1E293B;
+            color: #38BDF8;
+            border: 1px solid #475569;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary:hover { background-color: #334155; }
+
+        .select-slide {
+            background-color: #1E293B;
+            border: 1px solid #475569;
+            color: #FFFFFF;
+            font-size: 12.5px;
+            border-radius: 8px;
+            padding: 6px 12px;
+            max-width: 280px;
+        }
+
+        /* Modal Styles */
+        #codeModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.9);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #codeModal.active { display: flex; }
+
+        .modal-content {
+            background: #0F172A;
+            color: #FFFFFF;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            border: 1px solid #334155;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+        }
+
+        .modal-textarea {
+            width: 100%;
+            flex-grow: 1;
+            margin: 16px 0;
+            background: #020617;
+            color: #2DD4BF;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+            resize: none;
+            outline: none;
+        }
+
+        /* Table Layout */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+        }
+
+        .custom-table th {
+            background-color: #0F2942;
+            color: #FFFFFF;
+            padding: 10px 14px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13.5px;
+        }
+
+        .custom-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .custom-table tr:nth-child(even) td { background-color: #F8FAFC; }
+
+        @media (max-width: 900px) {
+            .slide-deck { aspect-ratio: auto; height: auto; min-height: calc(100vh - 80px); border-radius: 0; }
+            .slide { position: relative; padding: 20px 16px; height: auto; }
+            .cards-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-deck" id="slideDeck">
+
+    <!-- Slide 1: Portada -->
+    <div class="slide active" style="background: linear-gradient(135deg, #0F2942 0%, #1E3A5F 100%); color: white; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #475569; padding-bottom: 10px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #2DD4BF; text-transform: uppercase;">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
+            <span style="font-size: 12px; color: #94A3B8;">INGENIERÍA EN ALIMENTOS — 2026</span>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; align-items: center; margin: auto 0;">
+            <div style="text-align: left;">
+                <span style="display: inline-block; background: rgba(15, 118, 110, 0.4); border: 1px solid #2DD4BF; color: #5EEAD4; font-size: 12px; font-weight: 700; padding: 4px 14px; border-radius: 30px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Gestión de la I+D+i — Unidad 2</span>
+                <h1 style="font-family: 'Poppins', sans-serif; font-size: 38px; font-weight: 700; color: #FFFFFF; line-height: 1.2; margin-bottom: 12px;">GESTIÓN DE LA INFORMACIÓN,<br><span style="color: #2DD4BF;">CONOCIMIENTO Y VIGILANCIA</span></h1>
+                <p style="font-size: 16px; color: #CBD5E1; line-height: 1.45;">Transformando datos del entorno en decisiones tecnológicas y de inversión seguras</p>
+            </div>
+            
+            <div class="card-image-box" style="height: 240px; border: 2px solid #2DD4BF;">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop" 
+                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/0F2942/FFFFFF?text=FoodTech+Lab+2026';" 
+                     alt="Laboratorio de Inteligencia y Biotecnología Alimentaria">
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #475569; padding-top: 12px;">
+            <div style="font-size: 14px; color: #CBD5E1;">
+                <strong style="color: #FFFFFF; font-size: 15px;">Dr. Ing. Ricardo Cravero</strong> | Ing. Alejandro Benito
+            </div>
+            <div style="font-style: italic; color: #5EEAD4; font-size: 14px;">
+                "Filtrar la infoxicación para tomar decisiones con evidencia"
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Pirámide DIKW -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">📊 De los Datos a la Inteligencia Estratégica (Jerarquía DIKW)</h2>
+            <p class="slide-subtitle">Transformación progresiva del dato bruto en decisiones operativas y de inversión de alto impacto</p>
+        </div>
+
+        <div class="cards-grid grid-4">
+            <div class="card-box accent-top-slate" style="text-align: center;">
+                <div>
+                    <span class="badge-tag badge-slate">1. DATO</span>
+                    <h3 class="card-title">Medición Neutra</h3>
+                </div>
+                <p class="card-text my-auto">Ej. <span style="background: #E2E8F0; font-weight: 700; padding: 2px 8px; border-radius: 4px;">39°C</span> registrado por un sensor en tanque de proceso.</p>
+                <div style="font-size: 28px; margin-top: 8px; color: #64748B;"><i class="fa-solid fa-calculator"></i></div>
+            </div>
+
+            <div class="card-box accent-top-sky" style="text-align: center;">
+                <div>
+                    <span class="badge-tag badge-sky">2. INFORMACIÓN</span>
+                    <h3 class="card-title">Contextualizada</h3>
+                </div>
+                <p class="card-text my-auto">Ej. <strong style="color: #0369A1;">39°C durante la inoculación</strong> del cultivo starter láctico.</p>
+                <div style="font-size: 28px; margin-top: 8px; color: #0284C7;"><i class="fa-solid fa-chart-line"></i></div>
+            </div>
+
+            <div class="card-box accent-top-teal" style="text-align: center;">
+                <div>
+                    <span class="badge-tag badge-teal">3. CONOCIMIENTO</span>
+                    <h3 class="card-title">Interpretado</h3>
+                </div>
+                <p class="card-text my-auto">Ej. <strong style="color: #0F766E;">Riesgo de inactivación térmica</strong> o muerte del fermento.</p>
+                <div style="font-size: 28px; margin-top: 8px; color: #0F766E;"><i class="fa-solid fa-brain"></i></div>
+            </div>
+
+            <div class="card-box accent-top-emerald" style="text-align: center;">
+                <div>
+                    <span class="badge-tag badge-emerald">4. INTELIGENCIA ⭐</span>
+                    <h3 class="card-title" style="color: #065F46;">Decisión Accionable</h3>
+                </div>
+                <p class="card-text my-auto" style="font-weight: 600;">Ej. <span style="background: #A7F3D0; color: #064E3B; padding: 3px 8px; border-radius: 6px;">Ajuste automático de la camisa</span> y alarma en planta.</p>
+                <div style="font-size: 28px; margin-top: 8px; color: #059669;"><i class="fa-solid fa-gears"></i></div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-filter"></i>
+            <div>
+                <strong>Desafío PyME:</strong> Superar la infoxicación (sobrecarga de datos) mediante sistemas de Inteligencia de Negocios (BI) y filtros de pertinencia.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Modelo SECI y Caso Delicias Gourmet -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">🧠 Gestión del Conocimiento: Modelo SECI (Nonaka & Takeuchi)</h2>
+            <p class="slide-subtitle">Transformando el saber tácito de planta en Capital Intelectual organizacional y preservando el know-how</p>
+        </div>
+
+        <div class="cards-grid grid-2">
+            <div class="card-box accent-left-sky">
+                <div>
+                    <h3 class="card-title" style="color: #0369A1; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #0284C7; color: white; font-size: 11px; padding: 2px 7px; border-radius: 50%;">1</span> Socialización (Tácito ➔ Tácito)
+                    </h3>
+                    <p class="card-text">Saber hacer no documentado. Ej. El maestro quesero compartiendo secretos de textura directamente en mesada.</p>
+                </div>
+                <div class="callout-box">
+                    <strong style="color: #0369A1;">Caso Mario (Chef):</strong> Mentoring directo y talleres prácticos a cocineros junior.
+                </div>
+            </div>
+
+            <div class="card-box accent-left-teal">
+                <div>
+                    <h3 class="card-title" style="color: #0F766E; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #0F766E; color: white; font-size: 11px; padding: 2px 7px; border-radius: 50%;">2</span> Externalización (Tácito ➔ Explícito) ⭐
+                    </h3>
+                    <p class="card-text">Codificación en manuales, recetas estandarizadas, fichas técnicas e instructivos HACCP.</p>
+                </div>
+                <div class="callout-box" style="border-color: #99F6E4;">
+                    <strong style="color: #0F766E;">Caso Ana (Calidad):</strong> Redacción de manuales de selección e inspección de insumos.
+                </div>
+            </div>
+
+            <div class="card-box accent-left-amber">
+                <div>
+                    <h3 class="card-title" style="color: #B45309; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #D97706; color: white; font-size: 11px; padding: 2px 7px; border-radius: 50%;">3</span> Combinación (Explícito ➔ Explícito)
+                    </h3>
+                    <p class="card-text">Integración de fichas técnicas con normas del Código Alimentario (CAA) y reportes de ERP.</p>
+                </div>
+                <div class="callout-box">
+                    <strong style="color: #B45309;">Sistemas ERP/QMS:</strong> Tableros integrados de trazabilidad e insumos.
+                </div>
+            </div>
+
+            <div class="card-box accent-left-emerald">
+                <div>
+                    <h3 class="card-title" style="color: #047857; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #059669; color: white; font-size: 11px; padding: 2px 7px; border-radius: 50%;">4</span> Internalización (Explícito ➔ Tácito)
+                    </h3>
+                    <p class="card-text">Aprender haciendo (<em>learning by doing</em>) leyendo manuales y practicando en planta piloto.</p>
+                </div>
+                <div class="callout-box">
+                    <strong style="color: #047857;">Rutinas Operativas:</strong> Adopción natural de mejores prácticas en el personal.
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-shield-cat"></i>
+            <div>
+                <strong>Protección de Know-How:</strong> Lo que no se externaliza y codifica se pierde cuando el talento clave se retira de la empresa.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Los 4 Ejes de la VeIE -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">🌐 Los 4 Ejes de la Vigilancia e Inteligencia Estratégica (VeIE)</h2>
+            <p class="slide-subtitle">Captura integral de señales del entorno para la toma de decisiones 360° en la PyME</p>
+        </div>
+
+        <div class="cards-grid grid-2">
+            <div class="card-box accent-left-teal">
+                <h3 class="card-title" style="color: #0F766E; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-microscope" style="font-size: 22px;"></i> 1. Vigilancia Tecnológica (VT)
+                </h3>
+                <p class="card-text" style="font-size: 15px;">
+                    Patentes de invención, artículos científicos, tecnologías de conservación no térmicas (HPP, PEF), ingredientes funcionales y soluciones de packaging activo/inteligente.
+                </p>
+            </div>
+
+            <div class="card-box accent-left-sky">
+                <h3 class="card-title" style="color: #0369A1; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-user-ninja" style="font-size: 22px;"></i> 2. Vigilancia Competitiva (IC)
+                </h3>
+                <p class="card-text" style="font-size: 15px;">
+                    Lanzamientos de nuevos productos por competidores directos e indirectos, alianzas estratégicas, movimientos de marcas, fusiones y estrategias de precios rivales.
+                </p>
+            </div>
+
+            <div class="card-box accent-left-amber">
+                <h3 class="card-title" style="color: #B45309; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-shop" style="font-size: 22px;"></i> 3. Vigilancia Comercial (VC)
+                </h3>
+                <p class="card-text" style="font-size: 15px;">
+                    Evolución de demandas de consumo (<em>Clean Label</em>, proteicas, reducidas en sellos), proveedores estratégicos de insumos y maquinaria, y canales de venta.
+                </p>
+            </div>
+
+            <div class="card-box accent-left-emerald">
+                <h3 class="card-title" style="color: #047857; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-earth-americas" style="font-size: 22px;"></i> 4. Vigilancia del Entorno (VE)
+                </h3>
+                <p class="card-text" style="font-size: 15px;">
+                    Leyes de etiquetado frontal (ANMAT/CAA/FDA), normativas ambientales de efluentes, costos macroeconómicos, aranceles de exportación y factores PESTEL.
+                </p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-chart-pie"></i>
+            <div>
+                <strong>Fórmula Integradora:</strong> Inteligencia Estratégica (VeIE) = Vigilancia Tecnológica (VT) + Inteligencia Competitiva (IC) + Prospectiva (P) + Planeación Estratégica (PE).
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Factores Críticos de Vigilancia (FCVs) con Figuras Ad-Hoc -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">🎯 Factores Críticos de Vigilancia (FCVs) & KITs</h2>
+            <p class="slide-subtitle">Del diagnóstico estratégico PESTEL/FODA a las ecuaciones de búsqueda en bases científicas</p>
+        </div>
+
+        <!-- Visual Flow Pipeline Bar -->
+        <div style="display: grid; grid-template-columns: 1.2fr auto 1.2fr auto 1.2fr auto 1.2fr; gap: 6px; align-items: center; background-color: #F1F5F9; border: 1.5px solid #CBD5E1; border-radius: 12px; padding: 8px 12px; text-align: center; font-size: 12px; font-weight: 700; color: #0F172A; margin-bottom: 8px;">
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 6px; border-radius: 6px; color: #0F2942;"><i class="fa-solid fa-compass" style="color: #0F766E;"></i> 1. Estrategia PyME</div>
+            <div style="color: #0F766E; font-size: 14px;">➔</div>
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 6px; border-radius: 6px; color: #0F2942;"><i class="fa-solid fa-chart-pie" style="color: #0284C7;"></i> 2. PESTEL / FODA</div>
+            <div style="color: #0F766E; font-size: 14px;">➔</div>
+            <div style="background: #0F766E; color: white; padding: 6px; border-radius: 6px;"><i class="fa-solid fa-bullseye"></i> 3. Identificar FCV</div>
+            <div style="color: #0F766E; font-size: 14px;">➔</div>
+            <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 6px; border-radius: 6px; color: #0F2942;"><i class="fa-solid fa-code" style="color: #D97706;"></i> 4. Ecuación Booleana</div>
+        </div>
+
+        <!-- 3 Cards populated with Ad-Hoc Diagrams to completely fill vertical whitespace -->
+        <div class="cards-grid grid-3">
+            
+            <!-- Card 1: Definition + Threshold Radar Diagram -->
+            <div class="card-box accent-top-teal">
+                <div>
+                    <span class="badge-tag badge-teal">Concepto Clave</span>
+                    <h3 class="card-title">¿Qué es un FCV?</h3>
+                    <p class="card-text" style="font-size: 13.5px; margin-bottom: 6px;">
+                        Variable externa crítica que, si sufre un cambio, <strong>obliga a la empresa a tomar una decisión estratégica</strong>.
+                    </p>
+                </div>
+
+                <!-- Ad-Hoc Diagram 1: Decision Threshold Radar -->
+                <div class="diagram-card-section">
+                    <div class="diagram-label"><i class="fa-solid fa-tower-broadcast"></i> FIGURA 5.1: Radar de Umbral</div>
+                    <div class="diagram-box-step">
+                        <span>1. Cambio Exógeno (ej. CAA)</span>
+                        <i class="fa-solid fa-triangle-exclamation" style="color: #D97706;"></i>
+                    </div>
+                    <div class="diagram-arrow-down">▼</div>
+                    <div class="diagram-box-step" style="border-color: #0F766E; background: #ECFDF5;">
+                        <span style="color: #065F46;"><strong>2. Umbral Crítico Superado</strong></span>
+                        <i class="fa-solid fa-bolt" style="color: #059669;"></i>
+                    </div>
+                    <div class="diagram-arrow-down">▼</div>
+                    <div class="diagram-box-step" style="background: #0F2942; color: white;">
+                        <span>3. Pivot de Inversión / Planta</span>
+                        <i class="fa-solid fa-circle-check" style="color: #2DD4BF;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Origin + FODA Funnel Diagram -->
+            <div class="card-box accent-top-sky">
+                <div>
+                    <span class="badge-tag badge-sky">Origen Táctico</span>
+                    <h3 class="card-title">¿De dónde nace?</h3>
+                    <p class="card-text" style="font-size: 13.5px; margin-bottom: 6px;">
+                        Surge de traducir las <strong>Amenazas a mitigar</strong> y <strong>Oportunidades a capitalizar</strong> detectadas en el FODA.
+                    </p>
+                </div>
+
+                <!-- Ad-Hoc Diagram 2: FODA Funnel Scheme -->
+                <div class="diagram-card-section">
+                    <div class="diagram-label" style="color: #0369A1;"><i class="fa-solid fa-filter"></i> FIGURA 5.2: Embudo FODA ➔ FCV</div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; text-align: center;">
+                        <div style="background: #FEF2F2; color: #991B1B; font-size: 11px; font-weight: 700; padding: 4px; border-radius: 4px; border: 1px solid #FCA5A5;">⚠️ Amenazas</div>
+                        <div style="background: #ECFDF5; color: #065F46; font-size: 11px; font-weight: 700; padding: 4px; border-radius: 4px; border: 1px solid #6EE7B7;">🌟 Oportunidad</div>
+                    </div>
+                    <div class="diagram-arrow-down">▼ (Filtro de Pertinencia & Impacto)</div>
+                    <div style="background: #E0F2FE; border: 1.5px solid #0284C7; border-radius: 6px; padding: 6px; text-align: center; font-size: 11.5px; font-weight: 700; color: #0369A1;">
+                        🎯 FCV Target para Búsqueda
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Metrics + KITs Dashboard Widget -->
+            <div class="card-box accent-top-amber">
+                <div>
+                    <span class="badge-tag badge-teal" style="background: #FEF3C7; color: #92400E;">Métricas & KITs</span>
+                    <h3 class="card-title">Indicadores Medibles</h3>
+                    <p class="card-text" style="font-size: 13.5px; margin-bottom: 4px;">
+                        Un FCV se monitorea mediante indicadores cuantitativos objetivos:
+                    </p>
+                </div>
+
+                <!-- Ad-Hoc Diagram 3: KITs Metrics Dashboard -->
+                <div class="diagram-card-section">
+                    <div class="diagram-label" style="color: #B45309;"><i class="fa-solid fa-gauge-high"></i> FIGURA 5.3: Tablero KITs</div>
+                    
+                    <div class="metric-bar-box">
+                        <div class="metric-bar-header">
+                            <span>📜 Patentes IPC A23L</span>
+                            <span style="color: #0F766E;">High Activity</span>
+                        </div>
+                        <div class="metric-bar-track"><div class="metric-bar-fill" style="width: 82%;"></div></div>
+                    </div>
+
+                    <div class="metric-bar-box">
+                        <div class="metric-bar-header">
+                            <span>🧪 Digestibilidad DIAAS</span>
+                            <span style="color: #0284C7;">> 90% Target</span>
+                        </div>
+                        <div class="metric-bar-track"><div class="metric-bar-fill" style="width: 95%; background: linear-gradient(90deg, #0284C7, #38BDF8);"></div></div>
+                    </div>
+
+                    <div class="metric-bar-box">
+                        <div class="metric-bar-header">
+                            <span>🏢 Lanzamientos Rivales</span>
+                            <span style="color: #D97706;">Alerta Mensual</span>
+                        </div>
+                        <div class="metric-bar-track"><div class="metric-bar-fill" style="width: 60%; background: linear-gradient(90deg, #D97706, #FBBF24);"></div></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-bullseye"></i>
+            <div>
+                <strong>Regla de Oro:</strong> Un FCV bien definido evita la parálisis por análisis e indica qué buscar, dónde y con qué urgencia.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Fuentes y Códigos IPC -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">🔍 Bases de Datos & Clasificación IPC (OMPI)</h2>
+            <p class="slide-subtitle">Dónde buscar información oficial y cómo categorizar las invenciones en la industria de alimentos</p>
+        </div>
+
+        <div class="cards-grid grid-2">
+            <div class="card-box">
+                <h3 class="card-title" style="border-bottom: 1px solid #E2E8F0; padding-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-database" style="color: #0284C7;"></i> Fuentes Académicas y Patentes
+                </h3>
+                <div class="card-text" style="display: flex; flex-direction: column; gap: 10px; margin: auto 0;">
+                    <p><strong>Científicas:</strong> Google Scholar, PubMed, ScienceDirect, SciELO.</p>
+                    <p><strong>Patentes Gratis:</strong> Espacenet, Lens.org, Google Patents, Patentscope.</p>
+                    <p><strong>Buscadores Semánticos IA:</strong> Perplexity, SciSpace, Consensus.</p>
+                </div>
+            </div>
+
+            <div class="card-box">
+                <h3 class="card-title" style="border-bottom: 1px solid #E2E8F0; padding-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-barcode" style="color: #0F766E;"></i> Códigos IPC Principales (OMPI)
+                </h3>
+                <div style="font-family: monospace; font-size: 13.5px; display: flex; flex-direction: column; gap: 6px; margin: auto 0;">
+                    <p style="background: #F1F5F9; padding: 5px 8px; border-radius: 6px;"><strong>A23L:</strong> Alimentos y bebidas no alcohólicas.</p>
+                    <p style="background: #F1F5F9; padding: 5px 8px; border-radius: 6px;"><strong>A23L 33/00:</strong> Alimentos funcionales y dietéticos.</p>
+                    <p style="background: #F1F5F9; padding: 5px 8px; border-radius: 6px;"><strong>A23C:</strong> Productos lácteos y sus sustitutos.</p>
+                    <p style="background: #F1F5F9; padding: 5px 8px; border-radius: 6px;"><strong>A23J:</strong> Composiciones proteicas e aislamiento.</p>
+                    <p style="background: #F1F5F9; padding: 5px 8px; border-radius: 6px;"><strong>B65D:</strong> Envases y packaging activo/inteligente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-key"></i>
+            <div>
+                <strong>Dato de Valor:</strong> Entre el 70% y el 80% de la información técnica del mundo solo está en patentes y jamás se publica en revistas científicas.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Prospectiva vs Foresight y TRM -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">🔮 Prospectiva Tecnológica & Roadmapping (TRM)</h2>
+            <p class="slide-subtitle">Escuelas de pensamiento del futuro y mapas de ruta tecnológicos para orientar la estrategia</p>
+        </div>
+
+        <div class="cards-grid grid-2" style="flex-grow: 0.6;">
+            <div class="card-box accent-left-teal">
+                <h3 class="card-title" style="color: #0F766E;">Escuela Francesa (Prospective - Berger/Godet)</h3>
+                <p class="card-text">
+                    Enfoque normativo y voluntarista. El futuro no se predice; se construye activamente mediante escenarios deseados (3 a 20 años).
+                </p>
+            </div>
+
+            <div class="card-box accent-left-sky">
+                <h3 class="card-title" style="color: #0369A1;">Escuela Anglosajona (Foresight - Voros/Popper)</h3>
+                <p class="card-text">
+                    Pragmático y participativo. Utiliza <em>Horizon Scanning</em> y método Delphi para anticipar múltiples futuros posibles e informar decisiones.
+                </p>
+            </div>
+        </div>
+
+        <div style="background: #F1F5F9; border: 1px solid #CBD5E1; border-radius: 14px; padding: 14px; margin: 6px 0;">
+            <strong style="color: #0F172A; font-size: 15px; display: block; margin-bottom: 8px;">🗺️ Technology Roadmapping (TRM) — 3 Capas Horizontales:</strong>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-family: monospace; text-align: center; font-size: 13.5px;">
+                <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 8px; border-radius: 8px; font-weight: 700;">1. Mercado / Tendencias (Drivers)</div>
+                <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 8px; border-radius: 8px; font-weight: 700;">2. Productos / Funciones (Lanzamientos)</div>
+                <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 8px; border-radius: 8px; font-weight: 700;">3. Tecnologías Habilitadoras / R&D</div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-compass"></i>
+            <div>
+                <strong>Visión-Acción:</strong> El Roadmap articula el corto (0 a 3 años), mediano (3 a 7 años) y largo plazo (7 a 15 años) reduciendo la incertidumbre.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Costo de la NO Vigilancia -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">⚠️ Lecciones de la Industria: El Costo de la NO-Vigilancia</h2>
+            <p class="slide-subtitle">Casos reales donde ignorar las señales del entorno destruyó valor comercial</p>
+        </div>
+
+        <div class="cards-grid grid-3">
+            <div class="card-box accent-top-red">
+                <div>
+                    <strong style="color: #991B1B; font-size: 17px; display: block; margin-bottom: 6px;">1. Envases para Detergente (Italia)</strong>
+                    <p class="card-text">Fabricantes de cartón no vigilaron la tendencia hacia fórmulas concentradas y envases compactos. Perderon el mercado a manos de nuevos competidores.</p>
+                </div>
+            </div>
+
+            <div class="card-box accent-top-amber">
+                <div>
+                    <strong style="color: #92400E; font-size: 17px; display: block; margin-bottom: 6px;">2. Kokoku Rubber vs. EE. UU.</strong>
+                    <p class="card-text">El anuncio de una nueva planta rival estuvo en diarios locales durante 3 años. La falta de circulación interna de datos tomó por sorpresa a la gerencia.</p>
+                </div>
+            </div>
+
+            <div class="card-box accent-top-emerald">
+                <div>
+                    <strong style="color: #065F46; font-size: 17px; display: block; margin-bottom: 6px;">3. Saber Cancelar a Tiempo ⭐</strong>
+                    <p class="card-text" style="font-weight: 600;">Searle (Monsanto) detectó que competidores lideraban el desarrollo de disolventes de coágulos (TPA) y canceló su proyecto, ahorrando millones en R&D.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <div>
+                <strong>Poder de Cancelación:</strong> Un buen sistema de vigilancia sirve tanto para lanzar nuevos proyectos como para detener a tiempo investigaciones inviables.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Protocolo Anti-Alucinación IA -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">🤖 Protocolo de Auditoría Humana (Anti-Alucinación)</h2>
+            <p class="slide-subtitle">Flujo de trabajo híbrido con Inteligencia Artificial en la era de los Modelos de Lenguaje (LLMs)</p>
+        </div>
+
+        <div class="cards-grid grid-3" style="text-align: center;">
+            <div class="card-box accent-top-sky" style="padding: 24px 18px;">
+                <div>
+                    <div style="font-size: 42px; margin-bottom: 8px;">🤖</div>
+                    <h3 class="card-title">Fase 1: PROMPT (IA)</h3>
+                </div>
+                <p class="card-text my-auto">Estructurar FCVs, sinónimos técnico-comerciales en inglés (US/UK) y ecuaciones booleanas iniciales.</p>
+            </div>
+
+            <div class="card-box accent-top-amber" style="padding: 24px 18px;">
+                <div>
+                    <div style="font-size: 42px; margin-bottom: 8px;">🔎</div>
+                    <h3 class="card-title">Fase 2: VERIFICACIÓN (Humana)</h3>
+                </div>
+                <p class="card-text my-auto" style="font-weight: 600;">Comprobar el <strong style="color: #0F766E;">DOI real</strong> o <strong style="color: #0F766E;">N° de Patente oficial</strong> en Google Scholar, Lens.org o Espacenet.</p>
+            </div>
+
+            <div class="card-box accent-top-emerald" style="padding: 24px 18px;">
+                <div>
+                    <div style="font-size: 42px; margin-bottom: 8px;">🧠</div>
+                    <h3 class="card-title">Fase 3: DECISIÓN (Ingeniería)</h3>
+                </div>
+                <p class="card-text my-auto">Analizar brecha de planta, factibilidad técnica y redactar recomendación para la gerencia.</p>
+            </div>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+                <strong>Regla Inviolable:</strong> La IA propone las hipótesis; el ingeniero en alimentos audita y prueba la evidencia antes de comprometer capital.
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Consigna Taller NutriSenior S.A. -->
+    <div class="slide">
+        <div class="slide-header-box">
+            <h2 class="slide-title">📋 Taller Práctico: NutriSenior S.A. + Ficha FCV (Entregable 4.1)</h2>
+            <p class="slide-subtitle">Traduciendo hallazgos de vigilancia en decisiones de desarrollo e inversión en planta industrial</p>
+        </div>
+
+        <div class="card-box" style="padding: 0; overflow: hidden; border-width: 2px;">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Sección de Ficha FCV</th>
+                        <th style="width: 70%;">Contenido Requerido para el TFI</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. FCV Prioritario</strong></td>
+                        <td>Nombre, tipo (Tecnológico/Competitivo) y 2 indicadores medibles.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="font-family: monospace;">2. Ecuación Booleana</strong></td>
+                        <td style="font-family: monospace;">Cadena booleana aplicada con comillas y operadores (AND/OR).</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #0F766E;">3. Evidencia Auditada</strong></td>
+                        <td style="font-weight: 700; color: #0F766E;">Cita verificada con DOI real o N° de Patente oficial.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Impacto & Causa Raíz</strong></td>
+                        <td>Brecha técnica que resuelve en la planta industrial de la PyME.</td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #0284C7;">5. Recomendación 4.1</strong></td>
+                        <td style="font-weight: 700; color: #0369A1;">Decisión concreta para la fase de desarrollo/formulación.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bottom-banner">
+            <i class="fa-solid fa-file-signature"></i>
+            <div>
+                <strong>Taller de Clase (60 min):</strong> Completar la Ficha 4.1 en el Google Doc del grupo utilizando el caso modelo de NutriSenior S.A.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal de Código HTML -->
+<div id="codeModal">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 12px;">
+            <h3 style="font-family: 'Poppins', sans-serif; color: #2DD4BF; font-size: 18px; font-weight: 700;">
+                <i class="fa-solid fa-code"></i> Código Fuente de la Presentación
+            </h3>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="copyCode()" class="btn-ctrl" style="padding: 6px 14px; font-size: 12px;">
+                    <i class="fa-solid fa-copy"></i> Copiar
+                </button>
+                <button onclick="toggleCodeModal()" class="btn-secondary" style="padding: 6px 14px; font-size: 12px;">
+                    <i class="fa-solid fa-xmark"></i> Cerrar
+                </button>
+            </div>
+        </div>
+        <textarea id="codeArea" class="modal-textarea" readonly></textarea>
+        <div style="font-size: 12px; color: #94A3B8; text-align: right;">Presiona Esc o el botón Cerrar para volver a la presentación</div>
+    </div>
+</div>
+
+<!-- Control Bar -->
+<div class="controls-bar">
+    <button class="btn-ctrl" id="prevBtn" onclick="moveSlide(-1)">
+        <i class="fa-solid fa-arrow-left"></i> Anterior
+    </button>
+    
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 14px; color: #CBD5E1; font-weight: 600;" id="slideCounter">Diapositiva 1 de 10</span>
+        <select class="select-slide" id="slideSelect" onchange="jumpToSlide(this.value)">
+            <!-- Options added dynamically -->
+        </select>
+        <button class="btn-secondary" onclick="openCodeModal()" title="Ver código HTML completo">
+            <i class="fa-solid fa-code"></i> <span>Ver Código</span>
+        </button>
+        <button class="btn-secondary" onclick="downloadSlideHTML()" style="color: #2DD4BF; border-color: #0F766E;" title="Descargar archivo .html a tu computadora">
+            <i class="fa-solid fa-download"></i> <span>Descargar .html</span>
+        </button>
+    </div>
+
+    <button class="btn-ctrl" id="nextBtn" onclick="moveSlide(1)">
+        Siguiente <i class="fa-solid fa-arrow-right"></i>
+    </button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideCounter = document.getElementById('slideCounter');
+    const slideSelect = document.getElementById('slideSelect');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    // Populate dropdown
+    slides.forEach((slide, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        const headerText = slide.querySelector('h2') ? slide.querySelector('h2').textContent.replace(/^[^\w\sÁÉÍÓÚáéíóú🎯🌍📖🏢🌱📐🌐🏛️⚙️🔺🚀🧬♻️📦🤖💡🧩📈🧠🐄🗣️🛠️🎩🧰📌🏁👨‍🔬🚨🔗📊⚖️🏻]+/u, '').trim() : `Diapositiva ${index + 1}`;
+        option.textContent = `${index + 1}. ${headerText.substring(0, 36)}...`;
+        slideSelect.appendChild(option);
+    });
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+        slideCounter.textContent = `Diapositiva ${currentSlide + 1} de ${totalSlides}`;
+        slideSelect.value = currentSlide;
+
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === totalSlides - 1;
+    }
+
+    function moveSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+        updateSlide();
+    }
+
+    function jumpToSlide(index) {
+        currentSlide = parseInt(index);
+        updateSlide();
+    }
+
+    function openCodeModal() {
+        document.getElementById('codeArea').value = document.documentElement.outerHTML;
+        document.getElementById('codeModal').classList.add('active');
+    }
+
+    function toggleCodeModal() {
+        document.getElementById('codeModal').classList.remove('active');
+    }
+
+    function copyCode() {
+        const codeArea = document.getElementById('codeArea');
+        codeArea.select();
+        document.execCommand('copy');
+        alert('¡Código HTML copiado al portapapeles!');
+    }
+
+    function downloadSlideHTML() {
+        const htmlContent = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'slides_unidad2_informacion_vigilancia_2026.html');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') moveSlide(-1);
+        if (e.key === 'ArrowRight') moveSlide(1);
+        if (e.key === 'Escape') toggleCodeModal();
+    });
+
+    updateSlide();
+</script>
+
+</body>
+</html>
