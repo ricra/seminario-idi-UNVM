@@ -8,20 +8,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Pure Self-Contained CSS - No external script dependency required for production rendering -->
     <style>
         :root {
             --navy-unvm: #0F2942;
             --teal-tech: #0F766E;
+            --teal-light: #0D9488;
             --bg-slide: #F8FAFC;
             --card-border: #CBD5E1;
             --text-dark: #0F172A;
+            --text-muted: #475569;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             background-color: #020617;
-            font-family: 'Lato', sans-serif;
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 10px;
         }
 
         .slide-deck {
@@ -33,6 +48,8 @@
             border-radius: 16px 16px 0 0;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .slide {
@@ -41,12 +58,12 @@
             justify-content: space-between;
             width: 100%;
             height: 100%;
-            padding: 40px 52px;
+            padding: 36px 48px;
             position: absolute;
             top: 0;
             left: 0;
             opacity: 0;
-            transition: opacity 0.25s ease-in-out;
+            transition: opacity 0.2s ease-in-out;
             overflow-y: auto;
         }
 
@@ -56,108 +73,295 @@
             z-index: 10;
         }
 
+        .slide-header-box {
+            margin-bottom: 12px;
+            flex-shrink: 0;
+        }
+
         .slide-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 700;
             color: var(--navy-unvm);
-            line-height: 1.2;
+            line-height: 1.25;
             border-bottom: 4px solid var(--teal-tech);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             margin-bottom: 6px;
             width: 100%;
         }
 
         .slide-subtitle {
-            font-size: 17px;
-            color: #475569;
+            font-size: 16px;
+            color: var(--text-muted);
             font-weight: 400;
-            margin-bottom: 20px;
         }
+
+        /* Card Layout System */
+        .cards-grid {
+            display: grid;
+            gap: 20px;
+            width: 100%;
+            flex-grow: 1;
+            align-items: stretch;
+            margin: 10px 0;
+        }
+
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
 
         .card-box {
             background-color: #FFFFFF;
             border: 2px solid var(--card-border);
             border-radius: 16px;
-            padding: 26px 28px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            padding: 22px 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 100%;
         }
 
+        /* Card Variations */
+        .card-box.accent-top-slate { border-top: 8px solid #64748B; background-color: #F8FAFC; }
+        .card-box.accent-top-sky { border-top: 8px solid #0284C7; background-color: #F0F9FF; }
+        .card-box.accent-top-teal { border-top: 8px solid #0F766E; background-color: #F0FDF4; }
+        .card-box.accent-top-emerald { border-top: 8px solid #059669; background-color: #ECFDF5; }
+        .card-box.accent-top-red { border-top: 8px solid #DC2626; background-color: #FEF2F2; }
+        .card-box.accent-top-amber { border-top: 8px solid #D97706; background-color: #FFFBEB; }
+
+        .card-box.accent-left-sky { border-left: 8px solid #0284C7; background-color: #F0F9FF; }
+        .card-box.accent-left-teal { border-left: 8px solid #0F766E; background-color: #F0FDF4; }
+        .card-box.accent-left-amber { border-left: 8px solid #D97706; background-color: #FFFBEB; }
+        .card-box.accent-left-emerald { border-left: 8px solid #059669; background-color: #ECFDF5; }
+
+        .badge-tag {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-slate { background-color: #E2E8F0; color: #0F172A; }
+        .badge-sky { background-color: #E0F2FE; color: #0369A1; }
+        .badge-teal { background-color: #CCFBF1; color: #115E59; }
+        .badge-emerald { background-color: #047857; color: #FFFFFF; }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 15px;
+            color: #334155;
+            line-height: 1.55;
+        }
+
+        .highlight-pill {
+            background-color: #E2E8F0;
+            color: #0F172A;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .highlight-pill-emerald {
+            background-color: #A7F3D0;
+            color: #064E3B;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        .callout-box {
+            background-color: #FFFFFF;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #1E293B;
+            margin-top: 12px;
+        }
+
         .bottom-banner {
             background-color: var(--navy-unvm);
             color: #FFFFFF;
-            border-radius: 14px;
-            padding: 16px 26px;
+            border-radius: 12px;
+            padding: 14px 22px;
             display: flex;
             align-items: center;
             gap: 16px;
-            font-size: 16px;
-            line-height: 1.5;
-            margin-top: 20px;
+            font-size: 15px;
+            line-height: 1.45;
+            margin-top: 14px;
             flex-shrink: 0;
         }
 
         .bottom-banner i {
-            font-size: 26px;
+            font-size: 24px;
             color: #38BDF8;
             flex-shrink: 0;
         }
 
-        /* Modal para ver código HTML */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 24px;
+            background-color: #0F172A;
+            color: #FFFFFF;
+            width: 100%;
+            max-width: 1280px;
+            border-radius: 0 0 16px 16px;
+            gap: 12px;
+        }
+
+        .btn-ctrl {
+            background-color: var(--teal-tech);
+            color: #FFFFFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-ctrl:hover { background-color: var(--teal-light); }
+        .btn-ctrl:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-secondary {
+            background-color: #1E293B;
+            color: #38BDF8;
+            border: 1px solid #475569;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-secondary:hover { background-color: #334155; }
+
+        .select-slide {
+            background-color: #1E293B;
+            border: 1px solid #475569;
+            color: #FFFFFF;
+            font-size: 13px;
+            border-radius: 8px;
+            padding: 8px 12px;
+            max-width: 300px;
+        }
+
+        /* Modal Styles */
         #codeModal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(2, 6, 23, 0.85);
+            background: rgba(2, 6, 23, 0.9);
             z-index: 100;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
 
-        #codeModal.active {
+        #codeModal.active { display: flex; }
+
+        .modal-content {
+            background: #0F172A;
+            color: #FFFFFF;
+            border-radius: 16px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 85vh;
             display: flex;
+            flex-direction: column;
+            padding: 24px;
+            border: 1px solid #334155;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
+        .modal-textarea {
+            width: 100%;
+            flex-grow: 1;
+            margin: 16px 0;
+            background: #020617;
+            color: #2DD4BF;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #1E293B;
+            resize: none;
+            outline: none;
+        }
+
+        /* Table Layout */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .custom-table th {
+            background-color: #0F2942;
+            color: #FFFFFF;
+            padding: 12px 16px;
+            text-align: left;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .custom-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .custom-table tr:nth-child(even) td { background-color: #F8FAFC; }
+
         @media (max-width: 900px) {
-            .slide-deck {
-                aspect-ratio: auto;
-                height: auto;
-                min-height: calc(100vh - 80px);
-                border-radius: 0;
-            }
-            .slide {
-                position: relative;
-                padding: 24px 20px;
-                height: auto;
-            }
+            .slide-deck { aspect-ratio: auto; height: auto; min-height: calc(100vh - 80px); border-radius: 0; }
+            .slide { position: relative; padding: 20px 16px; height: auto; }
+            .cards-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-0 sm:p-4">
+<body>
 
 <div class="slide-deck" id="slideDeck">
 
     <!-- Slide 1: Portada -->
-    <div class="slide active flex-col justify-between" style="background: linear-gradient(135deg, #0F2942 0%, #1E3A5F 100%); color: white;">
-        <div class="flex justify-between items-center border-b border-slate-600 pb-4">
-            <span class="text-sm font-bold tracking-widest text-teal-400 uppercase">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
-            <span class="text-sm text-slate-300">INGENIERÍA EN ALIMENTOS — 2026</span>
+    <div class="slide active" style="background: linear-gradient(135deg, #0F2942 0%, #1E3A5F 100%); color: white; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #475569; padding-bottom: 12px;">
+            <span style="font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #2DD4BF; text-transform: uppercase;">UNIVERSIDAD NACIONAL DE VILLA MARÍA</span>
+            <span style="font-size: 13px; color: #94A3B8;">INGENIERÍA EN ALIMENTOS — 2026</span>
         </div>
-        <div class="my-auto text-center py-8">
-            <span class="inline-block bg-teal-800/60 border border-teal-400 text-teal-300 text-base font-bold px-6 py-2 rounded-full uppercase tracking-wider mb-8">Gestión de la I+D+i — Unidad 2</span>
-            <h1 class="font-['Poppins'] text-4xl sm:text-6xl font-bold text-white mb-6 leading-tight">GESTIÓN DE LA INFORMACIÓN,<br><span class="text-teal-400">CONOCIMIENTO Y VIGILANCIA</span></h1>
-            <p class="text-slate-300 text-lg sm:text-2xl max-w-3xl mx-auto leading-relaxed">Transformando datos del entorno en decisiones tecnológicas y de inversión seguras</p>
+        
+        <div style="text-align: center; margin: auto 0; padding: 20px 0;">
+            <span style="display: inline-block; background: rgba(15, 118, 110, 0.4); border: 1px solid #2DD4BF; color: #5EEAD4; font-size: 14px; font-weight: 700; padding: 6px 20px; border-radius: 30px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px;">Gestión de la I+D+i — Unidad 2</span>
+            <h1 style="font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: #FFFFFF; line-height: 1.2; margin-bottom: 20px;">GESTIÓN DE LA INFORMACIÓN,<br><span style="color: #2DD4BF;">CONOCIMIENTO Y VIGILANCIA</span></h1>
+            <p style="font-size: 20px; color: #CBD5E1; max-w: 800px; margin: 0 auto; line-height: 1.5;">Transformando datos del entorno en decisiones tecnológicas y de inversión seguras</p>
         </div>
-        <div class="flex flex-col sm:flex-row justify-between items-center border-t border-slate-600 pt-5 gap-3">
-            <div class="text-left text-base text-slate-300">
-                <strong class="text-white text-lg">Dr. Ing. Ricardo Cravero</strong> | Ing. Alejandro Benito
+
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #475569; padding-top: 16px;">
+            <div style="font-size: 15px; color: #CBD5E1;">
+                <strong style="color: #FFFFFF; font-size: 16px;">Dr. Ing. Ricardo Cravero</strong> | Ing. Alejandro Benito
             </div>
-            <div class="italic text-teal-300 text-base">
+            <div style="font-style: italic; color: #5EEAD4; font-size: 15px;">
                 "Filtrar la infoxicación para tomar decisiones con evidencia"
             </div>
         </div>
@@ -165,42 +369,42 @@
 
     <!-- Slide 2: Pirámide DIKW -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">📊 De los Datos a la Inteligencia Estratégica (Jerarquía DIKW)</h2>
             <p class="slide-subtitle">Transformación progresiva del dato bruto en decisiones operativas y de inversión de alto impacto</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-5 my-auto flex-grow items-stretch py-2">
-            <div class="card-box border-t-8 border-t-slate-400 bg-slate-50 text-center">
+        <div class="cards-grid grid-4">
+            <div class="card-box accent-top-slate text-center" style="text-align: center;">
                 <div>
-                    <span class="bg-slate-200 text-slate-900 font-bold text-sm px-4 py-1.5 rounded-md mb-4 inline-block tracking-wide">1. DATO</span>
-                    <h3 class="font-bold text-slate-800 text-lg sm:text-xl mb-3">Medición Neutra</h3>
+                    <span class="badge-tag badge-slate">1. DATO</span>
+                    <h3 class="card-title">Medición Neutra</h3>
                 </div>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">Ej. <span class="font-bold text-slate-900 bg-slate-200 px-2 py-0.5 rounded">39°C</span> registrado por un sensor en tanque de proceso.</p>
+                <p class="card-text my-auto">Ej. <span class="highlight-pill">39°C</span> registrado por un sensor en tanque de proceso.</p>
             </div>
 
-            <div class="card-box border-t-8 border-t-sky-500 bg-sky-50/30 text-center">
+            <div class="card-box accent-top-sky" style="text-align: center;">
                 <div>
-                    <span class="bg-sky-100 text-sky-900 font-bold text-sm px-4 py-1.5 rounded-md mb-4 inline-block tracking-wide">2. INFORMACIÓN</span>
-                    <h3 class="font-bold text-slate-800 text-lg sm:text-xl mb-3">Contextualizada</h3>
+                    <span class="badge-tag badge-sky">2. INFORMACIÓN</span>
+                    <h3 class="card-title">Contextualizada</h3>
                 </div>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">Ej. <strong class="text-sky-950">39°C durante la inoculación</strong> del cultivo starter láctico.</p>
+                <p class="card-text my-auto">Ej. <strong style="color: #0369A1;">39°C durante la inoculación</strong> del cultivo starter láctico.</p>
             </div>
 
-            <div class="card-box border-t-8 border-t-teal-600 bg-teal-50/30 text-center">
+            <div class="card-box accent-top-teal" style="text-align: center;">
                 <div>
-                    <span class="bg-teal-100 text-teal-900 font-bold text-sm px-4 py-1.5 rounded-md mb-4 inline-block tracking-wide">3. CONOCIMIENTO</span>
-                    <h3 class="font-bold text-slate-800 text-lg sm:text-xl mb-3">Interpretado</h3>
+                    <span class="badge-tag badge-teal">3. CONOCIMIENTO</span>
+                    <h3 class="card-title">Interpretado</h3>
                 </div>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">Ej. <strong class="text-teal-950">Riesgo de inactivación térmica</strong> o muerte del fermento.</p>
+                <p class="card-text my-auto">Ej. <strong style="color: #0F766E;">Riesgo de inactivación térmica</strong> o muerte del fermento.</p>
             </div>
 
-            <div class="card-box border-t-8 border-t-emerald-600 bg-emerald-50/60 text-center">
+            <div class="card-box accent-top-emerald" style="text-align: center;">
                 <div>
-                    <span class="bg-emerald-700 text-white font-bold text-sm px-4 py-1.5 rounded-md mb-4 inline-block tracking-wide">4. INTELIGENCIA ⭐</span>
-                    <h3 class="font-bold text-emerald-950 text-lg sm:text-xl mb-3">Decisión Accionable</h3>
+                    <span class="badge-tag badge-emerald">4. INTELIGENCIA ⭐</span>
+                    <h3 class="card-title" style="color: #065F46;">Decisión Accionable</h3>
                 </div>
-                <p class="text-sm sm:text-base text-slate-900 leading-relaxed my-auto font-medium">Ej. <strong class="text-emerald-950 bg-emerald-200/80 px-2 py-1 rounded">Ajuste automático de la camisa de enfriamiento</strong> y alarma en planta.</p>
+                <p class="card-text my-auto" style="font-weight: 600;">Ej. <span class="highlight-pill-emerald">Ajuste automático de la camisa de enfriamiento</span> y alarma en planta.</p>
             </div>
         </div>
 
@@ -214,57 +418,57 @@
 
     <!-- Slide 3: Modelo SECI y Caso Delicias Gourmet -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">🧠 Gestión del Conocimiento: Modelo SECI (Nonaka & Takeuchi)</h2>
             <p class="slide-subtitle">Transformando el saber tácito de planta en Capital Intelectual organizacional y preservando el know-how</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto flex-grow items-stretch py-2">
-            <div class="card-box border-l-8 border-l-sky-600 bg-sky-50/20">
+        <div class="cards-grid grid-2">
+            <div class="card-box accent-left-sky">
                 <div>
-                    <h3 class="font-bold text-sky-950 text-lg sm:text-xl mb-2 flex items-center gap-2">
-                        <span class="bg-sky-600 text-white text-xs px-2.5 py-1 rounded-full">1</span> Socialización (Tácito ➔ Tácito)
+                    <h3 class="card-title" style="color: #0369A1; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #0284C7; color: white; font-size: 12px; padding: 2px 8px; border-radius: 50%;">1</span> Socialización (Tácito ➔ Tácito)
                     </h3>
-                    <p class="text-sm sm:text-base text-slate-700 mb-4 leading-relaxed">Saber hacer no documentado. Ej. El maestro quesero compartiendo secretos de textura directamente en mesada.</p>
+                    <p class="card-text">Saber hacer no documentado. Ej. El maestro quesero compartiendo secretos de textura directamente en mesada.</p>
                 </div>
-                <div class="p-3 bg-white border border-sky-200 rounded-xl text-xs sm:text-sm text-slate-800">
-                    <strong class="text-sky-900">Caso Mario (Chef):</strong> Mentoring directo y talleres prácticos a cocineros junior.
+                <div class="callout-box">
+                    <strong style="color: #0369A1;">Caso Mario (Chef):</strong> Mentoring directo y talleres prácticos a cocineros junior.
                 </div>
             </div>
 
-            <div class="card-box border-l-8 border-l-teal-600 bg-teal-50/30">
+            <div class="card-box accent-left-teal">
                 <div>
-                    <h3 class="font-bold text-teal-950 text-lg sm:text-xl mb-2 flex items-center gap-2">
-                        <span class="bg-teal-600 text-white text-xs px-2.5 py-1 rounded-full">2</span> Externalización (Tácito ➔ Explícito) ⭐
+                    <h3 class="card-title" style="color: #0F766E; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #0F766E; color: white; font-size: 12px; padding: 2px 8px; border-radius: 50%;">2</span> Externalización (Tácito ➔ Explícito) ⭐
                     </h3>
-                    <p class="text-sm sm:text-base text-slate-700 mb-4 leading-relaxed">Codificación en manuales, recetas estandarizadas, fichas técnicas e instructivos HACCP.</p>
+                    <p class="card-text">Codificación en manuales, recetas estandarizadas, fichas técnicas e instructivos HACCP.</p>
                 </div>
-                <div class="p-3 bg-white border border-teal-200 rounded-xl text-xs sm:text-sm text-slate-800">
-                    <strong class="text-teal-900">Caso Ana (Calidad):</strong> Redacción de manuales de selección e inspección de insumos.
+                <div class="callout-box" style="border-color: #99F6E4;">
+                    <strong style="color: #0F766E;">Caso Ana (Calidad):</strong> Redacción de manuales de selección e inspección de insumos.
                 </div>
             </div>
 
-            <div class="card-box border-l-8 border-l-amber-600 bg-amber-50/20">
+            <div class="card-box accent-left-amber">
                 <div>
-                    <h3 class="font-bold text-amber-950 text-lg sm:text-xl mb-2 flex items-center gap-2">
-                        <span class="bg-amber-600 text-white text-xs px-2.5 py-1 rounded-full">3</span> Combinación (Explícito ➔ Explícito)
+                    <h3 class="card-title" style="color: #B45309; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #D97706; color: white; font-size: 12px; padding: 2px 8px; border-radius: 50%;">3</span> Combinación (Explícito ➔ Explícito)
                     </h3>
-                    <p class="text-sm sm:text-base text-slate-700 mb-4 leading-relaxed">Integración de fichas técnicas con normas del Código Alimentario (CAA) y reportes de ERP.</p>
+                    <p class="card-text">Integración de fichas técnicas con normas del Código Alimentario (CAA) y reportes de ERP.</p>
                 </div>
-                <div class="p-3 bg-white border border-amber-200 rounded-xl text-xs sm:text-sm text-slate-800">
-                    <strong class="text-amber-900">Sistemas ERP/QMS:</strong> Tableros integrados de trazabilidad e insumos.
+                <div class="callout-box">
+                    <strong style="color: #B45309;">Sistemas ERP/QMS:</strong> Tableros integrados de trazabilidad e insumos.
                 </div>
             </div>
 
-            <div class="card-box border-l-8 border-l-emerald-600 bg-emerald-50/20">
+            <div class="card-box accent-left-emerald">
                 <div>
-                    <h3 class="font-bold text-emerald-950 text-lg sm:text-xl mb-2 flex items-center gap-2">
-                        <span class="bg-emerald-600 text-white text-xs px-2.5 py-1 rounded-full">4</span> Internalización (Explícito ➔ Tácito)
+                    <h3 class="card-title" style="color: #047857; display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #059669; color: white; font-size: 12px; padding: 2px 8px; border-radius: 50%;">4</span> Internalización (Explícito ➔ Tácito)
                     </h3>
-                    <p class="text-sm sm:text-base text-slate-700 mb-4 leading-relaxed">Aprender haciendo (<em>learning by doing</em>) leyendo manuales y practicando en planta piloto.</p>
+                    <p class="card-text">Aprender haciendo (<em>learning by doing</em>) leyendo manuales y practicando en planta piloto.</p>
                 </div>
-                <div class="p-3 bg-white border border-emerald-200 rounded-xl text-xs sm:text-sm text-slate-800">
-                    <strong class="text-emerald-900">Rutinas Operativas:</strong> Adopción natural de mejores prácticas en el personal.
+                <div class="callout-box">
+                    <strong style="color: #047857;">Rutinas Operativas:</strong> Adopción natural de mejores prácticas en el personal.
                 </div>
             </div>
         </div>
@@ -279,44 +483,44 @@
 
     <!-- Slide 4: Los 4 Ejes de la VeIE -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">🌐 Los 4 Ejes de la Vigilancia e Inteligencia Estratégica (VeIE)</h2>
             <p class="slide-subtitle">Captura integral de señales del entorno para la toma de decisiones 360° en la PyME</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto flex-grow items-stretch py-2">
-            <div class="card-box border-l-8 border-l-teal-600 bg-teal-50/20">
-                <h3 class="font-['Poppins'] font-bold text-teal-900 text-lg sm:text-xl mb-3 flex items-center gap-3">
-                    <i class="fa-solid fa-microscope text-teal-600 text-2xl"></i> 1. Vigilancia Tecnológica (VT)
+        <div class="cards-grid grid-2">
+            <div class="card-box accent-left-teal">
+                <h3 class="card-title" style="color: #0F766E; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-microscope" style="font-size: 24px;"></i> 1. Vigilancia Tecnológica (VT)
                 </h3>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">
+                <p class="card-text" style="font-size: 16px;">
                     Patentes de invención, artículos científicos, tecnologías de conservación no térmicas (HPP, PEF), ingredientes funcionales y soluciones de packaging activo/inteligente.
                 </p>
             </div>
 
-            <div class="card-box border-l-8 border-l-sky-600 bg-sky-50/20">
-                <h3 class="font-['Poppins'] font-bold text-sky-900 text-lg sm:text-xl mb-3 flex items-center gap-3">
-                    <i class="fa-solid fa-user-ninja text-sky-600 text-2xl"></i> 2. Vigilancia Competitiva (IC)
+            <div class="card-box accent-left-sky">
+                <h3 class="card-title" style="color: #0369A1; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-user-ninja" style="font-size: 24px;"></i> 2. Vigilancia Competitiva (IC)
                 </h3>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">
+                <p class="card-text" style="font-size: 16px;">
                     Lanzamientos de nuevos productos por competidores directos e indirectos, alianzas estratégicas, movimientos de marcas, fusiones y estrategias de precios rivales.
                 </p>
             </div>
 
-            <div class="card-box border-l-8 border-l-amber-600 bg-amber-50/20">
-                <h3 class="font-['Poppins'] font-bold text-amber-900 text-lg sm:text-xl mb-3 flex items-center gap-3">
-                    <i class="fa-solid fa-shop text-amber-600 text-2xl"></i> 3. Vigilancia Comercial (VC)
+            <div class="card-box accent-left-amber">
+                <h3 class="card-title" style="color: #B45309; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-shop" style="font-size: 24px;"></i> 3. Vigilancia Comercial (VC)
                 </h3>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">
+                <p class="card-text" style="font-size: 16px;">
                     Evolución de demandas de consumo (<em>Clean Label</em>, proteicas, reducidas en sellos), proveedores estratégicos de insumos y maquinaria, y canales de venta.
                 </p>
             </div>
 
-            <div class="card-box border-l-8 border-l-emerald-600 bg-emerald-50/20">
-                <h3 class="font-['Poppins'] font-bold text-emerald-900 text-lg sm:text-xl mb-3 flex items-center gap-3">
-                    <i class="fa-solid fa-earth-americas text-emerald-600 text-2xl"></i> 4. Vigilancia del Entorno (VE)
+            <div class="card-box accent-left-emerald">
+                <h3 class="card-title" style="color: #047857; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-earth-americas" style="font-size: 24px;"></i> 4. Vigilancia del Entorno (VE)
                 </h3>
-                <p class="text-sm sm:text-base text-slate-700 leading-relaxed my-auto">
+                <p class="card-text" style="font-size: 16px;">
                     Leyes de etiquetado frontal (ANMAT/CAA/FDA), normativas ambientales de efluentes, costos macroeconómicos, aranceles de exportación y factores PESTEL.
                 </p>
             </div>
@@ -332,42 +536,42 @@
 
     <!-- Slide 5: Factores Críticos de Vigilancia (FCVs) -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">🎯 Factores Críticos de Vigilancia (FCVs) & KITs</h2>
             <p class="slide-subtitle">Del diagnóstico estratégico PESTEL/FODA a las ecuaciones de búsqueda en bases científicas</p>
         </div>
 
-        <div class="bg-slate-100 p-3.5 rounded-xl border border-slate-300 text-center mb-4 font-mono text-xs sm:text-sm text-slate-800 font-bold">
+        <div style="background-color: #F1F5F9; border: 1px solid #CBD5E1; border-radius: 12px; padding: 12px; text-align: center; font-family: monospace; font-weight: 700; font-size: 15px; color: #0F172A; margin-bottom: 12px;">
             Estrategia PyME ➔ Diagnóstico PESTEL/FODA ➔ Identificación de FCVs ➔ Ecuación de Búsqueda
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto flex-grow items-stretch py-2">
+        <div class="cards-grid grid-3">
             <div class="card-box">
                 <div>
-                    <span class="bg-teal-100 text-teal-800 text-xs sm:text-sm font-bold px-3 py-1 rounded mb-3 inline-block">Definición</span>
-                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">¿Qué es un FCV?</h3>
+                    <span class="badge-tag badge-teal">Definición</span>
+                    <h3 class="card-title">¿Qué es un FCV?</h3>
                 </div>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">
+                <p class="card-text">
                     Variable externa crítica que, si sufre una modificación ligera, <strong>obliga a la empresa a tomar una decisión estratégica</strong> de inversión, cambio o permanencia.
                 </p>
             </div>
 
             <div class="card-box">
                 <div>
-                    <span class="bg-teal-100 text-teal-800 text-xs sm:text-sm font-bold px-3 py-1 rounded mb-3 inline-block">Origen</span>
-                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">¿De dónde nace?</h3>
+                    <span class="badge-tag badge-teal">Origen</span>
+                    <h3 class="card-title">¿De dónde nace?</h3>
                 </div>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">
+                <p class="card-text">
                     Surge de la traducción directa de las <strong>Amenazas a mitigar</strong> y <strong>Oportunidades a capitalizar</strong> detectadas en el FODA organizacional.
                 </p>
             </div>
 
             <div class="card-box">
                 <div>
-                    <span class="bg-teal-100 text-teal-800 text-xs sm:text-sm font-bold px-3 py-1 rounded mb-3 inline-block">Métrica</span>
-                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Indicadores Medibles</h3>
+                    <span class="badge-tag badge-teal">Métrica</span>
+                    <h3 class="card-title">Indicadores Medibles</h3>
                 </div>
-                <ul class="text-xs sm:text-sm text-slate-600 space-y-2 list-disc pl-4 my-auto">
+                <ul style="padding-left: 20px; font-size: 15px; color: #334155; line-height: 1.6;">
                     <li>N° de patentes en IPC A23L.</li>
                     <li>Porcentaje de digestibilidad (DIAAS).</li>
                     <li>Evolución de lanzamientos rivales.</li>
@@ -385,17 +589,17 @@
 
     <!-- Slide 6: Fuentes y Códigos IPC -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">🔍 Bases de Datos & Clasificación IPC (OMPI)</h2>
             <p class="slide-subtitle">Dónde buscar información oficial y cómo categorizar las invenciones en la industria de alimentos</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto flex-grow items-stretch py-2">
+        <div class="cards-grid grid-2">
             <div class="card-box">
-                <h3 class="font-bold text-slate-800 text-lg sm:text-xl mb-4 flex items-center gap-3 border-b pb-3">
-                    <i class="fa-solid fa-database text-sky-600 text-2xl"></i> Fuentes Académicas y Patentes
+                <h3 class="card-title" style="border-bottom: 1px solid #E2E8F0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-database" style="color: #0284C7;"></i> Fuentes Académicas y Patentes
                 </h3>
-                <div class="text-sm sm:text-base text-slate-700 space-y-3 leading-relaxed my-auto">
+                <div class="card-text" style="display: flex; flex-direction: column; gap: 12px; margin: auto 0;">
                     <p><strong>Científicas:</strong> Google Scholar, PubMed, ScienceDirect, SciELO.</p>
                     <p><strong>Patentes Gratis:</strong> Espacenet, Lens.org, Google Patents, Patentscope.</p>
                     <p><strong>Buscadores Semánticos IA:</strong> Perplexity, SciSpace, Consensus.</p>
@@ -403,15 +607,15 @@
             </div>
 
             <div class="card-box">
-                <h3 class="font-bold text-slate-800 text-lg sm:text-xl mb-4 flex items-center gap-3 border-b pb-3">
-                    <i class="fa-solid fa-barcode text-teal-600 text-2xl"></i> Códigos IPC Principales (OMPI)
+                <h3 class="card-title" style="border-bottom: 1px solid #E2E8F0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-barcode" style="color: #0F766E;"></i> Códigos IPC Principales (OMPI)
                 </h3>
-                <div class="text-xs sm:text-sm text-slate-800 space-y-2.5 font-mono my-auto">
-                    <p class="p-1.5 bg-slate-100 rounded"><strong>A23L:</strong> Alimentos y bebidas no alcohólicas.</p>
-                    <p class="p-1.5 bg-slate-100 rounded"><strong>A23L 33/00:</strong> Alimentos funcionales y dietéticos.</p>
-                    <p class="p-1.5 bg-slate-100 rounded"><strong>A23C:</strong> Productos lácteos y sus sustitutos.</p>
-                    <p class="p-1.5 bg-slate-100 rounded"><strong>A23J:</strong> Composiciones proteicas e aislamiento.</p>
-                    <p class="p-1.5 bg-slate-100 rounded"><strong>B65D:</strong> Envases y packaging activo/inteligente.</p>
+                <div style="font-family: monospace; font-size: 14px; display: flex; flex-direction: column; gap: 8px; margin: auto 0;">
+                    <p style="background: #F1F5F9; padding: 6px 10px; border-radius: 6px;"><strong>A23L:</strong> Alimentos y bebidas no alcohólicas.</p>
+                    <p style="background: #F1F5F9; padding: 6px 10px; border-radius: 6px;"><strong>A23L 33/00:</strong> Alimentos funcionales y dietéticos.</p>
+                    <p style="background: #F1F5F9; padding: 6px 10px; border-radius: 6px;"><strong>A23C:</strong> Productos lácteos y sus sustitutos.</p>
+                    <p style="background: #F1F5F9; padding: 6px 10px; border-radius: 6px;"><strong>A23J:</strong> Composiciones proteicas e aislamiento.</p>
+                    <p style="background: #F1F5F9; padding: 6px 10px; border-radius: 6px;"><strong>B65D:</strong> Envases y packaging activo/inteligente.</p>
                 </div>
             </div>
         </div>
@@ -426,33 +630,33 @@
 
     <!-- Slide 7: Prospectiva vs Foresight y TRM -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">🔮 Prospectiva Tecnológica & Roadmapping (TRM)</h2>
             <p class="slide-subtitle">Escuelas de pensamiento del futuro y mapas de ruta tecnológicos para orientar la estrategia</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto flex-grow items-stretch py-2">
-            <div class="card-box border-l-8 border-l-teal-600 bg-teal-50/20">
-                <h3 class="font-bold text-teal-900 text-base sm:text-lg mb-2">Escuela Francesa (Prospective - Berger/Godet)</h3>
-                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed my-auto">
+        <div class="cards-grid grid-2" style="flex-grow: 0.6;">
+            <div class="card-box accent-left-teal">
+                <h3 class="card-title" style="color: #0F766E;">Escuela Francesa (Prospective - Berger/Godet)</h3>
+                <p class="card-text">
                     Enfoque normativo y voluntarista. El futuro no se predice; se construye activamente mediante escenarios deseados (3 a 20 años).
                 </p>
             </div>
 
-            <div class="card-box border-l-8 border-l-sky-600 bg-sky-50/20">
-                <h3 class="font-bold text-sky-900 text-base sm:text-lg mb-2">Escuela Anglosajona (Foresight - Voros/Popper)</h3>
-                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed my-auto">
+            <div class="card-box accent-left-sky">
+                <h3 class="card-title" style="color: #0369A1;">Escuela Anglosajona (Foresight - Voros/Popper)</h3>
+                <p class="card-text">
                     Pragmático y participativo. Utiliza <em>Horizon Scanning</em> y método Delphi para anticipar múltiples futuros posibles e informar decisiones.
                 </p>
             </div>
         </div>
 
-        <div class="p-4 bg-slate-100 border border-slate-300 rounded-2xl my-2">
-            <strong class="text-slate-900 text-sm sm:text-base block mb-2">🗺️ Technology Roadmapping (TRM) — 3 Capas Horizontales:</strong>
-            <div class="text-xs sm:text-sm font-mono text-slate-800 grid grid-cols-3 gap-3 text-center">
-                <div class="p-2.5 bg-white border rounded-xl shadow-sm">1. Mercado / Tendencias (Drivers)</div>
-                <div class="p-2.5 bg-white border rounded-xl shadow-sm">2. Productos / Funciones (Lanzamientos)</div>
-                <div class="p-2.5 bg-white border rounded-xl shadow-sm">3. Tecnologías Habilitadoras / R&D</div>
+        <div style="background: #F1F5F9; border: 1px solid #CBD5E1; border-radius: 14px; padding: 16px; margin: 8px 0;">
+            <strong style="color: #0F172A; font-size: 16px; display: block; margin-bottom: 10px;">🗺️ Technology Roadmapping (TRM) — 3 Capas Horizontales:</strong>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-family: monospace; text-align: center; font-size: 14px;">
+                <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 10px; border-radius: 8px; font-weight: 700;">1. Mercado / Tendencias (Drivers)</div>
+                <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 10px; border-radius: 8px; font-weight: 700;">2. Productos / Funciones (Lanzamientos)</div>
+                <div style="background: #FFFFFF; border: 1px solid #CBD5E1; padding: 10px; border-radius: 8px; font-weight: 700;">3. Tecnologías Habilitadoras / R&D</div>
             </div>
         </div>
 
@@ -466,30 +670,30 @@
 
     <!-- Slide 8: Costo de la NO Vigilancia -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">⚠️ Lecciones de la Industria: El Costo de la NO-Vigilancia</h2>
             <p class="slide-subtitle">Casos reales donde ignorar las señales del entorno destruyó valor comercial</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto flex-grow items-stretch py-2">
-            <div class="card-box border-t-8 border-t-red-600 bg-red-50/30">
+        <div class="cards-grid grid-3">
+            <div class="card-box accent-top-red">
                 <div>
-                    <strong class="text-red-950 text-base sm:text-lg block mb-2">1. Envases para Detergente (Italia)</strong>
-                    <p class="text-xs sm:text-sm text-slate-800 leading-relaxed my-auto">Fabricantes de cartón no vigilaron la tendencia hacia fórmulas concentradas y envases compactos. Perderon el mercado a manos de nuevos competidores.</p>
+                    <strong style="color: #991B1B; font-size: 18px; display: block; margin-bottom: 8px;">1. Envases para Detergente (Italia)</strong>
+                    <p class="card-text">Fabricantes de cartón no vigilaron la tendencia hacia fórmulas concentradas y envases compactos. Perderon el mercado a manos de nuevos competidores.</p>
                 </div>
             </div>
 
-            <div class="card-box border-t-8 border-t-amber-600 bg-amber-50/30">
+            <div class="card-box accent-top-amber">
                 <div>
-                    <strong class="text-amber-950 text-base sm:text-lg block mb-2">2. Kokoku Rubber vs. EE. UU.</strong>
-                    <p class="text-xs sm:text-sm text-slate-800 leading-relaxed my-auto">El anuncio de una nueva planta rival estuvo en diarios locales durante 3 años. La falta de circulación interna de datos tomó por sorpresa a la gerencia.</p>
+                    <strong style="color: #92400E; font-size: 18px; display: block; margin-bottom: 8px;">2. Kokoku Rubber vs. EE. UU.</strong>
+                    <p class="card-text">El anuncio de una nueva planta rival estuvo en diarios locales durante 3 años. La falta de circulación interna de datos tomó por sorpresa a la gerencia.</p>
                 </div>
             </div>
 
-            <div class="card-box border-t-8 border-t-emerald-600 bg-emerald-50/40">
+            <div class="card-box accent-top-emerald">
                 <div>
-                    <strong class="text-emerald-950 text-base sm:text-lg block mb-2">3. Saber Cancelar a Tiempo ⭐</strong>
-                    <p class="text-xs sm:text-sm text-slate-900 leading-relaxed my-auto font-medium">Searle (Monsanto) detectó que competidores lideraban el desarrollo de disolventes de coágulos (TPA) y canceló su proyecto, ahorrando millones en R&D.</p>
+                    <strong style="color: #065F46; font-size: 18px; display: block; margin-bottom: 8px;">3. Saber Cancelar a Tiempo ⭐</strong>
+                    <p class="card-text" style="font-weight: 600;">Searle (Monsanto) detectó que competidores lideraban el desarrollo de disolventes de coágulos (TPA) y canceló su proyecto, ahorrando millones en R&D.</p>
                 </div>
             </div>
         </div>
@@ -504,34 +708,34 @@
 
     <!-- Slide 9: Protocolo Anti-Alucinación IA -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">🤖 Protocolo de Auditoría Humana (Anti-Alucinación)</h2>
             <p class="slide-subtitle">Flujo de trabajo híbrido con Inteligencia Artificial en la era de los Modelos de Lenguaje (LLMs)</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto flex-grow items-stretch py-4">
-            <div class="card-box text-center border-t-8 border-t-sky-500 py-6">
+        <div class="cards-grid grid-3" style="text-align: center;">
+            <div class="card-box accent-top-sky" style="padding: 30px 20px;">
                 <div>
-                    <div class="text-4xl sm:text-5xl mb-3">🤖</div>
-                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Fase 1: PROMPT (IA)</h3>
+                    <div style="font-size: 48px; margin-bottom: 12px;">🤖</div>
+                    <h3 class="card-title">Fase 1: PROMPT (IA)</h3>
                 </div>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Estructurar FCVs, sinónimos técnico-comerciales en inglés (US/UK) y ecuaciones booleanas iniciales.</p>
+                <p class="card-text my-auto">Estructurar FCVs, sinónimos técnico-comerciales en inglés (US/UK) y ecuaciones booleanas iniciales.</p>
             </div>
 
-            <div class="card-box text-center border-t-8 border-t-amber-500 bg-amber-50/30 py-6">
+            <div class="card-box accent-top-amber" style="padding: 30px 20px;">
                 <div>
-                    <div class="text-4xl sm:text-5xl mb-3">🔎</div>
-                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Fase 2: VERIFICACIÓN (Humana)</h3>
+                    <div style="font-size: 48px; margin-bottom: 12px;">🔎</div>
+                    <h3 class="card-title">Fase 2: VERIFICACIÓN (Humana)</h3>
                 </div>
-                <p class="text-xs sm:text-sm text-slate-800 leading-relaxed my-auto">Comprobar el <strong>DOI real</strong> o <strong>N° de Patente oficial</strong> en Google Scholar, Lens.org o Espacenet.</p>
+                <p class="card-text my-auto" style="font-weight: 600;">Comprobar el <strong style="color: #0F766E;">DOI real</strong> o <strong style="color: #0F766E;">N° de Patente oficial</strong> en Google Scholar, Lens.org o Espacenet.</p>
             </div>
 
-            <div class="card-box text-center border-t-8 border-t-emerald-500 py-6">
+            <div class="card-box accent-top-emerald" style="padding: 30px 20px;">
                 <div>
-                    <div class="text-4xl sm:text-5xl mb-3">🧠</div>
-                    <h3 class="font-bold text-slate-800 text-base sm:text-lg mb-2">Fase 3: DECISIÓN (Ingeniería)</h3>
+                    <div style="font-size: 48px; margin-bottom: 12px;">🧠</div>
+                    <h3 class="card-title">Fase 3: DECISIÓN (Ingeniería)</h3>
                 </div>
-                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed my-auto">Analizar brecha de planta, factibilidad técnica y redactar recomendación para la gerencia.</p>
+                <p class="card-text my-auto">Analizar brecha de planta, factibilidad técnica y redactar recomendación para la gerencia.</p>
             </div>
         </div>
 
@@ -545,39 +749,39 @@
 
     <!-- Slide 10: Consigna Taller NutriSenior S.A. -->
     <div class="slide">
-        <div>
+        <div class="slide-header-box">
             <h2 class="slide-title">📋 Taller Práctico: NutriSenior S.A. + Ficha FCV (Entregable 4.1)</h2>
             <p class="slide-subtitle">Traduciendo hallazgos de vigilancia en decisiones de desarrollo e inversión en planta industrial</p>
         </div>
 
-        <div class="card-box overflow-hidden my-auto p-0 border-2 border-slate-300 flex-grow py-1">
-            <table class="w-full text-xs sm:text-sm text-left h-full">
-                <thead class="bg-slate-800 text-white font-['Poppins']">
+        <div class="card-box" style="padding: 0; overflow: hidden; border-width: 2px;">
+            <table class="custom-table">
+                <thead>
                     <tr>
-                        <th class="p-3.5 text-xs sm:text-sm">Sección de Ficha FCV</th>
-                        <th class="p-3.5 text-xs sm:text-sm">Contenido Requerido para el TFI</th>
+                        <th style="width: 30%;">Sección de Ficha FCV</th>
+                        <th style="width: 70%;">Contenido Requerido para el TFI</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-200 text-xs sm:text-sm">
+                <tbody>
                     <tr>
-                        <td class="p-3 font-bold bg-slate-50">1. FCV Prioritario</td>
-                        <td class="p-3">Nombre, tipo (Tecnológico/Competitivo) y 2 indicadores medibles.</td>
+                        <td><strong>1. FCV Prioritario</strong></td>
+                        <td>Nombre, tipo (Tecnológico/Competitivo) y 2 indicadores medibles.</td>
                     </tr>
                     <tr>
-                        <td class="p-3 font-bold bg-slate-50 font-mono text-xs">2. Ecuación Booleana</td>
-                        <td class="p-3 font-mono text-xs">Cadena booleana aplicada con comillas y operadores (AND/OR).</td>
+                        <td><strong style="font-family: monospace;">2. Ecuación Booleana</strong></td>
+                        <td style="font-family: monospace;">Cadena booleana aplicada con comillas y operadores (AND/OR).</td>
                     </tr>
                     <tr>
-                        <td class="p-3 font-bold bg-slate-50 text-teal-800">3. Evidencia Auditada</td>
-                        <td class="p-3 font-semibold text-teal-900">Cita verificada con DOI real o N° de Patente oficial.</td>
+                        <td><strong style="color: #0F766E;">3. Evidencia Auditada</strong></td>
+                        <td style="font-weight: 700; color: #0F766E;">Cita verificada con DOI real o N° de Patente oficial.</td>
                     </tr>
                     <tr>
-                        <td class="p-3 font-bold bg-slate-50">4. Impacto & Causa Raíz</td>
-                        <td class="p-3">Brecha técnica que resuelve en la planta industrial de la PyME.</td>
+                        <td><strong>4. Impacto & Causa Raíz</strong></td>
+                        <td>Brecha técnica que resuelve en la planta industrial de la PyME.</td>
                     </tr>
                     <tr>
-                        <td class="p-3 font-bold bg-slate-50 text-sky-800">5. Recomendación 4.1</td>
-                        <td class="p-3 font-semibold text-sky-900">Decisión concreta para la fase de desarrollo/formulación.</td>
+                        <td><strong style="color: #0284C7;">5. Recomendación 4.1</strong></td>
+                        <td style="font-weight: 700; color: #0369A1;">Decisión concreta para la fase de desarrollo/formulación.</td>
                     </tr>
                 </tbody>
             </table>
@@ -595,42 +799,42 @@
 
 <!-- Modal de Código HTML -->
 <div id="codeModal">
-    <div class="bg-slate-900 text-white rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col p-6 border border-slate-700 shadow-2xl">
-        <div class="flex justify-between items-center pb-4 border-b border-slate-700">
-            <h3 class="font-['Poppins'] font-bold text-lg text-teal-400 flex items-center gap-2">
+    <div class="modal-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 12px;">
+            <h3 style="font-family: 'Poppins', sans-serif; color: #2DD4BF; font-size: 18px; font-weight: 700;">
                 <i class="fa-solid fa-code"></i> Código Fuente de la Presentación
             </h3>
-            <div class="flex gap-2">
-                <button onclick="copyCode()" class="bg-teal-700 hover:bg-teal-600 text-white text-xs px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold transition">
+            <div style="display: flex; gap: 10px;">
+                <button onclick="copyCode()" class="btn-ctrl" style="padding: 6px 14px; font-size: 12px;">
                     <i class="fa-solid fa-copy"></i> Copiar
                 </button>
-                <button onclick="toggleCodeModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-1.5 rounded-lg font-bold transition">
+                <button onclick="toggleCodeModal()" class="btn-secondary" style="padding: 6px 14px; font-size: 12px;">
                     <i class="fa-solid fa-xmark"></i> Cerrar
                 </button>
             </div>
         </div>
-        <textarea id="codeArea" class="w-full flex-grow my-4 bg-slate-950 text-teal-300 font-mono text-xs p-4 rounded-xl border border-slate-800 resize-none outline-none overflow-y-auto" readonly></textarea>
-        <div class="text-slate-400 text-xs text-right">Presiona Esc o el botón Cerrar para volver a la presentación</div>
+        <textarea id="codeArea" class="modal-textarea" readonly></textarea>
+        <div style="font-size: 12px; color: #94A3B8; text-align: right;">Presiona Esc o el botón Cerrar para volver a la presentación</div>
     </div>
 </div>
 
 <!-- Control Bar -->
-<div class="flex justify-between items-center p-3.5 bg-slate-900 text-white w-full max-w-[1280px] rounded-b-2xl gap-3">
-    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="prevBtn" onclick="moveSlide(-1)">
+<div class="controls-bar">
+    <button class="btn-ctrl" id="prevBtn" onclick="moveSlide(-1)">
         <i class="fa-solid fa-arrow-left"></i> Anterior
     </button>
     
-    <div class="flex items-center gap-3">
-        <span class="text-xs sm:text-sm text-slate-300 font-semibold" id="slideCounter">Diapositiva 1 de 10</span>
-        <select class="bg-slate-800 border border-slate-600 text-white text-xs sm:text-sm rounded-lg px-3 py-1.5 max-w-[200px] sm:max-w-[300px]" id="slideSelect" onchange="jumpToSlide(this.value)">
+    <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 14px; color: #CBD5E1; font-weight: 600;" id="slideCounter">Diapositiva 1 de 10</span>
+        <select class="select-slide" id="slideSelect" onchange="jumpToSlide(this.value)">
             <!-- Options added dynamically -->
         </select>
-        <button class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-teal-300 text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg flex items-center gap-2 transition" onclick="openCodeModal()" title="Ver código HTML completo">
-            <i class="fa-solid fa-code"></i> <span class="hidden sm:inline">Ver Código</span>
+        <button class="btn-secondary" onclick="openCodeModal()" title="Ver código HTML completo">
+            <i class="fa-solid fa-code"></i> <span>Ver Código</span>
         </button>
     </div>
 
-    <button class="bg-teal-700 hover:bg-teal-600 disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2" id="nextBtn" onclick="moveSlide(1)">
+    <button class="btn-ctrl" id="nextBtn" onclick="moveSlide(1)">
         Siguiente <i class="fa-solid fa-arrow-right"></i>
     </button>
 </div>
@@ -691,7 +895,7 @@
     function copyCode() {
         const codeArea = document.getElementById('codeArea');
         codeArea.select();
-        navigator.clipboard.writeText(codeArea.value);
+        document.execCommand('copy');
         alert('¡Código HTML copiado al portapapeles!');
     }
 
