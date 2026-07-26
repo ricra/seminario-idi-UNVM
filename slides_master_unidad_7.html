@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 7 — Inteligencia Artificial en la Gestión de la Innovación (2026)</title>
+    <style>
+        :root{
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --surface-2: #eef4fb;
+            --ink: #16324f;
+            --muted: #5c7188;
+            --line: #d7e3f1;
+            --primary: #0b5394;
+            --primary-2: #1f78c8;
+            --accent: #00a3c7;
+            --ok: #198754;
+            --warn: #c27a00;
+            --violet: #6f42c1;
+            --shadow: 0 10px 30px rgba(12,46,84,.08);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --max: 1180px;
+        }
+        * { box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(180deg, #f7fbff 0%, #eef4fb 100%);
+            color: var(--ink);
+            line-height: 1.55;
+            overflow-y: scroll;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+        
+        header, main > section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 44px 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0b5394 0%, #1b365d 58%, #00a3c7 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding: 56px 0 42px;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto -120px -120px auto;
+            width: 320px; height: 320px; border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            filter: blur(6px);
+        }
+        .eyebrow {
+            display: inline-block;
+            font-size: .84rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 999px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,.08);
+            font-weight: 600;
+        }
+        h1, h2, h3 { margin: 0 0 12px; }
+        h1 { font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.1; font-weight: 700; }
+        h2 { font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--primary); font-weight: 700; }
+        h3 { font-size: 1.15rem; color: var(--ink); font-weight: 700; }
+        .hero p { max-width: 860px; font-size: 1.05rem; color: rgba(255,255,255,.95); margin: 0; }
+        .hero-grid { display: grid; grid-template-columns: 1.4fr .9fr; gap: 24px; align-items: end; }
+        .hero-card {
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: var(--radius);
+            padding: 22px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+        .hero-card strong { display: block; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; color: #a5f3fc; }
+
+        .quick-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(244, 247, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+        .quick-nav .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 20px; }
+        .quick-nav a {
+            padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
+            color: var(--ink); font-size: .88rem; font-weight: 600; transition: all .2s ease;
+        }
+        .quick-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        .lead { font-size: 1.05rem; color: var(--muted); max-width: 880px; margin-bottom: 18px; }
+        .grid { display: grid; gap: 20px; }
+        .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card.soft { background: var(--surface-2); }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+            margin-bottom: 10px;
+            background: #eaf3fe;
+            color: var(--primary);
+            width: fit-content;
+        }
+        .tag.ok { background: #e8f5e9; color: var(--ok); }
+        .tag.warn { background: #fff8e1; color: var(--warn); }
+        .tag.violet { background: #f3e8ff; color: var(--violet); }
+        
+        .list { margin: 0; padding-left: 18px; }
+        .list li { margin: 8px 0; }
+
+        .flow {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: 18px;
+        }
+        .flow .step {
+            background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); position: relative;
+        }
+        .flow .step::after {
+            content: "→"; position: absolute; right: -13px; top: 50%; transform: translateY(-50%);
+            font-size: 1.4rem; color: var(--primary-2); font-weight: bold;
+        }
+        .flow .step:last-child::after { display: none; }
+
+        .band {
+            background: linear-gradient(135deg, #eaf3fe 0%, #f5fbff 100%);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .decision {
+            border-left: 5px solid var(--primary-2);
+            background: #fff;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            margin-top: 18px;
+            font-size: .98rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+        .custom-table th {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: .95rem;
+        }
+        .custom-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--line);
+            font-size: .92rem;
+        }
+        .custom-table tr:nth-child(even) td { background-color: var(--surface-2); }
+
+        .cta {
+            background: linear-gradient(135deg, #16324f 0%, #0b5394 100%);
+            color: #fff; border-radius: 24px; padding: 32px; box-shadow: var(--shadow);
+        }
+        .cta h2, .cta h3, .cta p, .cta li { color: #fff; }
+
+        @media (max-width: 980px){
+            .hero-grid, .grid-2, .grid-3, .grid-4, .flow { grid-template-columns: 1fr; }
+            .flow .step::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <span class="eyebrow">Seminario de Posgrado — Gestión de la I+D+i</span>
+            <h1>Unidad 7 — Inteligencia Artificial en la Gestión de la Innovación</h1>
+            <p>Acelerando el ciclo completo de I+D+i en alimentos: Formulación molecular algorítmica, Visión por Computadora, Agentes Autónomos, Hoja de Ruta PyME y Protocolo de Auditoría Humana.</p>
+        </div>
+        <div class="hero-card">
+            <strong>Sinergia Humano-Máquina</strong>
+            <div style="font-size:1.12rem; font-weight:700; line-height:1.35;">
+                "La IA no reemplaza al Ingeniero en Alimentos; el Ingeniero que usa IA reemplazará al que no la utiliza."
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav aria-label="Navegación de la unidad" class="quick-nav">
+    <div class="wrap">
+        <a href="#panorama">Panorama</a>
+        <a href="#transversal">Uso Transversal</a>
+        <a href="#ecosistema">Ecosistema GenAI</a>
+        <a href="#casos">Casos Globales</a>
+        <a href="#hoja-pyme">Hoja de Ruta PyME</a>
+        <a href="#empleo">Futuro & Ética</a>
+        <a href="#auditoria">Auditoría Humana</a>
+        <a href="#taller">Taller Detectives</a>
+    </div>
+</nav>
+
+<main>
+<section id="panorama">
+    <div class="wrap">
+        <h2>Panorama de la Unidad</h2>
+        <p class="lead">La IA evoluciona de ser una herramienta aislada a convertirse en el tejido digital que conecta el diagnóstico, la formulación, la vigilancia y los modelos de negocio.</p>
+        <div class="flow">
+            <article class="step">
+                <span class="tag">01</span>
+                <h3>Amplificación Algorítmica</h3>
+                <p>Generación acelerada de alternativas SCAMPER, ecuaciones booleanas y formulación molecular.</p>
+            </article>
+            <article class="step">
+                <span class="tag ok">02</span>
+                <h3>Auditoría Técnica</h3>
+                <p>Filtro crítico humano (*Human-in-the-Loop*) para eliminar alucinaciones y verificar regulaciones CAA.</p>
+            </article>
+            <article class="step">
+                <span class="tag violet">03</span>
+                <h3>Impacto en Planta & TFI</h3>
+                <p>SOPs automatizados, inspección por visión artificial y maquetación del Lienzo Canvas 16:9.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="transversal">
+    <div class="wrap">
+        <h2>Matriz de Uso Transversal de IA en las Unidades (1 a 6)</h2>
+        <p class="lead">Demostración de cómo la IA potencia cada etapa del programa analítico de la asignatura.</p>
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Unidad Temática</th>
+                    <th>Herramienta de IA / Prompting</th>
+                    <th>Aporte Concreto al TFI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Módulo 0 & U1 (Diagnóstico & Creatividad)</strong></td>
+                    <td>LLMs (ChatGPT / Claude)</td>
+                    <td>Extracción de tendencias PESTEL, FODA causa raíz e ideación SCAMPER.</td>
+                </tr>
+                <tr>
+                    <td><strong>Unidad 2 (Información & VT)</strong></td>
+                    <td>Buscadores Semánticos (Perplexity / SciSpace)</td>
+                    <td>Ecuaciones booleanas en inglés (US/UK) y mapeo de códigos IPC OMPI.</td>
+                </tr>
+                <tr>
+                    <td><strong>Unidad 3 (Propiedad IP)</strong></td>
+                    <td>Análisis de FTO con IA / Lens.org</td>
+                    <td>Evaluación de Libertad de Operación y borradores de cláusulas NDA.</td>
+                </tr>
+                <tr>
+                    <td><strong>Unidad 4 (Proceso & ISO)</strong></td>
+                    <td>Simuladores de Scoring Models</td>
+                    <td>Priorización de cartera, matriz de riesgos e indicadores ISO 56001:2024.</td>
+                </tr>
+                <tr>
+                    <td><strong>Unidad 5 (Sistema de Valor)</strong></td>
+                    <td>Auditor de Coherencia de Canvas</td>
+                    <td>Verificación de ajuste entre Propuesta de Valor y Segmento de Clientes.</td>
+                </tr>
+                <tr>
+                    <td><strong>Unidad 6 (FoodTech 2026)</strong></td>
+                    <td>Formulación Algorítmica (Giuseppe)</td>
+                    <td>Prototipado Plant-Based / Clean Label y simulación de ciclo de vida (LCA).</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="decision">
+            <strong>Regla de Trabajo:</strong> En cada hito del TFI, el uso de IA se documenta en la **Caja de Auditoría Humana** indicando el prompt ejecutado y los descartes técnicos realizados.
+        </div>
+    </div>
+</section>
+
+<section id="ecosistema">
+    <div class="wrap">
+        <h2>Ecosistema Tecnológico de IA en Alimentos</h2>
+        <p class="lead">Las 4 ramas de la informática que están redefiniendo el procesamiento y desarrollo alimentario.</p>
+        <div class="grid grid-4">
+            <article class="card">
+                <span class="tag">MACHINE LEARNING</span>
+                <h3>Predicción & Datos</h3>
+                <p>Predicción de vida útil, pronóstico de demanda y ajuste dinámico de curvas de pasteurización.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">COMPUTER VISION ⭐</span>
+                <h3>Calidad en Línea</h3>
+                <p>Imágenes hiperespectrales para detectar defectos visuales, cuerpos extraños y frescura sin destruir muestra.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">GENAI & NLP</span>
+                <h3>Generación & Texto</h3>
+                <p>Formulación de recetas, síntesis de publicaciones científicas y atención automatizada de consultas.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">AGENTIC AI</span>
+                <h3>Agentes Autónomos</h3>
+                <p>Asistentes inteligentes que planifican y ejecutan tareas secuenciales de I+D bajo supervisión humana.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="casos">
+    <div class="wrap">
+        <h2>Casos Globales Disruptivos de IA en Alimentos</h2>
+        <p class="lead">Evidencia industrial de empresas que escalaron sus modelos mediante algoritmos.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">NOTCO (GIUSEPPE)</span>
+                <h3>Mapeo Molecular</h3>
+                <p>Algoritmo que analiza la estructura de alimentos animales y encuentra combinaciones vegetales para replicar textura y sabor.</p>
+                <p class="subtle">Ejemplo: NotMilk, NotBurger.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">WINNOW SOLUTIONS ⭐</span>
+                <h3>Cero Desperdicio</h3>
+                <p>Cámaras y balanzas inteligentes con visión por computadora que reducen hasta un $50\%$ las mermas en cocinas.</p>
+                <p class="subtle">Ejemplo: Cadenas hoteleras globales.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">GASTROGRAPH AI</span>
+                <h3>Modelado Sensorial</h3>
+                <p>Predicción de la aceptación de sabor por segmentos demográficos antes de realizar la primera prueba de degustación.</p>
+                <p class="subtle">Ejemplo: Desarrollo de bebidas B2B.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="hoja-pyme">
+    <div class="wrap">
+        <h2>Hoja de Ruta para PyMEs: "Ordená tu Empresa antes de la IA"</h2>
+        <p class="lead">Los 10 pasos fundamentales para construir cimientos digitales sólidos y evitar el *FOMO*.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">PASOS 1 A 5 (INFRAESTRUCTURA)</span>
+                <h3>Cimientos Digitales</h3>
+                <ul class="list">
+                    <li><strong>1. CRM & Datos Clientes:</strong> Registrar información de ventas sin hojas sueltas.</li>
+                    <li><strong>2. ERP Integrado:</strong> Mapear stocks, lotes y materias primas en tiempo real.</li>
+                    <li><strong>3. Finanzas Claras:</strong> Margen de contribución y flujo de caja transparente.</li>
+                    <li><strong>4. Automatización Lógica:</strong> Eliminar tareas repetitivas antes de usar IA.</li>
+                    <li><strong>5. Procesos & SOPs:</strong> Manuales de inocuidad y recetas estandarizadas.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">PASOS 6 A 10 (CULTURA & ADOPCIÓN) ⭐</span>
+                <h3>Cultura & Escalado</h3>
+                <ul class="list">
+                    <li><strong>6. Comunicación Interna:</strong> Reducir el temor de los operarios al cambio.</li>
+                    <li><strong>7. Digitalización de Archivos:</strong> Pasar análisis de laboratorio a la nube.</li>
+                    <li><strong>8. Gestión de Talento:</strong> Capacitación en *upskilling* digital.</li>
+                    <li><strong>9. Mentalidad de Aprendizaje:</strong> Fomentar experimentos acotados.</li>
+                    <li><strong>10. Autodiagnóstico Honesto:</strong> Evaluar madurez digital previa.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="empleo">
+    <div class="wrap">
+        <h2>El Futuro del Trabajo y Consideraciones Éticas</h2>
+        <p class="lead">El informe del Foro Económico Mundial ($44\%$ de cambio de habilidades) y la regla del 80/20.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">LA REGLA DEL 80/20</span>
+                <h3>Operativo vs. Humano</h3>
+                <p><strong>80% Operativo (IA):</strong> Búsquedas bibliográficas, tabulación de datos, borradores administrativos y detección visual de fallas.</p>
+                <p><strong>20% Humano (Talento):</strong> Empatía con el consumidor, formulación en mesada, cata sensorial, liderazgo de equipo y decisiones éticas.</p>
+            </article>
+            <article class="card soft">
+                <span class="tag warn">DILEMAS ÉTICOS & REGULACIÓN</span>
+                <h3>Puntos Críticos</h3>
+                <ul class="list">
+                    <li><strong>Transparencia:</strong> Declaración de uso de IA en etiquetas y apps.</li>
+                    <li><strong>Privacidad de Datos:</strong> Resguardo de datos genéticos en nutrición personal.</li>
+                    <li><strong>Inocuidad & Responsabilidad:</strong> Ninguna IA asume la responsabilidad legal del Director Técnico en ANMAT/INAL.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="auditoria">
+    <div class="wrap">
+        <h2>Protocolo de Auditoría Humana (*Human-in-the-Loop*)</h2>
+        <p class="lead">El estándar de rigor universitario para trabajar con Inteligencia Artificial Generativa.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">1. PROMPT</span>
+                <h3>1. Indicación Estructurada</h3>
+                <p>Diseño del prompt especificando ROL + CONTEXTO + RESTRICCIÓN + FORMATO DE SALIDA.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">2. VERIFICACIÓN ⭐</span>
+                <h3>2. Filtro de Fuentes</h3>
+                <p>Búsqueda manual del DOI real o N° de Patente en Espacenet/Scholar para descartar alucinaciones.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">3. DECISIÓN</span>
+                <h3>3. Dictamen de Ingeniería</h3>
+                <p>Evaluación de viabilidad en planta piloto PyME y redacción de la nota crítica para el TFI.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="taller">
+    <div class="wrap">
+        <div class="cta">
+            <h2>Taller Práctico Integrador: "Detectives de la IA en Alimentos"</h2>
+            <p>Diseño en equipo de un Agente o Solución de IA para el Trabajo Final Integrador (TFI).</p>
+            <div class="grid grid-2" style="margin-top:18px;">
+                <div>
+                    <h3>Consigna para los Grupos</h3>
+                    <ul class="list">
+                        <li><strong>1. Problema de Planta:</strong> Identificar una falla real de proceso o calidad en la PyME del TFI.</li>
+                        <li><strong>2. Solución de IA:</strong> Seleccionar la tecnología (Visión, ML, IoT) y los datos necesarios.</li>
+                        <li><strong>3. Nombre Creativo:</strong> Bautizar el desarrollo (ej. *SnackVisor AI*).</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Entregables Finales</h3>
+                    <ul class="list">
+                        <li>Ficha del Agente de IA cargada en el TFI.</li>
+                        <li>Caja de Auditoría Humana documentando los prompts de la sesión.</li>
+                        <li>Consolidación del Lienzo Canvas 16:9 preparado para el Pitch Oral de la Clase 8.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+(()=>{
+    const slides = [...document.querySelectorAll('header, main > section')];
+    let idx = 0;
+
+    function current(){
+        const y = window.scrollY + window.innerHeight * 0.3;
+        slides.forEach((s, i)=>{
+            if(s.offsetTop <= y) idx = i;
+        });
+    }
+
+    function go(i){
+        if(i < 0 || i >= slides.length) return;
+        idx = i;
+        window.scrollTo({
+            top: slides[idx].offsetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    document.addEventListener('keydown', e => {
+        if(['PageDown', 'ArrowRight', ' '].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx + 1);
+        }
+        if(['PageUp', 'ArrowLeft'].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx - 1);
+        }
+        if(e.key === 'Home'){ e.preventDefault(); go(0); }
+        if(e.key === 'End'){ e.preventDefault(); go(slides.length - 1); }
+    }, {passive: false});
+})();
+</script>
+
+</body>
+</html>
+```e-o-f
+
+### 🌟 Summary of generated master files for Unidad 7:
+1. **`apunte_unidad7_ia_innovacion_2026.md`**: Student study guide in Dual-Layer format (Capa A: 5-minute Light Summary + Capa B: Complete technical manual covering the Transversal Use Schema across all units, GenAI, Machine Learning, Computer Vision, Agentic AI, global cases [NotCo, Winnow, Gastrograph, IBM Food Trust], the 10-step PyME roadmap, WEF/Gartner jobs & skills 80/20 rule, ethics/IP, AI prompts kit, Quiz with answers, and Glossary).
+2. **`slides_unidad7_ia_innovacion_2026.html`**: Widescreen 16:9 interactive HTML presentation deck using the full scroll-snap layout, `--primary` palette, sticky quick-nav bar, hero section, card grids, custom tables, decision callouts, and smooth keyboard navigation.
