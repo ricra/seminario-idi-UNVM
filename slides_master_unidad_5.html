@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 5 — Innovación en el Sistema de Valor y Modelos de Negocio (2026)</title>
+    <style>
+        :root{
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --surface-2: #eef4fb;
+            --ink: #16324f;
+            --muted: #5c7188;
+            --line: #d7e3f1;
+            --primary: #0b5394;
+            --primary-2: #1f78c8;
+            --accent: #00a3c7;
+            --ok: #198754;
+            --warn: #c27a00;
+            --violet: #6f42c1;
+            --shadow: 0 10px 30px rgba(12,46,84,.08);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --max: 1180px;
+        }
+        * { box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(180deg, #f7fbff 0%, #eef4fb 100%);
+            color: var(--ink);
+            line-height: 1.55;
+            overflow-y: scroll;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+        
+        header, main > section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 44px 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0b5394 0%, #1b365d 58%, #00a3c7 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding: 56px 0 42px;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto -120px -120px auto;
+            width: 320px; height: 320px; border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            filter: blur(6px);
+        }
+        .eyebrow {
+            display: inline-block;
+            font-size: .84rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 999px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,.08);
+            font-weight: 600;
+        }
+        h1, h2, h3 { margin: 0 0 12px; }
+        h1 { font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.1; font-weight: 700; }
+        h2 { font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--primary); font-weight: 700; }
+        h3 { font-size: 1.15rem; color: var(--ink); font-weight: 700; }
+        .hero p { max-width: 860px; font-size: 1.05rem; color: rgba(255,255,255,.95); margin: 0; }
+        .hero-grid { display: grid; grid-template-columns: 1.4fr .9fr; gap: 24px; align-items: end; }
+        .hero-card {
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: var(--radius);
+            padding: 22px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+        .hero-card strong { display: block; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; color: #a5f3fc; }
+
+        .quick-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(244, 247, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+        .quick-nav .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 20px; }
+        .quick-nav a {
+            padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
+            color: var(--ink); font-size: .88rem; font-weight: 600; transition: all .2s ease;
+        }
+        .quick-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        .lead { font-size: 1.05rem; color: var(--muted); max-width: 880px; margin-bottom: 18px; }
+        .grid { display: grid; gap: 20px; }
+        .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card.soft { background: var(--surface-2); }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+            margin-bottom: 10px;
+            background: #eaf3fe;
+            color: var(--primary);
+            width: fit-content;
+        }
+        .tag.ok { background: #e8f5e9; color: var(--ok); }
+        .tag.warn { background: #fff8e1; color: var(--warn); }
+        .tag.violet { background: #f3e8ff; color: var(--violet); }
+        
+        .list { margin: 0; padding-left: 18px; }
+        .list li { margin: 8px 0; }
+
+        .flow {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: 18px;
+        }
+        .flow .step {
+            background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); position: relative;
+        }
+        .flow .step::after {
+            content: "→"; position: absolute; right: -13px; top: 50%; transform: translateY(-50%);
+            font-size: 1.4rem; color: var(--primary-2); font-weight: bold;
+        }
+        .flow .step:last-child::after { display: none; }
+
+        .band {
+            background: linear-gradient(135deg, #eaf3fe 0%, #f5fbff 100%);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .decision {
+            border-left: 5px solid var(--primary-2);
+            background: #fff;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            margin-top: 18px;
+            font-size: .98rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+        .custom-table th {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: .95rem;
+        }
+        .custom-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--line);
+            font-size: .92rem;
+        }
+        .custom-table tr:nth-child(even) td { background-color: var(--surface-2); }
+
+        .cta {
+            background: linear-gradient(135deg, #16324f 0%, #0b5394 100%);
+            color: #fff; border-radius: 24px; padding: 32px; box-shadow: var(--shadow);
+        }
+        .cta h2, .cta h3, .cta p, .cta li { color: #fff; }
+
+        @media (max-width: 980px){
+            .hero-grid, .grid-2, .grid-3, .grid-4, .flow { grid-template-columns: 1fr; }
+            .flow .step::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <span class="eyebrow">Seminario de Posgrado — Gestión de la I+D+i</span>
+            <h1>Unidad 5 — Innovación en el Sistema de Valor y Modelos de Negocio</h1>
+            <p>Optimizando la cadena agroalimentaria de punta a punta: Cadena de Porter, Innovación Abierta, Alianzas Universidad-Empresa, Financiamiento (FONTAR/CFI/Córdoba 2026) y Modelo Canvas (TFI Parte 3).</p>
+        </div>
+        <div class="hero-card">
+            <strong>Idea Central</strong>
+            <div style="font-size:1.12rem; font-weight:700; line-height:1.35;">
+                "Innovar no es solo crear en laboratorio; es articular el ecosistema para agregar valor en origen y sostener un modelo de negocio rentable."
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav aria-label="Navegación de la unidad" class="quick-nav">
+    <div class="wrap">
+        <a href="#panorama">Panorama</a>
+        <a href="#cadena-valor">Cadena de Valor</a>
+        <a href="#pymes-agilidad">PyMEs & Agilidad</a>
+        <a href="#estrategias">Estrategias</a>
+        <a href="#open-innovation">Innovación Abierta</a>
+        <a href="#ecosistema">Ecosistema C&T</a>
+        <a href="#financiamiento">Financiamiento 2026</a>
+        <a href="#canvas">Modelo Canvas</a>
+        <a href="#protocolo-ia">Copiloto IA</a>
+        <a href="#tfi">Aplicación TFI</a>
+    </div>
+</nav>
+
+<main>
+<section id="panorama">
+    <div class="wrap">
+        <h2>Panorama de la Unidad</h2>
+        <p class="lead">Las ventajas competitivas en la industria alimentaria emergen de conectar la excelencia técnica con el ecosistema de valor y los modelos de negocio ágiles.</p>
+        <div class="flow">
+            <article class="step">
+                <span class="tag">01</span>
+                <h3>Cadena & Agregado de Valor</h3>
+                <p>Mapear actividades primarias y de soporte (Porter) incorporando economía circular, *upcycling* y trazabilidad.</p>
+            </article>
+            <article class="step">
+                <span class="tag ok">02</span>
+                <h3>Innovación Abierta & Redes</h3>
+                <p>Articular capacidades con la Universidad (UNVM), INTA, CONICET y proveedores clave mediante convenios STAN.</p>
+            </article>
+            <article class="step">
+                <span class="tag violet">03</span>
+                <h3>Canvas & Financiamiento</h3>
+                <p>Estructurar los 9 bloques del Canvas (TFI Parte 3) y apalancar el desarrollo con instrumentos públicos (FONTAR/CFI/Córdoba).</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="cadena-valor">
+    <div class="wrap">
+        <h2>La Cadena de Valor Agroalimentaria (Michael Porter Adaptado)</h2>
+        <p class="lead">Análisis sistemático de actividades primarias y de soporte para identificar fuentes de diferenciación y eficiencia.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">ACTIVIDADES PRIMARIAS</span>
+                <h3>Operaciones & Logística</h3>
+                <ul class="list">
+                    <li><strong>Logística de Entrada:</strong> Calidad de materia prima e ingredientes en recepción.</li>
+                    <li><strong>Operaciones:</strong> Transformación industrial, bioprocesos, envasado aséptico y control HACCP.</li>
+                    <li><strong>Logística de Salida:</strong> Mantenimiento de cadena de frío y transporte refrigerado.</li>
+                    <li><strong>Marketing & Ventas:</strong> Posicionamiento, *storytelling* de origen y canales especializados.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">ACTIVIDADES DE SOPORTE</span>
+                <h3>Tecnología, RRHH & Aprovisionamiento</h3>
+                <ul class="list">
+                    <li><strong>Desarrollo Tecnológico ⭐:</strong> Formulaciones *Clean Label*, ensayos de vida útil y patentes.</li>
+                    <li><strong>Aprovisionamiento:</strong> Compras estratégicas de complejos enzimáticos e insumos.</li>
+                    <li><strong>Gestión de RRHH:</strong> Capacitación continua de operarios en normas de inocuidad.</li>
+                    <li><strong>Infraestructura:</strong> Sistemas ERP de trazabilidad e infraestructura de planta.</li>
+                </ul>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Mecanismo de Agregado de Valor:</strong> Revalorizar subproductos (*Upcycling* de suero o bagazo) transforma un costo de efluente en una fuente primaria de margen comercial.
+        </div>
+    </div>
+</section>
+
+<section id="pymes-agilidad">
+    <div class="wrap">
+        <h2>Modelos de Gestión de Innovación en PyMEs Alimentarias</h2>
+        <p class="lead">Aprovechando la flexibilidad y velocidad de respuesta de las empresas de menor escala.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">01. STAGE-GATE PYME</span>
+                <h3>Fases & Puertas</h3>
+                <p>Estructura simplificada de filtros (*Go/Kill/Pivot*) para controlar la inversión presupuestaria antes de escalar a lote industrial.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">02. LEAN INNOVATION ⭐</span>
+                <h3>Prototipado Mínimo Viable</h3>
+                <p>Lanzamiento de Lotes Mínimos Viables (MPV) para probar deseabilidad y respuesta sensorial en mercado real con bajo riesgo.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">03. DESIGN THINKING</span>
+                <h3>Enfoque en el Consumidor</h3>
+                <p>Ciclo centrado en las personas: Empatizar ➔ Definir el problema ➔ Idear ➔ Prototipar ➔ Testear con paneles locales.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="estrategias">
+    <div class="wrap">
+        <h2>Tipos de Estrategias de Innovación Empresarial</h2>
+        <p class="lead">Definiendo la postura competitiva según el nivel de riesgo y capacidad técnica instalada.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">POSTURAS DE MERCADO</span>
+                <h3>Ofensiva vs. Defensiva vs. Nicho</h3>
+                <ul class="list">
+                    <li><strong>Ofensiva (First-Mover):</strong> Liderazgo tecnológico de alta I+D. Captura máximo margen pero asume alto riesgo regulatorio.</li>
+                    <li><strong>Defensiva (Seguidor Rápido):</strong> Mejora veloz sobre innovaciones validadas por líderes. Minimiza costo de educación de mercado.</li>
+                    <li><strong>Tradicional / Nicho ⭐:</strong> Especialización en segmentos de alto valor (seniors, celíacos, *plant-based*). Es la estrategia reina de las PyMEs.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag warn">MATRIZ DE RIESGO</span>
+                <h3>Selección por Capacidades</h3>
+                <table class="custom-table" style="margin-top:8px;">
+                    <thead>
+                        <tr>
+                            <th>Estrategia</th>
+                            <th>Inversión I+D</th>
+                            <th>Riesgo Tecnológico</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Ofensiva</strong></td>
+                            <td>Alta (&gt; 5% Ventas)</td>
+                            <td>Muy Alto</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Defensiva</strong></td>
+                            <td>Media (2% - 3%)</td>
+                            <td>Moderado</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nicho / PyME</strong></td>
+                            <td>Focalizada / Abierta</td>
+                            <td>Bajo (con alianzas)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="open-innovation">
+    <div class="wrap">
+        <h2>Innovación Abierta (*Open Innovation*) & Co-Creación</h2>
+        <p class="lead">Superando los límites de la PyME mediante flujos bidireccionales de conocimiento e infraestructura.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">OUTSIDE-IN</span>
+                <h3>Absorción de Ciencia</h3>
+                <p>Importar tecnología y know-how desarrollado en universidades (UNVM), startups o institutos de investigación (INTA/CONICET).</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">INSIDE-OUT</span>
+                <h3>Licenciamiento & Spin-offs</h3>
+                <p>Comercializar patentes o tecnologías propias no utilizadas mediante licencias comerciales a terceros o creación de startups.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">CROWDSOURCING</span>
+                <h3>Inteligencia Colectiva</h3>
+                <p>Convocatorias abiertas a consumidores o plataformas de retos (*Hackathons* tipo CCU Impacta) para co-crear conceptos y sabores.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="ecosistema">
+    <div class="wrap">
+        <h2>Ecosistema de Innovación Agroalimentario (Córdoba 2026)</h2>
+        <p class="lead">Articulación territorial entre academia, centros tecnológicos y el sector productivo regional.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">CAPACIDADES CIENTÍFICAS LOCALES</span>
+                <h3>UNVM, INTA, CONICET e INTI</h3>
+                <ul class="list">
+                    <li><strong>UNVM (IAPCBYA):</strong> Laboratorios de análisis, desarrollo de formulaciones y paneles sensoriales geriátricos.</li>
+                    <li><strong>INTA / INTI Lácteos:</strong> Plantas piloto semi-industriales para ensayos de escalado y diseño de planes HACCP.</li>
+                    <li><strong>Servicios STAN:</strong> Contratación de horas de equipamiento avanzado (HPLC, espectrometría, reología).</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">PLATAFORMAS REGIONALES</span>
+                <h3>Programas de Vinculación Activos</h3>
+                <ul class="list">
+                    <li><strong>i-Teams Córdoba:</strong> Aceleración de la transferencia tecnológica cruzando investigadores con mentores de negocio.</li>
+                    <li><strong>Plataforma INNOVAB:</strong> Ecosistema digital colaborativo que conecta PyMEs con oferta científica y financiamiento.</li>
+                    <li><strong>Vouchers de Innovación:</strong> Subvenciones provinciales para contratar asesoramiento técnico universitario.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="financiamiento">
+    <div class="wrap">
+        <h2>Instrumentos de Financiamiento Promocional (2026)</h2>
+        <p class="lead">Herramientas públicas y bancarias para apalancar el desarrollo tecnológico de la PyME.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag ok">SUBSIDIOS NO REEMBOLSABLES (ANR) ⭐</span>
+                <h3>Agencia I+D+i (FONTAR)</h3>
+                <p>Cofinanciamiento de hasta el $60\%$ de los costos del proyecto para adquisición de equipamiento piloto, ensayos de laboratorio, registro de patentes y consultorías de ingeniería.</p>
+                <p class="subtle">Aplica para proyectos de innovación tecnológica con riesgo técnico medido.</p>
+            </article>
+            <article class="card soft">
+                <span class="tag">CRÉDITOS Y FONDOS REGIONALES</span>
+                <h3>BICE, CFI y Agencia Córdoba</h3>
+                <ul class="list">
+                    <li><strong>BICE / Banco Nación:</strong> Líneas de crédito productivo a tasa bonificada para capital de trabajo e infraestructura.</li>
+                    <li><strong>CFI (Consejo Federal de Inversiones):</strong> Financiamiento preferencial para PyMEs agroalimentarias provinciales.</li>
+                    <li><strong>Agencia Córdoba Innovar y Emprender:</strong> Fondos de co-inversión y capital semilla para emprendimientos dinámicos.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="canvas">
+    <div class="wrap">
+        <h2>El Modelo de Negocios Canvas (Numeral 4.2.9 / TFI Parte 3)</h2>
+        <p class="lead">La arquitectura visual que conecta la propuesta de valor con la viabilidad técnica y financiera.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">OFERTA (¿QUÉ?)</span>
+                <h3>1. Propuesta de Valor</h3>
+                <p>El alimento funcional o solución técnica que resuelve el problema del cliente (*Clean Label*, alta digestibilidad).</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">MERCADO (¿QUIÉN?)</span>
+                <h3>2. Clientes & Canales</h3>
+                <p>Segmentos target (Seniors/Deportistas), Canales de venta (Farmacias/DTC) y Relaciones de confianza.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">OPERACIONES (¿CÓMO? & ¿CUÁNTO?)</span>
+                <h3>3. Infraestructura & Finanzas</h3>
+                <p>Actividades y Recursos clave, Socios (UNVM/INTA), Estructura de Costos e Ingresos esperados.</p>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Conexión TFI Parte 3:</strong> El Canvas de 9 bloques maquetado en Google Slides 16:9 es el soporte único obligatorio para la defensa del Pitch Oral en la Clase 8.
+        </div>
+    </div>
+</section>
+
+<section id="protocolo-ia">
+    <div class="wrap">
+        <h2>Copiloto de IA Generativa en la Arquitectura del Modelo Canvas</h2>
+        <p class="lead">Validación de coherencia interna mediante el principio *Human-in-the-Loop*.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">AUDITORÍA ALGORÍTMICA (IA)</span>
+                <h3>Rol del Copiloto de IA</h3>
+                <ul class="list">
+                    <li>Detección de incoherencias entre Propuesta de Valor y Segmento.</li>
+                    <li>Simulación de preguntas críticas de inversores o jurados.</li>
+                    <li>Mapeo de costos ocultos en ensayos HPLC o registros RNE/RNPA.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">AUDITORÍA HUMANA (GRUPO TFI) ⭐</span>
+                <h3>Filtro Técnico y Financiero</h3>
+                <ul class="list">
+                    <li>Comprobación de cotizaciones reales con proveedores locales.</li>
+                    <li>Validación de viabilidad en planta piloto de la PyME.</li>
+                    <li>Verificación de las tasas de interés y líneas de crédito reales (CFI/BICE).</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="tfi">
+    <div class="wrap">
+        <div class="cta">
+            <h2>Aplicación Directa al TFI (Partes 2 y 3 — Numerales 4.2.6 a 4.2.9)</h2>
+            <p>Consolidando la viabilidad económica, el plan de trabajo y el lienzo de modelo de negocio en Google Drive.</p>
+            <div class="grid grid-2" style="margin-top:18px;">
+                <div>
+                    <h3>Entregables Requeridos en Drive</h3>
+                    <ul class="list">
+                        <li><strong>Numeral 4.2.6:</strong> Presupuesto desglosado en USD (Equipamiento, Insumos, RRHH).</li>
+                        <li><strong>Numeral 4.2.7:</strong> Identificación de la línea de financiamiento (FONTAR / CFI).</li>
+                        <li><strong>Numeral 4.2.8:</strong> Plan de trabajo (Diagrama de Gantt a 12-18 meses).</li>
+                        <li><strong>Numeral 4.2.9 (Parte 3):</strong> Lienzo Canvas de 9 Bloques en Google Slides 16:9.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Criterios de Evaluación para el Pitch</h3>
+                    <ul class="list">
+                        <li>Alineación directa entre los costos de I+D y los fondos promocionales solicitados.</li>
+                        <li>Coherencia entre las Actividades Clave de planta y los Socios (UNVM/INTA).</li>
+                        <li>Claridad sintética visual en la plantilla 16:9 de Google Slides.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+(()=>{
+    const slides = [...document.querySelectorAll('header, main > section')];
+    let idx = 0;
+
+    function current(){
+        const y = window.scrollY + window.innerHeight * 0.3;
+        slides.forEach((s, i)=>{
+            if(s.offsetTop <= y) idx = i;
+        });
+    }
+
+    function go(i){
+        if(i < 0 || i >= slides.length) return;
+        idx = i;
+        window.scrollTo({
+            top: slides[idx].offsetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    document.addEventListener('keydown', e => {
+        if(['PageDown', 'ArrowRight', ' '].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx + 1);
+        }
+        if(['PageUp', 'ArrowLeft'].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx - 1);
+        }
+        if(e.key === 'Home'){ e.preventDefault(); go(0); }
+        if(e.key === 'End'){ e.preventDefault(); go(slides.length - 1); }
+    }, {passive: false});
+})();
+</script>
+
+</body>
+</html>
