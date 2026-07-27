@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 2 - Vigilancia e Inteligencia Estratégica 2026</title>
+    <!-- Fuentes Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0F2942;
+            --secondary: #1D70B8;
+            --accent: #0052A3;
+            --light: #F4F7F9;
+            --dark: #333333;
+            --white: #FFFFFF;
+            --gray: #E1E4E8;
+            --success: #0F766E;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Lato', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            height: 100vh;
+            scroll-behavior: smooth;
+        }
+
+        /* Ocultar scrollbar visualmente pero mantener funcionalidad */
+        body::-webkit-scrollbar { width: 0px; }
+        
+        section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding-top: 60px; /* Espacio para la navbar */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Navbar fija */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: 5px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.9rem;
+            color: var(--dark);
+            background-color: var(--white);
+            cursor: pointer;
+            outline: none;
+        }
+
+        .nav-btn {
+            background-color: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent);
+        }
+
+        /* Tipografía de títulos */
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+        }
+
+        h2.section-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Hero / Portada */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a4a75 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--light);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-weight: 400;
+        }
+
+        .hero .badge {
+            background-color: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        /* Grillas y Tarjetas */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border: 1px solid var(--gray);
+            border-top: 5px solid var(--secondary);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card.success { border-top-color: var(--success); }
+        .card.warning { border-top-color: #D97706; }
+        .card.danger { border-top-color: #DC2626; }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card p, .card li {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        .card ul {
+            padding-left: 1.5rem;
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        th {
+            background-color: var(--primary);
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        tr:nth-child(even) { background-color: #f8fafc; }
+
+        /* Callouts / Banners */
+        .callout {
+            background-color: #e0f2fe;
+            border-left: 5px solid var(--secondary);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .callout i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .callout p {
+            font-size: 1.1rem;
+            margin: 0;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Menú de Navegación Fijo -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="fa-solid fa-graduation-cap"></i> UNVM | IAPCBYA
+        </div>
+        <div class="nav-controls">
+            <select class="nav-select" id="slideSelector" onchange="goToSlide(this.value)">
+                <option value="0">1. Portada</option>
+                <option value="1">2. Del Buscador al Radar</option>
+                <option value="2">3. Los 4 Ejes del Radar</option>
+                <option value="3">4. De la Estrategia a FCV</option>
+                <option value="4">5. Puesta en Marcha</option>
+                <option value="5">6. Fuentes y Códigos IPC</option>
+                <option value="6">7. Protocolo Auditoría IA</option>
+                <option value="7">8. Ficha Entregable FCV</option>
+            </select>
+            <button class="nav-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Ant</button>
+            <button class="nav-btn" onclick="nextSlide()">Sig <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </nav>
+
+    <!-- Slide 1: Portada -->
+    <section class="hero" id="slide-0">
+        <div class="container text-center">
+            <span class="badge">Gestión de la I+D+i — Unidad 2</span>
+            <h1>VIGILANCIA E INTELIGENCIA<br><span style="color: #38BDF8;">ESTRATÉGICA (VeIE)</span></h1>
+            <p class="subtitle">Captura de señales del entorno para la toma de decisiones tecnológicas seguras en la industria alimentaria.</p>
+            
+            <div style="margin-top: 3rem; font-size: 1.2rem; color: #cbd5e1;">
+                <strong>Dr. Ing. Ricardo Cravero</strong><br>
+                <span style="font-size: 1rem; margin-top: 10px; display: inline-block;">Ingeniería en Alimentos | 2026</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Del Buscador al Radar -->
+    <section id="slide-1">
+        <div class="container">
+            <h2 class="section-title">📡 Del "Buscador" al "Radar"</h2>
+            <p class="section-subtitle">Evolución del paradigma de Vigilancia hacia la Inteligencia Estratégica 2026</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 style="color: var(--dark);"><i class="fa-solid fa-building-columns"></i> Antes: Vigilancia Tecnológica (VT)</h3>
+                    <ul>
+                        <li><strong>Enfoque acotado:</strong> Monitoreo aislado de patentes, tesis y laboratorio.</li>
+                        <li><strong>Operativa manual:</strong> Búsqueda de datos "a mano" con operadores complejos.</li>
+                        <li><strong>Rol profesional:</strong> Recopilador de información ("picar piedra").</li>
+                        <li><strong>Resultado:</strong> Listados extensos de links o alertas crudas sin procesar.</li>
+                    </ul>
+                </div>
+                <div class="card success">
+                    <h3 style="color: var(--success);"><i class="fa-solid fa-rocket"></i> Hoy: Inteligencia Estratégica (VeIE)</h3>
+                    <ul>
+                        <li><strong>Visión 360°:</strong> Integra Tecnología, Competencia, Mercado y factores PESTEL.</li>
+                        <li><strong>Co-Piloto IA + Auditoría Humana:</strong> Generación ágil y verificación de veracidad estricta.</li>
+                        <li><strong>Rol profesional:</strong> Auditor Estratégico y curador de datos.</li>
+                        <li><strong>Resultado:</strong> Ficha FCV con Causa Raíz y viabilidad ejecutable (TFI 4.1).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <i class="fa-solid fa-lightbulb"></i>
+                <p>Mensaje Clave: En la era de la Inteligencia Artificial (IA), el valor no está en conseguir el dato, sino en saber auditarlo, interpretar su causa raíz y convertirlo en decisiones viables.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Los 4 Ejes del Radar -->
+    <section id="slide-2">
+        <div class="container">
+            <h2 class="section-title">🌐 Los 4 Ejes del Radar de Inteligencia</h2>
+            <p class="section-subtitle">Captura integral de señales del entorno para la toma de decisiones 360° en la PyME</p>
+
+            <div class="grid-2">
+                <div class="card success">
+                    <h3><i class="fa-solid fa-microscope"></i> 1. Vigilancia Tecnológica (VT)</h3>
+                    <p>Monitoreo de patentes de invención, artículos científicos, nuevos ingredientes, tecnologías de conservación (HPP, PEF) y soluciones de packaging avanzado.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: #0369A1;"><i class="fa-solid fa-user-ninja"></i> 2. Vigilancia Competitiva (IC)</h3>
+                    <p>Seguimiento de lanzamientos de competidores directos e indirectos, alianzas de rivales, fusiones, adquisiciones y movimientos de marcas líderes.</p>
+                </div>
+                <div class="card warning">
+                    <h3 style="color: #B45309;"><i class="fa-solid fa-shop"></i> 3. Vigilancia Comercial (VC)</h3>
+                    <p>Análisis de hábitos del consumidor, necesidades insatisfechas, proveedores de maquinaria e insumos, y la evolución de los canales de distribución.</p>
+                </div>
+                <div class="card danger">
+                    <h3 style="color: #DC2626;"><i class="fa-solid fa-earth-americas"></i> 4. Vigilancia del Entorno (VE)</h3>
+                    <p>Legislación de etiquetado (ANMAT/CAA/FDA), normativas ambientales, costos macroeconómicos, aranceles, barreras de entrada y factores PESTEL.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: De la Estrategia a FCVs -->
+    <section id="slide-3">
+        <div class="container">
+            <h2 class="section-title">🎯 De la Estrategia a los FCVs</h2>
+            <p class="section-subtitle">Evitar la parálisis por infoxicación mediante focos de búsqueda precisos</p>
+
+            <div style="background-color: var(--primary); color: white; padding: 15px; border-radius: 8px; text-align: center; font-weight: 700; margin-bottom: 2rem; font-size: 1.1rem; display: flex; justify-content: space-evenly;">
+                <span>Estrategia</span> ➔ <span>FODA / PESTEL</span> ➔ <span>Definición de FCVs</span> ➔ <span>Ecuación de Búsqueda</span>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <h3 style="font-size: 1.2rem;">¿Qué es un FCV?</h3>
+                    <p>Variable o evento externo clave que, de modificarse, <strong>obliga a la PyME a tomar una decisión estratégica</strong> de cambio, inversión o permanencia.</p>
+                </div>
+                <div class="card">
+                    <h3 style="font-size: 1.2rem;">¿De dónde nacen?</h3>
+                    <p>Son la traducción directa y ejecutable de las <strong>Amenazas que debemos mitigar</strong> y las <strong>Oportunidades que debemos capitalizar</strong> detectadas en el FODA.</p>
+                </div>
+                <div class="card">
+                    <h3 style="font-size: 1.2rem;">Clasificación</h3>
+                    <ul>
+                        <li>Sobre decisiones estratégicas corporativas.</li>
+                        <li>Sobre señales tempranas (riesgos/tecnología).</li>
+                        <li>Sobre actores clave del mercado.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <i class="fa-solid fa-bullseye"></i>
+                <p>Regla de Oro: Un FCV (Factor Crítico de Vigilancia) bien definido le dice al analista y a la IA exactamente qué buscar, en qué fuentes y con qué urgencia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Puesta en Marcha -->
+    <section id="slide-4">
+        <div class="container">
+            <h2 class="section-title">⚙️ Puesta en Marcha en la PyME</h2>
+            <p class="section-subtitle">Estructura operativa, roles clave y asignación de presupuesto</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-repeat"></i> Sistemas de Búsqueda</h3>
+                    <p style="margin-bottom: 15px;"><strong>Vigilancia Sistemática (Continua):</strong> Rutina permanente de monitoreo con alertas programadas para mantener alimentado el radar de la empresa.</p>
+                    <p><strong>Vigilancia Puntual (Por Proyecto):</strong> Búsqueda específica intensiva para resolver una inquietud técnica o validar una decisión de inversión puntual.</p>
+                </div>
+                <div class="card success">
+                    <h3><i class="fa-solid fa-users-gear"></i> Roles y Presupuesto</h3>
+                    <ul>
+                        <li><strong>Gestor de Vigilancia:</strong> Coordina el sistema, estructura los prompts, valida la pertinencia y elabora los reportes ejecutivos.</li>
+                        <li><strong>Sensores Humanos:</strong> Vendedores, compradores y técnicos de planta que captan "señales débiles" en su día a día.</li>
+                        <li><strong>Presupuesto:</strong> Costos directos (suscripciones, APIs) + Costos indirectos (Horas/Hombre).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout">
+                <i class="fa-solid fa-network-wired"></i>
+                <p>Simbiosis Organizacional: La inteligencia estratégica no la hace un analista aislado; se nutre de los contactos y observaciones cotidianas de toda la red de la empresa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Fuentes y Códigos IPC -->
+    <section id="slide-5">
+        <div class="container">
+            <h2 class="section-title">🔍 Fuentes Clave & Clasificación IPC</h2>
+            <p class="section-subtitle">Dónde buscar y cómo categorizar las invenciones (OMPI)</p>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3><i class="fa-solid fa-database"></i> Motores y Repositorios</h3>
+                    <ul>
+                        <li><strong>Papers Científicos:</strong> Google Scholar, ScienceDirect, PubMed, SciELO.</li>
+                        <li><strong>Patentes (Gratis):</strong> Google Patents, Lens.org, Espacenet, Patentscope.</li>
+                        <li><strong>Buscadores Semánticos IA:</strong> Perplexity, SciSpace, Consensus.</li>
+                    </ul>
+                    <p class="mt-1" style="font-size: 0.95rem; font-weight: bold; color: var(--secondary);">* 70% al 80% de la información técnica del mundo solo está en patentes.</p>
+                </div>
+                <div class="card success">
+                    <h3><i class="fa-solid fa-barcode"></i> Códigos IPC (Clasif. Internacional)</h3>
+                    <table style="font-size: 0.9rem; margin-top: 10px;">
+                        <tr><th style="padding: 8px;">Código</th><th style="padding: 8px;">Descripción OMPI</th></tr>
+                        <tr><td><strong>A23L</strong></td><td>Alimentos y bebidas no alcohólicas.</td></tr>
+                        <tr><td><strong>A23L 33/00</strong></td><td>Alimentos funcionales y dietéticos.</td></tr>
+                        <tr><td><strong>A23C</strong></td><td>Productos lácteos y sus sustitutos.</td></tr>
+                        <tr><td><strong>A23J</strong></td><td>Composiciones proteicas e aislamiento.</td></tr>
+                        <tr><td><strong>B65D</strong></td><td>Envases, packaging activo e inteligente.</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Protocolo Anti-Alucinación -->
+    <section id="slide-6">
+        <div class="container">
+            <h2 class="section-title">🛡️ Protocolo de Auditoría Humana</h2>
+            <p class="section-subtitle">El flujo de trabajo obligatorio Anti-Alucinaciones con LLMs (GenAI)</p>
+
+            <div class="grid-3 text-center">
+                <div class="card">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🤖</div>
+                    <h3 style="justify-content: center;">Fase 1: PROMPT</h3>
+                    <p>Uso de IA para generar la ecuación de búsqueda, traducir palabras clave (US/UK) y mapear los sinónimos comerciales y técnicos del FCV.</p>
+                </div>
+                <div class="card warning">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🔎</div>
+                    <h3 style="justify-content: center;">Fase 2: VERIFICACIÓN</h3>
+                    <p><strong>Paso Crítico:</strong> Búsqueda directa del <strong>DOI real</strong> o del <strong>Nº de Patente oficial</strong> en bases confiables (Lens, Scholar, Espacenet). <em>El humano audita.</em></p>
+                </div>
+                <div class="card success">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">🧠</div>
+                    <h3 style="justify-content: center;">Fase 3: DECISIÓN</h3>
+                    <p>Evaluación de la causa raíz de la tecnología, viabilidad para implementarla en planta piloto y redacción de la recomendación ejecutiva.</p>
+                </div>
+            </div>
+
+            <div class="callout" style="margin-top: 1.5rem;">
+                <i class="fa-solid fa-triangle-exclamation" style="color: #DC2626;"></i>
+                <p style="color: #DC2626;">Regla Inviolable: La IA propone la hipótesis y estructura la búsqueda; el profesional humano audita y comprueba la fuente primaria antes de invertir o tomar decisiones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Ficha FCV Entregable -->
+    <section id="slide-7">
+        <div class="container">
+            <h2 class="section-title">📋 La Ficha FCV (Entregable 4.1 TFI)</h2>
+            <p class="section-subtitle">Cómo traducir un hallazgo en conocimiento útil y aplicable para el proyecto</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Componente</th>
+                        <th>Contenido Requerido en la Ficha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Factor Crítico (FCV)</strong></td>
+                        <td>Definición del área o variable monitoreada (ej. <em>Conservantes naturales para embutidos plant-based</em>).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ecuación de Búsqueda</strong></td>
+                        <td>Cadena booleana exacta utilizada en las bases (ej. <em>"plant-based" AND "natural preservative" AND sausage</em>).</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--success); font-weight: bold;">Evidencia Auditada</td>
+                        <td>Cita verificada con <strong>DOI</strong> (papers) o <strong>Nº de Patente Oficial</strong> y código IPC.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Impacto & Causa Raíz</strong></td>
+                        <td>Análisis de la brecha tecnológica y viabilidad técnico-económica para aplicarlo en la PyME/Planta.</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--secondary); font-weight: bold;">Recomendación 4.1</td>
+                        <td>Decisión estratégica sugerida a la gerencia basada en la evidencia (Adoptar, Descartar, Pilotear).</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Script de Navegación -->
+    <script>
+        // Lógica simple para navegación por botones y selector
+        const totalSlides = 8;
+        let currentSlide = 0;
+        const selector = document.getElementById('slideSelector');
+
+        function updateScroll() {
+            const slide = document.getElementById(`slide-${currentSlide}`);
+            slide.scrollIntoView({ behavior: 'smooth' });
+            selector.value = currentSlide;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateScroll();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateScroll();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = parseInt(index);
+            updateScroll();
+        }
+
+        // Actualizar el selector al scrollear manualmente con IntersectionObserver
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5 // Se dispara cuando el 50% de la sección es visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const slideId = entry.target.id;
+                    currentSlide = parseInt(slideId.split('-')[1]);
+                    selector.value = currentSlide;
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Soporte para flechas del teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+    </script>
+</body>
+</html>
