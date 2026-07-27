@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 1 — Fundamentos de Creatividad e Innovación (2026)</title>
+    <style>
+        :root{
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --surface-2: #eef4fb;
+            --ink: #16324f;
+            --muted: #5c7188;
+            --line: #d7e3f1;
+            --primary: #0b5394;
+            --primary-2: #1f78c8;
+            --accent: #00a3c7;
+            --ok: #198754;
+            --warn: #c27a00;
+            --violet: #6f42c1;
+            --shadow: 0 10px 30px rgba(12,46,84,.08);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --max: 1180px;
+        }
+        * { box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(180deg, #f7fbff 0%, #eef4fb 100%);
+            color: var(--ink);
+            line-height: 1.55;
+            overflow-y: scroll;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+        
+        header, main > section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 44px 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0b5394 0%, #1b365d 58%, #00a3c7 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding: 56px 0 42px;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto -120px -120px auto;
+            width: 320px; height: 320px; border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            filter: blur(6px);
+        }
+        .eyebrow {
+            display: inline-block;
+            font-size: .84rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 999px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,.08);
+            font-weight: 600;
+        }
+        h1, h2, h3 { margin: 0 0 12px; }
+        h1 { font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.1; font-weight: 700; }
+        h2 { font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--primary); font-weight: 700; }
+        h3 { font-size: 1.15rem; color: var(--ink); font-weight: 700; }
+        .hero p { max-width: 860px; font-size: 1.05rem; color: rgba(255,255,255,.95); margin: 0; }
+        .hero-grid { display: grid; grid-template-columns: 1.4fr .9fr; gap: 24px; align-items: end; }
+        .hero-card {
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: var(--radius);
+            padding: 22px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+        .hero-card strong { display: block; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; color: #a5f3fc; }
+
+        .quick-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(244, 247, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+        .quick-nav .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 20px; }
+        .quick-nav a {
+            padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
+            color: var(--ink); font-size: .88rem; font-weight: 600; transition: all .2s ease;
+        }
+        .quick-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        .lead { font-size: 1.05rem; color: var(--muted); max-width: 880px; margin-bottom: 18px; }
+        .grid { display: grid; gap: 20px; }
+        .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card.soft { background: var(--surface-2); }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+            margin-bottom: 10px;
+            background: #eaf3fe;
+            color: var(--primary);
+            width: fit-content;
+        }
+        .tag.ok { background: #e8f5e9; color: var(--ok); }
+        .tag.warn { background: #fff8e1; color: var(--warn); }
+        .tag.violet { background: #f3e8ff; color: var(--violet); }
+        
+        .list { margin: 0; padding-left: 18px; }
+        .list li { margin: 8px 0; }
+
+        .flow {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: 18px;
+        }
+        .flow .step {
+            background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); position: relative;
+        }
+        .flow .step::after {
+            content: "→"; position: absolute; right: -13px; top: 50%; transform: translateY(-50%);
+            font-size: 1.4rem; color: var(--primary-2); font-weight: bold;
+        }
+        .flow .step:last-child::after { display: none; }
+
+        .band {
+            background: linear-gradient(135deg, #eaf3fe 0%, #f5fbff 100%);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .decision {
+            border-left: 5px solid var(--primary-2);
+            background: #fff;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            margin-top: 18px;
+            font-size: .98rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+        .custom-table th {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: .95rem;
+        }
+        .custom-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--line);
+            font-size: .92rem;
+        }
+        .custom-table tr:nth-child(even) td { background-color: var(--surface-2); }
+
+        .cta {
+            background: linear-gradient(135deg, #16324f 0%, #0b5394 100%);
+            color: #fff; border-radius: 24px; padding: 32px; box-shadow: var(--shadow);
+        }
+        .cta h2, .cta h3, .cta p, .cta li { color: #fff; }
+
+        @media (max-width: 980px){
+            .hero-grid, .grid-2, .grid-3, .grid-4, .flow { grid-template-columns: 1fr; }
+            .flow .step::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <span class="eyebrow">Seminario de Posgrado — Gestión de la I+D+i</span>
+            <h1>Unidad 1 — Fundamentos de Creatividad e Innovación</h1>
+            <p>De la inventiva abstracta a la creación de valor sostenible en la industria agroalimentaria: Tríada del valor, Manual de Oslo 2018, SCAMPER, Seis Sombreros, TRIZ y Copiloto de IA.</p>
+        </div>
+        <div class="hero-card">
+            <strong>Fórmula Cornella</strong>
+            <div style="font-size:1.15rem; font-weight:700; line-height:1.35; color:#fff;">
+                "Ideas × Valor = Resultados Sostenibles"
+            </div>
+            <p style="font-size:.92rem; margin-top:8px; color:rgba(255,255,255,.85);">Las ideas sin valor capturado son solo invenciones no aprovechadas.</p>
+        </div>
+    </div>
+</header>
+
+<nav aria-label="Navegación de la unidad" class="quick-nav">
+    <div class="wrap">
+        <a href="#panorama">Panorama</a>
+        <a href="#triada">Tríada del Valor</a>
+        <a href="#tipos-oslo">Tipos Oslo 2018</a>
+        <a href="#grados">Grados de Cambio</a>
+        <a href="#proceso-creativo">Proceso Creativo</a>
+        <a href="#herramientas">Herramientas Núcleo</a>
+        <a href="#sistemicos">Métodos Sistémicos</a>
+        <a href="#elementos-valor">Pirámide de Valor</a>
+        <a href="#copiloto-ia">Copiloto IA</a>
+        <a href="#tfi">Aplicación TFI</a>
+    </div>
+</nav>
+
+<main>
+<section id="panorama">
+    <div class="wrap">
+        <h2>Panorama de la Unidad</h2>
+        <p class="lead">En la industria alimentaria actual, la innovación no es un chispazo fortuito; es un método intencional que transforma ideas en productos, procesos y modelos de negocio valiosos.</p>
+        <div class="flow">
+            <article class="step">
+                <span class="tag">01</span>
+                <h3>Ideación & Divergencia</h3>
+                <p>Generar conexiones imprevistas mediante Brainstorming, SCAMPER y asistencia de IA Generativa.</p>
+            </article>
+            <article class="step">
+                <span class="tag ok">02</span>
+                <h3>Filtrado & Convergencia</h3>
+                <p>Evaluar viabilidad técnica, restricciones del CAA, riesgos microbiológicos y valor para el consumidor.</p>
+            </article>
+            <article class="step">
+                <span class="tag violet">03</span>
+                <h3>Impacto & Mercado</h3>
+                <p>Transformar invenciones de mesada en propuestas comercialmente viables, sostenibles y protegidas.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="triada">
+    <div class="wrap">
+        <h2>La Tríada del Valor: Creatividad, Invención e Innovación</h2>
+        <p class="lead">Evolución conceptual desde la idea abstracta en la mente hasta el objeto aceptado en la góndola.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">01. CREATIVIDAD</span>
+                <h3>Mundo Abstracto</h3>
+                <p>Capacidad cognitiva humana para generar ideas originales y conexiones asociativas imprevistas.</p>
+                <p style="font-size:.9rem; color:var(--primary); font-weight:700;">Ámbito: Mente humana / Brainstorming.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">02. INVENCIÓN</span>
+                <h3>Manifestación Técnica</h3>
+                <p>Primera realización física o formulación de laboratorio. Crea conocimiento técnico pero no garantiza viabilidad comercial.</p>
+                <p style="font-size:.9rem; color:var(--warn); font-weight:700;">Ámbito: Mesada / Prototipo inicial.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">03. INNOVACIÓN ⭐</span>
+                <h3>Objeto de Mercado</h3>
+                <p>Introducción exitosa en el mercado o implementación organizacional que genera **valor real capturado** (Oslo 2018).</p>
+                <p style="font-size:.9rem; color:var(--ok); font-weight:700;">Ámbito: Góndola / Planta industrial.</p>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Diferencia Crítica:</strong> La invención transforma recursos e inversión en conocimiento; la innovación transforma conocimiento en valor económico, social y ambiental.
+        </div>
+    </div>
+</section>
+
+<section id="tipos-oslo">
+    <div class="wrap">
+        <h2>Tipos de Innovación Empresarial (Manual de Oslo 2018)</h2>
+        <p class="lead">Sintetizando las 4 funciones tradicionales en dos categorías principales de aplicación agroindustrial.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">01. INNOVACIÓN DE PRODUCTO</span>
+                <h3>Bien o Servicio Significativamente Mejorado</h3>
+                <p>Cambios en especificaciones técnicas, componentes, ingredientes funcionales, perfil nutricional o uso final.</p>
+                <ul class="list">
+                    <li><strong>Alimentos Funcionales:</strong> Bebidas hiperproteicas, péptidos bioactivos, cultivos probióticos.</li>
+                    <li><strong>Matriz Vegetal 2.0:</strong> Análogos lácteos o cárnicos (*plant-based* de segunda generación).</li>
+                    <li><strong>Clean Label:</strong> Reformulación para eliminar aditivos sintéticos y sellos de advertencia.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">02. INNOVACIÓN DE PROCESO DE NEGOCIO</span>
+                <h3>Operaciones, Logística y Organización</h3>
+                <p>Métodos nuevos o mejorados para las funciones operativas, distribución, marketing, compras y gestión.</p>
+                <ul class="list">
+                    <li><strong>Procesamiento No Térmico:</strong> Conservación por Altas Presiones (HPP) o Campos Eléctricos Pulsados (PEF).</li>
+                    <li><strong>Trazabilidad Digital:</strong> Monitoreo de cadena de frío mediante sensores IoT y Blockchain.</li>
+                    <li><strong>Economía Circular:</strong> Revalorización de subproductos (*Upcycling* de suero o bagazo cervecero).</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="grados">
+    <div class="wrap">
+        <h2>Grados y Alcance del Cambio Innovador</h2>
+        <p class="lead">Matriz de clasificación según el nivel de novedad tecnológica y el impacto de mercado.</p>
+        <div class="grid grid-4">
+            <article class="card">
+                <span class="tag">NIVEL 1</span>
+                <h3>Mejora Continua</h3>
+                <p>Ajustes rutinarios y optimizaciones menores en líneas de producción o formulación.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">NIVEL 2</span>
+                <h3>Incremental</h3>
+                <p>Suma de mejoras que agregan valor sobre productos existentes (nuevo sabor, empaque abre-fácil).</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">NIVEL 3</span>
+                <h3>Radical</h3>
+                <p>Propuesta técnica completamente nueva para la empresa o la industria (ej. HPP en jugos frescos).</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">NIVEL 4 ⭐</span>
+                <h3>Disruptiva</h3>
+                <p>Transforma la dinámica del mercado y crea categorías inéditas (carne cultivada, fermentación de precisión).</p>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Regla de Balance 70 / 20 / 10:</strong> Un portafolio PyME equilibrado sostiene un 70% de proyectos incrementales (bajo riesgo), 20% radicales y 10% de exploración disruptiva.
+        </div>
+    </div>
+</section>
+
+<section id="proceso-creativo">
+    <div class="wrap">
+        <h2>Neurociencia y Fases del Proceso Creativo</h2>
+        <p class="lead">Ciclo estructurado de 4 fases para transitar entre el caos divergente y el rigor convergerte.</p>
+        <div class="flow">
+            <article class="step">
+                <span class="tag">FASE 1</span>
+                <h3>Preparación</h3>
+                <p>Inmersión en datos, PESTEL, demandas de mercado, normativas del CAA y definición del reto.</p>
+            </article>
+            <article class="step">
+                <span class="tag warn">FASE 2</span>
+                <h3>Incubación</h3>
+                <p>Proceso inconsciente. Distanciamiento del problema para permitir asociaciones distantes.</p>
+            </article>
+            <article class="step">
+                <span class="tag ok">FASE 3</span>
+                <h3>Iluminación ⭐</h3>
+                <p>El momento "Eureka". Conexión espontánea y surgimiento de la hipótesis de solución.</p>
+            </article>
+        </div>
+        <div class="grid grid-2" style="margin-top:20px;">
+            <article class="card soft">
+                <span class="tag violet">FASE 4: VERIFICACIÓN</span>
+                <h3>Validación en Mesada</h3>
+                <p>Formulación en laboratorio, evaluación microbiológica, panel sensorial, análisis de costos y escalabilidad industrial.</p>
+            </article>
+            <article class="card soft">
+                <span class="tag">PRERREQUISITOS COGNITIVOS</span>
+                <h3>Divergencia vs. Convergencia</h3>
+                <p>Alternar deliberadamente entre **Divergencia** (abrir abanico sin juzgar) y **Convergencia** (filtrar con criterio técnico de ingeniería).</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="herramientas">
+    <div class="wrap">
+        <h2>Herramientas Núcleo de Ideación e Innovación</h2>
+        <p class="lead">Técnicas estructuradas para dinamizar el trabajo colaborativo en equipos de I+D+i.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">01. BRAINSTORMING</span>
+                <h3>Inverso & Rolestorming</h3>
+                <p>Generación masiva sin juicio previo. El *Brainstorming Inverso* analiza cómo arruinar el producto; el *Rolestorming* asume el papel del auditor o competidor.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">02. MÉTODO SCAMPER ⭐</span>
+                <h3>7 Disparadores Directos</h3>
+                <p>**S**ustituir, **C**ombinar, **A**daptar, **M**odificar, **P**roponer otros usos (*Upcycling*), **E**liminar (*Clean Label*) y **R**eordenar.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">03. SEIS SOMBREROS</span>
+                <h3>Edward de Bono</h3>
+                <p>Mapeo de perspectivas: ⚪Blanco (datos), 🔴Rojo (emoción), 🖤Negro (riesgos/CAA), 🟡Amarillo (valor), 🟢Verde (locura), 🔵Azul (gestión).</p>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Conexión TFI:</strong> La técnica SCAMPER es la herramienta obligatoria requerida para estructurar las variantes de la Idea-Proyecto en la Sección XII de Google Docs.
+        </div>
+    </div>
+</section>
+
+<section id="sistemicos">
+    <div class="wrap">
+        <h2>Métodos Sistémicos: Análisis Morfológico, TRIZ & Biomimetismo</h2>
+        <p class="lead">Descomposición paramétrica y resolución de contradicciones técnicas sin soluciones de compromiso.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">Zwicky</span>
+                <h3>Análisis Morfológico</h3>
+                <p>Descompone el alimento en parámetros clave (Base, Proteína, Sabor, Fortificación, Empaque) y combina opciones para hallar configuraciones inéditas.</p>
+                <p class="subtle">Ejemplo: Suero clarificado + Péptidos + Liposomas + Envase compostable.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">Altshuller</span>
+                <h3>TRIZ (40 Principios)</h3>
+                <p>Basado en el análisis de 3 millones de patentes. Resuelve **contradicciones técnicas** (ej. extender vida útil sin añadir conservantes) sin hacer trade-offs.</p>
+                <p class="subtle">Elimina la solución de compromiso.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">Naturaleza</span>
+                <h3>Biomimetismo</h3>
+                <p>Aprender e imitar diseños de la naturaleza (ej. imitar la estructura micro-hidrofóbica de la hoja de loto para crear envases antiadherentes).</p>
+                <p class="subtle">Innovación inspirada en la biología.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="elementos-valor">
+    <div class="wrap">
+        <h2>La Pirámide de Elementos de Valor (Bain & Co / HBR)</h2>
+        <p class="lead">Para que una innovación triunfe debe aportar valor multidimensional al consumidor.</p>
+        <div class="grid grid-4">
+            <article class="card">
+                <span class="tag">NIVEL 1</span>
+                <h3>Funcional</h3>
+                <p>Ahorra tiempo, simplifica la vida, reduce costos, aporta nutrición y promueve la salud.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">NIVEL 2</span>
+                <h3>Emocional</h3>
+                <p>Reducción de ansiedad, nostalgia, estética, atractivo de diseño y placer gastronómico.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">NIVEL 3</span>
+                <h3>Cambio de Vida</h3>
+                <p>Autorealización, pertenencia a tribu urbana, hábitos saludables sostenibles.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">NIVEL 4 ⭐</span>
+                <h3>Trascendencia</h3>
+                <p>Impacto social positivo, descarbonización y regeneración del planeta.</p>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Regla de Lealtad:</strong> Los productos alimenticios que combinan atributos Funcionales + Emocionales + Ambientales logran la mayor retención y precio premium en góndola.
+        </div>
+    </div>
+</section>
+
+<section id="protocolo-ia">
+    <div class="wrap">
+        <h2>Copiloto de IA Generativa en Creatividad e Ideación (2026)</h2>
+        <p class="lead">Sinergia Humano-Máquina para acelerar la divergencia alimentaria bajo el principio *Human-in-the-Loop*.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">AMPLIFICADOR DIVERGENTE (IA)</span>
+                <h3>Rol del Copiloto de IA</h3>
+                <ul class="list">
+                    <li>Generación masiva de variaciones SCAMPER en segundos.</li>
+                    <li>Sugerencias de sustitución de aditivos sintéticos (*Clean Label*).</li>
+                    <li>Desafío a "Vacas Sagradas" y dogmas históricos de la empresa.</li>
+                    <li>Propuestas de hibridación de sabores y categorías.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">AUDITORÍA DE INGENIERÍA (HUMANO) ⭐</span>
+                <h3>Filtro Técnico Crítico</h3>
+                <ul class="list">
+                    <li>Evaluación de factibilidad físico-química de la matriz.</li>
+                    <li>Verificación de viabilidad de escalado en planta piloto.</li>
+                    <li>Cumplimiento estricto del Código Alimentario Argentino (CAA).</li>
+                    <li>Descarte de mezclas organolépticamente incompatibles.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="tfi">
+    <div class="wrap">
+        <div class="cta">
+            <h2>Aplicación Directa al TFI (Parte 2 — Secciones X y XII)</h2>
+            <p>Traduciendo la divergencia creativa en la propuesta de valor y matriz SCAMPER de la Idea-Proyecto en Google Drive.</p>
+            <div class="grid grid-2" style="margin-top:18px;">
+                <div>
+                    <h3>Entregables Requeridos en Drive</h3>
+                    <ul class="list">
+                        <li><strong>Matriz SCAMPER Completa (Sección XII):</strong> Las 7 variables aplicadas al producto base de la PyME.</li>
+                        <li><strong>Ficha de Selección de IP (Sección X):</strong> Definición precisa del QUÉ, CÓMO, POR QUÉ y CUÁL.</li>
+                        <li><strong>Caja de Auditoría Humana sobre IA:</strong> Documentación del prompt ejecutado y descartes aplicados.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Criterios de Evaluación</h3>
+                    <ul class="list">
+                        <li>Coherencia entre el problema detectado en la Parte 1 y la solución SCAMPER.</li>
+                        <li>Factibilidad técnica inicial a escala de planta piloto PyME.</li>
+                        <li>Demostración de filtro humano crítico sobre sugerencias de IA.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+(()=>{
+    const slides = [...document.querySelectorAll('header, main > section')];
+    let idx = 0;
+
+    function current(){
+        const y = window.scrollY + window.innerHeight * 0.3;
+        slides.forEach((s, i)=>{
+            if(s.offsetTop <= y) idx = i;
+        });
+    }
+
+    function go(i){
+        if(i < 0 || i >= slides.length) return;
+        idx = i;
+        window.scrollTo({
+            top: slides[idx].offsetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    document.addEventListener('keydown', e => {
+        if(['PageDown', 'ArrowRight', ' '].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx + 1);
+        }
+        if(['PageUp', 'ArrowLeft'].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx - 1);
+        }
+        if(e.key === 'Home'){ e.preventDefault(); go(0); }
+        if(e.key === 'End'){ e.preventDefault(); go(slides.length - 1); }
+    }, {passive: false});
+})();
+</script>
+
+</body>
+</html>
