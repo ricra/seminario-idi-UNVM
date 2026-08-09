@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unidad 2 — Gestión de la Información, Conocimiento y Vigilancia Tecnológica</title>
+    <style>
+        :root{
+            --bg: #f4f7fb;
+            --surface: #ffffff;
+            --surface-2: #eef4fb;
+            --ink: #16324f;
+            --muted: #5c7188;
+            --line: #d7e3f1;
+            --primary: #0b5394;
+            --primary-2: #1f78c8;
+            --accent: #00a3c7;
+            --ok: #198754;
+            --warn: #c27a00;
+            --violet: #6f42c1;
+            --shadow: 0 10px 30px rgba(12,46,84,.08);
+            --radius: 18px;
+            --radius-sm: 12px;
+            --max: 1180px;
+        }
+        * { box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background: linear-gradient(180deg, #f7fbff 0%, #eef4fb 100%);
+            color: var(--ink);
+            line-height: 1.55;
+            overflow-y: scroll;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        .wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+        
+        header, main > section {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 44px 0;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0b5394 0%, #1b365d 58%, #00a3c7 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            padding: 56px 0 42px;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto -120px -120px auto;
+            width: 320px; height: 320px; border-radius: 50%;
+            background: rgba(255,255,255,.08);
+            filter: blur(6px);
+        }
+        .eyebrow {
+            display: inline-block;
+            font-size: .84rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 999px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,.08);
+            font-weight: 600;
+        }
+        h1, h2, h3 { margin: 0 0 12px; }
+        h1 { font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 1.1; font-weight: 700; }
+        h2 { font-size: clamp(1.4rem, 2.6vw, 2.1rem); color: var(--primary); font-weight: 700; }
+        h3 { font-size: 1.15rem; color: var(--ink); font-weight: 700; }
+        .hero p { max-width: 860px; font-size: 1.05rem; color: rgba(255,255,255,.95); margin: 0; }
+        .hero-grid { display: grid; grid-template-columns: 1.4fr .9fr; gap: 24px; align-items: end; }
+        .hero-card {
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: var(--radius);
+            padding: 22px;
+            backdrop-filter: blur(8px);
+            box-shadow: var(--shadow);
+        }
+        .hero-card strong { display: block; font-size: .88rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; color: #a5f3fc; }
+
+        .quick-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(244, 247, 251, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+        }
+        .quick-nav .wrap { display: flex; gap: 8px; flex-wrap: wrap; padding: 10px 20px; }
+        .quick-nav a {
+            padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line);
+            color: var(--ink); font-size: .88rem; font-weight: 600; transition: all .2s ease;
+        }
+        .quick-nav a:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        .lead { font-size: 1.05rem; color: var(--muted); max-width: 880px; margin-bottom: 18px; }
+        .grid { display: grid; gap: 20px; }
+        .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+        .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+        .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: var(--shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .card.soft { background: var(--surface-2); }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .03em;
+            margin-bottom: 10px;
+            background: #eaf3fe;
+            color: var(--primary);
+            width: fit-content;
+        }
+        .tag.ok { background: #e8f5e9; color: var(--ok); }
+        .tag.warn { background: #fff8e1; color: var(--warn); }
+        .tag.violet { background: #f3e8ff; color: var(--violet); }
+        
+        .list { margin: 0; padding-left: 18px; }
+        .list li { margin: 8px 0; }
+
+        .flow {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: 18px;
+        }
+        .flow .step {
+            background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); position: relative;
+        }
+        .flow .step::after {
+            content: "→"; position: absolute; right: -13px; top: 50%; transform: translateY(-50%);
+            font-size: 1.4rem; color: var(--primary-2); font-weight: bold;
+        }
+        .flow .step:last-child::after { display: none; }
+
+        .band {
+            background: linear-gradient(135deg, #eaf3fe 0%, #f5fbff 100%);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .decision {
+            border-left: 5px solid var(--primary-2);
+            background: #fff;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 18px 20px;
+            box-shadow: var(--shadow);
+            margin-top: 18px;
+            font-size: .98rem;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+        .custom-table th {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: .95rem;
+        }
+        .custom-table td {
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--line);
+            font-size: .92rem;
+        }
+        .custom-table tr:nth-child(even) td { background-color: var(--surface-2); }
+
+        .cta {
+            background: linear-gradient(135deg, #16324f 0%, #0b5394 100%);
+            color: #fff; border-radius: 24px; padding: 32px; box-shadow: var(--shadow);
+        }
+        .cta h2, .cta h3, .cta p, .cta li { color: #fff; }
+
+        @media (max-width: 980px){
+            .hero-grid, .grid-2, .grid-3, .grid-4, .flow { grid-template-columns: 1fr; }
+            .flow .step::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <div class="wrap hero-grid">
+        <div>
+            <span class="eyebrow">Seminario de Posgrado — Gestión de la I+D+i</span>
+            <h1>Unidad 2 — Gestión de la Información, Conocimiento y Vigilancia Tecnológica</h1>
+            <p>Transformando datos del entorno en decisiones tecnológicas seguras: Pirámide DIKW, Modelo SECI, Radar VeIE, FCVs, Bases de Patentes e IA Generativa.</p>
+        </div>
+        <div class="hero-card">
+            <strong>Idea Central</strong>
+            <div style="font-size:1.12rem; font-weight:700; line-height:1.35;">
+                "Superar la infoxicación exige curar los datos con criterio técnico, codificar el saber tácito de planta e interpretar la evidencia antes de invertir."
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav aria-label="Navegación de la unidad" class="quick-nav">
+    <div class="wrap">
+        <a href="#panorama">Panorama</a>
+        <a href="#dikw">Pirámide DIKW</a>
+        <a href="#seci">Modelo SECI</a>
+        <a href="#veie">Radar VeIE (4 Ejes)</a>
+        <a href="#fcv">FCVs & KITs</a>
+        <a href="#patentes">Patentes & IPC</a>
+        <a href="#prospectiva">Prospectiva & TRM</a>
+        <a href="#protocolo-ia">Protocolo IA</a>
+        <a href="#tfi">Aplicación TFI</a>
+    </div>
+</nav>
+
+<main>
+<section id="panorama">
+    <div class="wrap">
+        <h2>Panorama de la Unidad</h2>
+        <p class="lead">En un entorno agroalimentario volátil, el valor estratégico no está en conseguir datos masivos, sino en saber filtrarlos e integrarlos a las decisiones de planta.</p>
+        <div class="flow">
+            <article class="step">
+                <span class="tag">01</span>
+                <h3>Captura & Filtrado</h3>
+                <p>Capturar señales del entorno en patentes, papers y normativas, eliminando el ruido y la infoxicación.</p>
+            </article>
+            <article class="step">
+                <span class="tag ok">02</span>
+                <h3>Conocimiento Codificado</h3>
+                <p>Transformar el saber tácito de los expertos de planta en manuales, fichas FCV y protocolos estandarizados (SECI).</p>
+            </article>
+            <article class="step">
+                <span class="tag violet">03</span>
+                <h3>Inteligencia & Decisión</h3>
+                <p>Conectar la evidencia con el plan estratégico, evaluando la brecha de planta y la libertad de operación (FTO).</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="dikw">
+    <div class="wrap">
+        <h2>La Jerarquía del Valor Informativo (Pirámide DIKW)</h2>
+        <p class="lead">Progresión sistémica para convertir observaciones desarticuladas en acciones operativas en tiempo real.</p>
+        <div class="grid grid-4">
+            <article class="card">
+                <span class="tag">01. DATO</span>
+                <h3>Medición Neutra</h3>
+                <p>Elemento discontinuo y objetivo sin contexto propio.</p>
+                <p style="font-size:.9rem; color:var(--primary); font-weight:700;">Ejemplo: 39 °C registrado por un sensor en fermentador.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">02. INFORMACIÓN</span>
+                <h3>Dato Contextualizado</h3>
+                <p>Conjunto de datos estructurados con significado concreto.</p>
+                <p style="font-size:.9rem; color:var(--ok); font-weight:700;">Ejemplo: 39 °C durante la inoculación del cultivo láctico.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">03. CONOCIMIENTO</span>
+                <h3>Saber Interpretado</h3>
+                <p>Información asimilada mediante experiencia previa y ciencia.</p>
+                <p style="font-size:.9rem; color:var(--warn); font-weight:700;">Ejemplo: Riesgo de inactivación térmica de las cepas starter.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">04. INTELIGENCIA ⭐</span>
+                <h3>Decisión Accionable</h3>
+                <p>Aplicación directa para evitar pérdidas o generar valor.</p>
+                <p style="font-size:.9rem; color:var(--violet); font-weight:700;">Ejemplo: Ajuste automático de la camisa de enfriamiento.</p>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Desafío PyME:</strong> La infoxicación se resuelve implementando filtros de pertinencia que lleven los datos rápidamente al nivel de decisión accionable.
+        </div>
+    </div>
+</section>
+
+<section id="seci">
+    <div class="wrap">
+        <h2>Gestión del Conocimiento: El Modelo SECI (Nonaka & Takeuchi)</h2>
+        <p class="lead">Transformando el saber hacer práctico de planta en Capital Intelectual protegido y transferible.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">CONVERSIÓN DE SABER</span>
+                <h3>Las 4 Fases de Conversión del Conocimiento</h3>
+                <ul class="list">
+                    <li><strong>Socialización (Tácito ➔ Tácito):</strong> Mentoring directo del maestro quesero en mesada sin documentos.</li>
+                    <li><strong>Externalización (Tácito ➔ Explícito):</strong> Codificación del saber práctico en manuales, fichas técnicas y patentes.</li>
+                    <li><strong>Combinación (Explícito ➔ Explícito):</strong> Integración de instructivos de planta con el sistema ERP y el Código Alimentario.</li>
+                    <li><strong>Internalización (Explícito ➔ Tácito):</strong> Entrenamiento práctico (*learning by doing*) leyendo los manuales estandarizados.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">CAPITAL INTELECTUAL</span>
+                <h3>Protección del Know-How de Planta</h3>
+                <ul class="list">
+                    <li><strong>Capital Humano:</strong> Competencias técnicas de los tecnólogos e ingenieros.</li>
+                    <li><strong>Capital Estructural:</strong> Manuales de inocuidad HACCP, recetas codificadas y bases de datos.</li>
+                    <li><strong>Capital Relacional:</strong> Alianzas con la UNVM, INTA, CONICET y proveedores clave.</li>
+                    <li><strong>Blindaje Legal:</strong> Secreto Industrial resguardado bajo la Ley N° 24.766 e ISO/IEC 27001.</li>
+                </ul>
+            </article>
+        </div>
+        <div class="decision">
+            <strong>Protección de Activos:</strong> El conocimiento que no se externaliza y codifica se pierde de forma irrecuperable cuando el talento clave se retira de la PyME.
+        </div>
+    </div>
+</section>
+
+<section class="band" id="veie">
+    <div class="wrap">
+        <h2>Los 4 Ejes de la Vigilancia e Inteligencia Estratégica (VeIE)</h2>
+        <p class="lead">Monitoreo sistemático 360° para reducir la incertidumbre en las decisiones de inversión y desarrollo.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">01. TECNOLÓGICA (VT)</span>
+                <h3>Tecnología & Proceso</h3>
+                <p>Monitoreo de patentes de invención, artículos científicos, tecnologías no térmicas (HPP, PEF), ingredientes funcionales y empaques activos.</p>
+                <p class="subtle">Fuente: Espacenet, Lens.org, PubMed, ScienceDirect.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">02. COMPETITIVA (IC)</span>
+                <h3>Competencia & Rivalidad</h3>
+                <p>Rastreo de lanzamientos de productos por competidores directos e indirectos, movimientos de marcas, alianzas y estrategias de precios.</p>
+                <p class="subtle">Fuente: Redes sociales, e-commerce, farmacias, Mintel.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">03. COMERCIAL (VC)</span>
+                <h3>Mercado & Proveedores</h3>
+                <p>Evolución de demandas de consumo (*Clean Label*, alta proteína), proveedores estratégicos de insumos/equipos y canales de venta.</p>
+                <p class="subtle">Fuente: Euromonitor, Nielsen, catálogos de proveedores.</p>
+            </article>
+            <article class="card">
+                <span class="tag violet">04. DEL ENTORNO (VE)</span>
+                <h3>Macroentorno & Leyes</h3>
+                <p>Leyes de etiquetado frontal (ANMAT/INAL), normativas ambientales de efluentes, factores macroeconómicos y análisis PESTEL.</p>
+                <p class="subtle">Fuente: Boletín Oficial, SENASA, Código Alimentario (CAA).</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="fcv">
+    <div class="wrap">
+        <h2>Factores Críticos de Vigilancia (FCVs) & KITs</h2>
+        <p class="lead">Traduciendo las Amenazas y Oportunidades del FODA en focos de búsqueda precisos con indicadores cuantificables.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">CONCEPTO Y ORIGEN</span>
+                <h3>¿Qué es un FCV?</h3>
+                <p>Variable o evento externo prioritario que, de sufrir un cambio, **obliga a la PyME a tomar una decisión estratégica de proyecto, inversión o permanencia**.</p>
+                <ul class="list">
+                    <li><strong>Origen Táctico:</strong> Nacen de traducir las Oportunidades a capitalizar y las Amenazas a mitigar del FODA.</li>
+                    <li><strong>Eliminación de Parálisis:</strong> Le indica al analista qué buscar, en qué fuentes y con qué urgencia.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag ok">INDICADORES MEDIBLES</span>
+                <h3>Ejemplo de Tablero FCV / KIT</h3>
+                <table class="custom-table" style="margin-top:8px;">
+                    <thead>
+                        <tr>
+                            <th>FCV Prioritario</th>
+                            <th>Indicador Medible</th>
+                            <th>Meta / Umbral</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Actividad en Patentes</strong></td>
+                            <td>N° de patentes en IPC A23L 33/19</td>
+                            <td>Alertas mensuales</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Digestibilidad Proteica</strong></td>
+                            <td>Índice DIAAS in-vitro (DH %)</td>
+                            <td>&gt; 90% Target</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lanzamientos Rivales</strong></td>
+                            <td>Monitoreo en góndolas de farmacias</td>
+                            <td>Evaluación trimestral</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="patentes">
+    <div class="wrap">
+        <h2>Bases de Datos de Patentes & Clasificación IPC (OMPI)</h2>
+        <p class="lead">El 80% de la información técnica del mundo está en las patentes y jamás se publica en revistas científicas.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">CLASIFICACIÓN IPC OMPI</span>
+                <h3>Códigos Clave en Industria Alimentaria</h3>
+                <ul class="list">
+                    <li><strong>A23L:</strong> Alimentos, productos alimenticios y bebidas no alcohólicas.</li>
+                    <li><strong>A23L 33/00:</strong> Alimentos funcionales, modificación nutricional y dietéticos.</li>
+                    <li><strong>A23C:</strong> Productos lácteos y sus sustitutos.</li>
+                    <li><strong>A23J:</strong> Composiciones proteicas para alimentos y aislamiento de proteínas.</li>
+                    <li><strong>B65D:</strong> Envases, empaques y packaging activo/inteligente.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag violet">BASES OFICIALES GRATUITAS</span>
+                <h3>Plataformas de Búsqueda Abierta</h3>
+                <ul class="list">
+                    <li><strong>Espacenet:</strong> Base oficial de la Oficina Europea de Patentes y OMPI.</li>
+                    <li><strong>The Lens (Lens.org):</strong> Interfaz moderna con analítica de familias y citaciones.</li>
+                    <li><strong>Google Patents:</strong> Búsqueda rápida en texto completo y PDFs oficiales.</li>
+                    <li><strong>Patentscope:</strong> Portal mundial de solicitudes internacionales PCT.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="prospectiva">
+    <div class="wrap">
+        <h2>Prospectiva Tecnológica & Technology Roadmapping (TRM)</h2>
+        <p class="lead">Anticipando futuros posibles para construir la hoja de ruta de desarrollo a 3, 5 y 10 años.</p>
+        <div class="grid grid-2">
+            <article class="card">
+                <span class="tag">ESCUELAS DE PROSPECTIVA</span>
+                <h3>Prospective vs. Foresight</h3>
+                <ul class="list">
+                    <li><strong>Prospective (Escuela Francesa - Berger/Godet):</strong> Humanista y voluntarista. El futuro no se predice; se construye mediante escenarios normativos.</li>
+                    <li><strong>Foresight (Escuela Anglosajona - Voros/Popper):</strong> Pragmático. Utiliza *Horizon Scanning* y Delphi para anticipar múltiples futuros posibles.</li>
+                </ul>
+            </article>
+            <article class="card soft">
+                <span class="tag warn">TECNOLOGY ROADMAP (TRM)</span>
+                <h3>Las 3 Capas Horizontales</h3>
+                <ul class="list">
+                    <li><strong>1. Mercado / Drivers:</strong> Tendencias de consumo (salud senior, descarbonización).</li>
+                    <li><strong>2. Producto / Funciones:</strong> Atributos y nuevos lanzamientos previstos.</li>
+                    <li><strong>3. Tecnología / R&D:</strong> Bioprocesos y capacidades requeridas en planta piloto.</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="band" id="protocolo-ia">
+    <div class="wrap">
+        <h2>Protocolo de Auditoría Humana de IA (Anti-Alucinación)</h2>
+        <p class="lead">Flujo de trabajo híbrido con Inteligencia Artificial Generativa bajo el principio *Human-in-the-Loop*.</p>
+        <div class="grid grid-3">
+            <article class="card">
+                <span class="tag">PASO 1: PROMPT</span>
+                <h3>1. Estructuración con IA</h3>
+                <p>Uso de LLMs (ChatGPT, Perplexity) para proponer combinaciones de términos en inglés, sinónimos y códigos IPC probables.</p>
+                <p style="font-size:.88rem; color:var(--primary); font-weight:700;">Output: Ecuación booleana preliminar.</p>
+            </article>
+            <article class="card">
+                <span class="tag warn">PASO 2: VERIFICACIÓN ⭐</span>
+                <h3>2. Auditoría Humana</h3>
+                <p>Búsqueda directa del **DOI real** o **N° de Patente oficial** en Google Scholar, Lens.org o Espacenet para descartar alucinaciones.</p>
+                <p style="font-size:.88rem; color:var(--warn); font-weight:700;">Output: Cita científica / Patente constatada.</p>
+            </article>
+            <article class="card">
+                <span class="tag ok">PASO 3: DECISIÓN</span>
+                <h3>3. Dictamen de Ingeniería</h3>
+                <p>Análisis de la brecha en la planta de la PyME, viabilidad técnica de escalado y redacción de la recomendación estratégica.</p>
+                <p style="font-size:.88rem; color:var(--ok); font-weight:700;">Output: Ficha FCV lista para el TFI (4.1).</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="tfi">
+    <div class="wrap">
+        <div class="cta">
+            <h2>Aplicación Directa al TFI (Partes 1 y 2)</h2>
+            <p>Sistematizando los hallazgos de vigilancia e inteligencia tecnológica en los entregables oficiales de Google Drive.</p>
+            <div class="grid grid-2" style="margin-top:18px;">
+                <div>
+                    <h3>Entregables Requeridos en Drive</h3>
+                    <ul class="list">
+                        <li><strong>Ficha FCV (Numeral 4.1):</strong> Definición del FCV, indicador medible y recomendación estratégica para la gerencia.</li>
+                        <li><strong>Numeral 4.2.3 (a):</strong> Tabla de Factores Críticos de Vigilancia Prioritarios.</li>
+                        <li><strong>Numeral 4.2.3 (b):</strong> Ecuaciones de búsqueda booleanas aplicadas.</li>
+                        <li><strong>Numeral 4.2.3 (c y d):</strong> Tabla Puente de Papers con DOI real y Patentes con códigos IPC de la OMPI.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Criterios de Éxito y Auditoría</h3>
+                    <ul class="list">
+                        <li>Inexistencia de citas alucinadas o links rotos (verificación obligatoria de DOIs).</li>
+                        <li>Alineación directa entre el FCV hallado y la brecha técnica de la planta piloto.</li>
+                        <li>Inclusión de la Caja de Auditoría Humana documentando los prompts de IA ejecutados.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+
+<script>
+(()=>{
+    const slides = [...document.querySelectorAll('header, main > section')];
+    let idx = 0;
+
+    function current(){
+        const y = window.scrollY + window.innerHeight * 0.3;
+        slides.forEach((s, i)=>{
+            if(s.offsetTop <= y) idx = i;
+        });
+    }
+
+    function go(i){
+        if(i < 0 || i >= slides.length) return;
+        idx = i;
+        window.scrollTo({
+            top: slides[idx].offsetTop,
+            behavior: 'smooth'
+        });
+    }
+
+    document.addEventListener('keydown', e => {
+        if(['PageDown', 'ArrowRight', ' '].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx + 1);
+        }
+        if(['PageUp', 'ArrowLeft'].includes(e.key)){
+            e.preventDefault();
+            current();
+            go(idx - 1);
+        }
+        if(e.key === 'Home'){ e.preventDefault(); go(0); }
+        if(e.key === 'End'){ e.preventDefault(); go(slides.length - 1); }
+    }, {passive: false});
+})();
+</script>
+
+</body>
+</html>

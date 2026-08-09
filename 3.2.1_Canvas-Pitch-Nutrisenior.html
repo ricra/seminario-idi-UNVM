@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pitch Oral - NutriSenior S.A.</title>
+  <style>
+    :root {
+      --primary-color: #0d3b66;
+      --secondary-color: #00a896;
+      --accent-color: #f4a261;
+      --bg-dark: #1e293b;
+      --card-bg: #ffffff;
+      --text-main: #334155;
+      --text-muted: #64748b;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: var(--text-main);
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .slide {
+      background-color: var(--card-bg);
+      width: 960px;
+      height: 540px; /* Relación de aspecto 16:9 */
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      padding: 35px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid var(--secondary-color);
+      padding-bottom: 12px;
+    }
+
+    .slide-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .slide-number {
+      font-size: 14px;
+      font-weight: 600;
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .slide-body {
+      flex-grow: 1;
+      margin-top: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+
+    /* Slide 1: Portada */
+    .title-slide {
+      background: linear-gradient(135deg, var(--primary-color) 0%, #1e293b 100%);
+      color: #ffffff;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .title-slide h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    .title-slide h2 {
+      font-size: 20px;
+      color: var(--secondary-color);
+      margin-top: 0;
+      font-weight: 600;
+    }
+
+    .title-badge {
+      background-color: var(--accent-color);
+      color: #000;
+      padding: 6px 16px;
+      font-weight: 700;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .author-info {
+      font-size: 13px;
+      color: #cbd5e1;
+      margin-top: 25px;
+    }
+
+    /* Slide 2: Grid Canvas */
+    .canvas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      font-size: 11px;
+    }
+
+    .canvas-box {
+      background-color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 10px;
+    }
+
+    .canvas-box h4 {
+      margin: 0 0 6px 0;
+      color: var(--primary-color);
+      font-size: 12px;
+      border-bottom: 1px solid var(--secondary-color);
+      padding-bottom: 2px;
+    }
+
+    .canvas-box ul {
+      margin: 0;
+      padding-left: 14px;
+    }
+
+    /* Slide 3, 4, 5, 6 Layouts */
+    .content-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--secondary-color);
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .content-box h4 {
+      margin: 0 0 8px 0;
+      color: var(--primary-color);
+      font-size: 15px;
+    }
+
+    .content-box p, .content-box ul {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .kpi-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .kpi-card {
+      flex: 1;
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 20px 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .kpi-card .value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin: 10px 0 5px 0;
+    }
+
+    .kpi-card .label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: PORTADA -->
+  <div class="slide title-slide">
+    <div>
+      <div class="title-badge">Trabajo Final Integrador — Pitch Oral</div>
+      <h1>Desarrollo e Industrialización de Bebida Láctea Hiperproteica de Alta Digestibilidad a Base de Hidrolizado Enzimático de Suero para Sarcopenia[cite: 1]</h1>
+      <h2>NutriSenior S.A.[cite: 1]</h2>
+      <div class="author-info">
+        Ingeniería en Alimentos | IAPCBYA – UNVM[cite: 1]<br>
+        Gestión de la Investigación + Desarrollo + Innovación (I+D+i)[cite: 1]
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: LIENZO CANVAS INTEGRADO -->
+  <div class="slide">
+    <div class="slide-header">
+      <h3 class="slide-title">Lienzo Canvas Integrado (Modelo 9 Bloques)[cite: 1]</h3>
+      <span class="slide-number">Slide 2 / 6</span>
+    </div>
+    <div class="slide-body">
+      <div class="canvas-grid">
+        <div class="canvas-box">
+          <h4>1. Propuesta de Valor[cite: 1]</h4>
+          <ul>
+            <li>Bebida láctea RTD 250 ml hiperproteica (15g péptidos)[cite: 1].</li>
+            <li>Sin amargor (DH &lt; 8%), baja en lactosa + Vit D3/Ca[cite: 1].</li>
+            <li>Packaging Easy-Open + Economía Circular (Upcycling)[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>2. Segmentos de Clientes[cite: 1]</h4>
+          <ul>
+            <li><strong>B2C:</strong> Adultos mayores (&gt;65 años) con sarcopenia[cite: 1].</li>
+            <li><strong>B2B:</strong> Clínicas geriátricas, farmacias, dietéticas[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>3. Canales[cite: 1]</h4>
+          <ul>
+            <li>Red de farmacias y nutrición médica[cite: 1].</li>
+            <li>Venta directa B2B a clínicas geriátricas[cite: 1].</li>
+            <li>E-commerce institucional con frío[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>4. Relaciones con Clientes[cite: 1]</h4>
+          <ul>
+            <li>Respaldo científico y ensayos clínicos[cite: 1].</li>
+            <li>Asesoramiento nutricional a comités médicos[cite: 1].</li>
+            <li>Transparencia Clean Label[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>5. Fuente de Ingresos[cite: 1]</h4>
+          <ul>
+            <li>Venta directa unitaria/pack en farmacias (45% margen)[cite: 1].</li>
+            <li>Contratos institucionales de provisión B2B[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>6. Recursos Clave[cite: 1]</h4>
+          <ul>
+            <li>Suero fluido propio + Reactor agitado 500L[cite: 1].</li>
+            <li>Patente FTO limpia + Marca NutriSenior®[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>7. Actividades Clave[cite: 1]</h4>
+          <ul>
+            <li>Hidrólisis enzimática controlada (DH &lt; 8%)[cite: 1].</li>
+            <li>Tratamiento térmico UHT y envasado aséptico[cite: 1].</li>
+            <li>Registros sanitarios RNE/RNPA[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>8. Socios Clave[cite: 1]</h4>
+          <ul>
+            <li>UNVM (ensayos HPLC, panel sensorial)[cite: 1].</li>
+            <li>INTA Lácteos (escalado piloto Manfredi)[cite: 1].</li>
+            <li>Proveedores de enzimas proteolíticas[cite: 1].</li>
+          </ul>
+        </div>
+        <div class="canvas-box">
+          <h4>9. Estructura de Costos[cite: 1]</h4>
+          <ul>
+            <li>Enzimas proteasa, Vit D3, fosfato disódico[cite: 1].</li>
+            <li>Packaging aséptico ergonómico + energía[cite: 1].</li>
+            <li>Aranceles STAN y logística de frío[cite: 1].</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NutriSenior S.A. — TFI I+D+i</span>
+      <span>Model de Negocios Canvas 16:9</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: VIGILANCIA TECNOLÓGICA Y EVIDENCIA CIENTÍFICA -->
+  <div class="slide">
+    <div class="slide-header">
+      <h3 class="slide-title">Vigilancia Tecnológica &amp; Evidencia Científica[cite: 1]</h3>
+      <span class="slide-number">Slide 3 / 6</span>
+    </div>
+    <div class="slide-body">
+      <div class="content-box">
+        <h4>📜 Patente Bloqueante Eludida (Libertad de Operación - FTO)[cite: 1]</h4>
+        <p><strong>N° Publicación / IPC:</strong> WO2023156789A1 (IPC A23L 33/19)[cite: 1].</p>
+        <p><strong>Solución Reivindicada:</strong> Protegía la estabilización térmica UHT de péptidos utilizando sales de citrato[cite: 1].</p>
+        <p><strong>Rediseño SCAMPER (Sustituir):</strong> Sustitución de sales de citrato por fosfato disódico (0.15% p/v), eludiendo la reivindicación y logrando FTO Limpio sin perder estabilidad proteica[cite: 1].</p>
+      </div>
+      <div class="content-box">
+        <h4>🔬 Paper Core (Respaldatoria de Eficacia Biológica)[cite: 1]</h4>
+        <p><strong>Cita Bibliográfica:</strong> Pennings, B. et al. (2012). <em>Am J Clin Nutr</em>, 95(2): 435-443[cite: 1].</p>
+        <p><strong>DOI Real Verificado:</strong> <a href="https://doi.org/10.3945/ajcn.111.024992" target="_blank" style="color:var(--primary-color);">10.3945/ajcn.111.024992</a>[cite: 1]</p>
+        <p><strong>Hallazgo Clave:</strong> Demuestra que la hidrólisis enzimática de suero estimula la síntesis proteica muscular postprandial en adultos mayores a una velocidad significativamente superior al WPC intacto[cite: 1].</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NutriSenior S.A. — TFI I+D+i</span>
+      <span>Ficha 05 VT &amp; FTO</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: CUADRO DE RIESGOS Y PLAN DE MITIGACIÓN -->
+  <div class="slide">
+    <div class="slide-header">
+      <h3 class="slide-title">Matriz de Riesgos y Plan de Mitigación[cite: 1]</h3>
+      <span class="slide-number">Slide 4 / 6</span>
+    </div>
+    <div class="slide-body">
+      <div class="content-box">
+        <h4>⚠️ Riesgo Técnico / Organoléptico[cite: 1]</h4>
+        <p><strong>Evento:</strong> Aparición de sabor amargo proteico por desviación indeseada en el grado de hidrólisis ($DH &gt; 8\%$)[cite: 1].</p>
+        <p><strong>Plan de Mitigación:</strong> Automatización del corte de reacción en reactor agitado mediante monitoreo continuo en línea de consumo de álcali, pH y temperatura[cite: 1].</p>
+      </div>
+      <div class="content-box">
+        <h4>⚖️ Riesgo Regulatorio / Claims Sanitarios[cite: 1]</h4>
+        <p><strong>Evento:</strong> Demoras o rechazos en la aprobación del registro RNPA por atribución de claims médicos no autorizados[cite: 1].</p>
+        <p><strong>Plan de Mitigación:</strong> Encuadre como Alimento Funcional bajo el Capítulo XXI del Código Alimentario Argentino (CAA) y asesoramiento conjunto con INTI Lácteos e IAPCBYA-UNVM[cite: 1].</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NutriSenior S.A. — TFI I+D+i</span>
+      <span>Evaluación de Riesgos</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: TABLERO DE MÉTRICAS E INDICADORES DE IMPACTO (KPIS) -->
+  <div class="slide">
+    <div class="slide-header">
+      <h3 class="slide-title">Tablero de Métricas e Indicadores de Impacto (KPIs)[cite: 1]</h3>
+      <span class="slide-number">Slide 5 / 6</span>
+    </div>
+    <div class="slide-body">
+      <div class="kpi-container">
+        <div class="kpi-card">
+          <div class="label">Métrica Input (Inversión I+D+i)[cite: 1]</div>
+          <div class="value">$51.5M ARS[cite: 1]</div>
+          <p style="font-size:11px; color:var(--text-muted); margin:0;">Estructura de Financiamiento:<br><strong>60% ANR FONTAR / 40% PyME</strong>[cite: 1]</p>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Métrica Output (Sustentabilidad)[cite: 1]</div>
+          <div class="value">15.000 L/mes[cite: 1]</div>
+          <p style="font-size:11px; color:var(--text-muted); margin:0;">Revalorización de lactosuero fluido (Upcycling) sin vertido hídrico[cite: 1].</p>
+        </div>
+        <div class="kpi-card">
+          <div class="label">Métrica Mercado (Rentabilidad)[cite: 1]</div>
+          <div class="value">45% Margen[cite: 1]</div>
+          <p style="font-size:11px; color:var(--text-muted); margin:0;">Margen bruto en canal farmacias. Recupero est. a 24 meses[cite: 1].</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NutriSenior S.A. — TFI I+D+i</span>
+      <span>Impacto Técnico &amp; Financiero</span>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: CAJA DE AUDITORÍA HUMANA DE IA -->
+  <div class="slide">
+    <div class="slide-header">
+      <h3 class="slide-title">Caja de Auditoría Humana sobre IA (Protocolo Anti-Alucinación)[cite: 1]</h3>
+      <span class="slide-number">Slide 6 / 6</span>
+    </div>
+    <div class="slide-body">
+      <div class="content-box">
+        <h4>🤖 Verificación de Fuentes &amp; FTO (Parte 1 y 2)[cite: 1]</h4>
+        <ul>
+          <li><strong>Patentes e IPC:</strong> Se confirmó en Espacenet la existencia real de la patente WO2023156789A1 y se validó técnicamente la sustitución por fosfatos[cite: 1].</li>
+          <li><strong>DOIs de Papers:</strong> Se verificó manualmente el DOI 10.3945/ajcn.111.024992 en doi.org y se descartaron 2 citas sugeridas por IA con DOIs inexistentes[cite: 1].</li>
+        </ul>
+      </div>
+      <div class="content-box">
+        <h4>🛠️ Ajuste Manual en Modelo Canvas (Parte 3)[cite: 1]</h4>
+        <ul>
+          <li><strong>Costos Omitidos por IA:</strong> La IA había omitido los costos de cadena de frío y los aranceles RNPA; fueron reincorporados manualmente al presupuesto[cite: 1].</li>
+          <li><strong>Canales Erróneos:</strong> Se descartó la sugerencia de la IA de vender en supermercados masivos de descuento, priorizando el canal farmacia de alto margen[cite: 1].</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>NutriSenior S.A. — TFI I+D+i</span>
+      <span>Control Human-in-the-Loop</span>
+    </div>
+  </div>
+
+</body>
+</html>
